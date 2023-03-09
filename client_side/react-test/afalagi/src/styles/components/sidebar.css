@@ -1,0 +1,8 @@
+.side-bar{
+   /* background-color :  #7386D5;*/
+   
+   padding-left: 0;
+   color : #fff;
+   position: fixed;
+   width : inherit;
+}
