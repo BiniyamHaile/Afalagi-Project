@@ -13,7 +13,7 @@ export default function Jobsposted(){
     useEffect(
      ()=>{
         
-        fetch('${URL}/job/postedjobs' , {
+        fetch(`${URL}/job/postedjobs` , {
             headers : {
                 'x-access-token' : localStorage.getItem("token")
             }

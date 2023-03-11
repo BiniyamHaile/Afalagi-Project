@@ -1,4 +1,4 @@
-// Applying to job
+
 
 //export const URL = 'http://localhost:3000'
 
