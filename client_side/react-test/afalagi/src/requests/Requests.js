@@ -2,6 +2,18 @@
 
 const URL = 'http://localhost:3000'
 
+
+
+export async function Login(path , body){
+    return  await fetch(`${URL}${path}` , {
+        method : "POST" , 
+        headers : {
+          "Content-Type" : "application/json"
+        } , 
+        body : body
+      }).then(response =>response.json()).then(data => data)
+}
+
 export async function httpApplyToJob(job_id){
         
      return   fetch(`${URL}/job/applytojob` , {
@@ -65,4 +77,39 @@ export async function httpGetRandomFreelancers(){
     const data = await response.json()
     console.log(data)
     return data
+}
+
+
+
+
+
+
+export async function httpCloseJob(id){
+          return fetch(`http://localhost:3000/job/closejob/${id}` , {
+                                method : "PATCH" , 
+                                headers : {
+                                    'x-access-token' : localStorage.getItem("token")
+                                }
+                                 }).then(response => response.json()).then(data =>data)
+}
+
+
+
+export async function httpGetRequest(path){
+    return fetch(`${URL}${path}` , {
+        headers : {
+            "x-access-token"  :  localStorage.getItem("token")
+        }
+    }).then(response => response.json()).then(data =>data)
+}
+
+
+export async function httpPostRequest(path , body){
+    return fetch(`${URL}${path}` , {
+        method : "POST" , 
+        headers : {
+            'x-access-token' : localStorage.getItem("token")
+        } , 
+        body : JSON.stringify(body)
+    }).then(response => response.json()).then(data=> data)
 }

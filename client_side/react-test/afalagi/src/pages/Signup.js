@@ -88,7 +88,13 @@ export default function Signup() {
 
     <div className='input-container border'>
     <label> Department :  </label>
-    <input value = {department} onChange = {(e)=>{setDepartment(e.target.value)}} />
+    <select name = "department" defaultValue={"IT"} onChange={(e)=>setDepartment(e.target.value)}>
+                        <option value = "IT" >IT</option>
+                        <option value = "Law">Law</option>
+                        <option value = "Psychology">Psychology</option>
+                        <option value = "Health">Health</option>
+                        <option value = "Graphics">Graphics Designer</option>
+                    </select>
     </div>
 
      

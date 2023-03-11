@@ -67,10 +67,12 @@ async function loginFreelancer(req , res){
         
   const user = await  freelancer.findOne({
     email : req.body.email 
-})
-     
+}).select("+password")
+
+
+
 if(!user){
-    return res.status(403).json({user : false , message : "email doesn't exist"}) //no user , so check the email!
+    return res.status(401).json({user : false , message : "email doesn't exist"}) //no user , so check the email!
 }   
 else if(await bcrypt.compare(req.body.password , user.password )){
     const token = jwt.sign(
@@ -92,7 +94,7 @@ async function addAppliedJob(email , job_id){
             {email  : email}  , {$push : {appliedJobs : job_id}})
 
             const me = await freelancer.find({email : email})
-           // return true
+           
            return me
         } catch (error) {
             console.log(error)

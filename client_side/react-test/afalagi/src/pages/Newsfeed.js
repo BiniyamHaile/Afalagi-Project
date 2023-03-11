@@ -30,7 +30,10 @@ export default function Newsfeed(){
             <div className="container ">
                <div className="row">
                     <div className="col-md-2 col-lg-3 d-none d-md-block col-md-2 col-lg-3  position-relative p-0"> <p className="invisible">sidebar</p>  <div className="side-bar"><Sidebar/></div> </div>
-                    <div className="col-md-9 col-lg-8 ms-5"> <Components jobs = {jobs}  /></div>
+                    <div className="col-md-9 col-lg-8 ms-5"> {jobs.length > 0 ?  <Components jobs = {jobs}  /> : 
+                    <div class="spinner-border" role="status">
+  <span class="visually-hidden">Loading...</span>
+</div>} </div>
                </div>
             </div>
         )

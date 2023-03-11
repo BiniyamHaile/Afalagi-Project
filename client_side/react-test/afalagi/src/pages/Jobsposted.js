@@ -3,11 +3,12 @@ import { useEffect  , useState} from "react"
 import { httpGetAppliedPeople } from "../requests/Requests.js"
 import Appliedjobs from "./Appliedjobs"
 import { Link } from "react-router-dom"
+import { httpCloseJob } from "../requests/Requests.js"
 import Appliedpeople from "./Appliedpeople"
 export default function Jobsposted(){
-
+    const [close , setClose] = useState(false)
     const [jobs , setJobs] = useState([])
-
+   
     useEffect(
      ()=>{
         
@@ -19,20 +20,18 @@ export default function Jobsposted(){
             console.log(data)
             setJobs(data)})
      }
-        ,[])
+        ,[close])
         
-    function handleClose(id  , job){
-        console.log(id)
-            fetch(`http://localhost:3000/job/closejob/${id}` , {
-                method : "PATCH" , 
-                headers : {
-                    'x-access-token' : localStorage.getItem("token")
-                }
-            }).then(response => response.json()).then(data => {
-                job.status= data.status
-            })
+
+
+        async function handleClose( job){
         
-    }
+
+
+            const data = await httpCloseJob(job.id)
+            job.status = data.status
+            setClose(!close) }
+
     return(
         <>
         <h2 className="text-secondary f-italics text-center">list of jobs from {localStorage.getItem('name')} </h2>
@@ -62,8 +61,8 @@ export default function Jobsposted(){
 
 
 
-function Component({jobs , handleClose}){
-
+function Component({jobs , handleClose }){
+    
 
         const handleApplied = async (job)=>{
 
@@ -74,6 +73,8 @@ function Component({jobs , handleClose}){
                           return <Appliedjobs people = {data} jobId = {job.id} />
                         }
         }
+
+
 
 
 
@@ -101,7 +102,7 @@ function Component({jobs , handleClose}){
         </td>
         
         <td>{job.status}</td>
-        <td ><button onClick = {()=>{handleClose(job.id , job)}} className="btn btn-primary"><i className="bi bi-x-square"></i></button></td>
+        <td ><button onClick = {()=>{handleClose( job)}} className="btn btn-primary"><i className="bi bi-x-square"></i></button></td>
         <td><i className="bi bi-three-dots"></i></td>
         
 

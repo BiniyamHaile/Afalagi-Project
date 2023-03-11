@@ -33,9 +33,9 @@ async function deleteJobById(job_id){
 
 async function applyToJob(job_id , email){
     try{
-       result =  await job.updateOne(
+       result =  await job.findOneAndUpdate(
             { id: job_id },
-            { $push: { personsApplied: email } }
+            { $push: { personsApplied: email } } ,   {upsert : true}
          )
        
       return result
