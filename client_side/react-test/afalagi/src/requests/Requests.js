@@ -1,6 +1,8 @@
 // Applying to job
 
-export const URL = 'http://localhost:3000'
+//export const URL = 'http://localhost:3000'
+
+export const URL = 'https://mern-bllq.onrender.com'
 
 
 
