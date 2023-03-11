@@ -5,6 +5,7 @@ import Appliedjobs from "./Appliedjobs"
 import { Link } from "react-router-dom"
 import { httpCloseJob } from "../requests/Requests.js"
 import Appliedpeople from "./Appliedpeople"
+import { URL } from "../requests/Requests.js"
 export default function Jobsposted(){
     const [close , setClose] = useState(false)
     const [jobs , setJobs] = useState([])
@@ -12,7 +13,7 @@ export default function Jobsposted(){
     useEffect(
      ()=>{
         
-        fetch('http://localhost:3000/job/postedjobs' , {
+        fetch('${URL}/job/postedjobs' , {
             headers : {
                 'x-access-token' : localStorage.getItem("token")
             }

@@ -2,13 +2,13 @@ import "../styles/components/newsfeed.css"
 import Sidebar from "../components/Sidebar";
 import { useState , useEffect } from "react";
 import { httpApplyToJob } from "../requests/Requests.js";
-
+import { URL } from "../requests/Requests.js";
 
 export default function Newsfeed(){
     const [jobs , setJobs] = useState([])
     useEffect( 
         ()=>{
-            fetch(`http://localhost:3000/job/departmentjob` , {
+            fetch(`${URL}/job/departmentjob` , {
                 headers : {
                     'x-access-token' : localStorage.getItem('token')
                 }
@@ -17,6 +17,7 @@ export default function Newsfeed(){
                     if(data){
                         console.log(data)
                         setJobs(data)
+                       
                     }
                 }
             )

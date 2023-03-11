@@ -4,7 +4,7 @@ import "../styles/initial/header.css"
 import "../styles/login.css"
 import { useEffect, useState } from 'react';
 import jwtDecode from 'jwt-decode';
-
+import { URL } from "../requests/Requests";
 export default function Login() {
 
   const [password , setPassword] = useState("");
@@ -14,7 +14,7 @@ export default function Login() {
   
 async function handleSubmit(e){    
     e.preventDefault() ;    
-    const response = await fetch('http://localhost:3000/freelancer/login' , {
+    const response = await fetch(`${URL}/freelancer/login` , {
       method : "POST" , 
       headers : {
         "Content-Type" : "application/json"

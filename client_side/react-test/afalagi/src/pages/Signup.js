@@ -1,6 +1,7 @@
 
 import { useState } from 'react';
-import "../styles/signup.css"
+import "../styles/signup.css";
+import { URL } from '../requests/Requests';
 
 export default function Signup() {
  
@@ -8,7 +9,7 @@ export default function Signup() {
   const [email , setEmail] = useState("");
   const [firstName , setFirstName] = useState("");
   const [lastName , setLastName] =  useState("")
-  const [department  , setDepartment] = useState("")
+  const [department  , setDepartment] = useState("IT")
   const [description , setDescription] =  useState("");
   const [phone , setPhone] =  useState("")
   const [experience , setExperience]=  useState(0)
@@ -23,7 +24,7 @@ export default function Signup() {
      console.log({
       firstName ,lastName ,  password , email , phone , department  ,description , experience  , location
     })
-    const response = await fetch('http://localhost:3000/freelancer/signin', {
+    const response = await fetch(`${URL}/freelancer/signin`, {
       method : "POST" , 
       headers : {
         "Content-Type" : "application/json"

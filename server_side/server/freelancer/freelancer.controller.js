@@ -51,8 +51,8 @@ async function httpGetAppliedPeople(req, res){
     const id = req.params.id
     const result = await getAppliedPeople(id)
     
-    if(result){
-        return res.status(200).json({result})
+    if(result){ 
+        return res.status(200).json(result)
     }
     else{
         return res.status(400).json({ok : false})

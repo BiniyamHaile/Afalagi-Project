@@ -18,12 +18,12 @@ export default  function App() {
     <BrowserRouter>
 
 <Routes>
-  <Route element = {<Entry/>} path = "/home" exact />
+  <Route element = {<Entry/>} path = "/" exact />
   <Route element = {<Logincontainer/>}  path = "/login"  exact  />
   <Route element = {<Signupcontainer/>} path = "/signup"  exact />
+  <Route element = {<ProtectedRoutes />}>
   <Route element = {<Companyhome/>} path = "/chome/*"/>
   <Route element = {<Home/>} path = "/freelancer/*" />
-  <Route element = {<ProtectedRoutes />}>
  </Route>
 </Routes>
 </BrowserRouter>

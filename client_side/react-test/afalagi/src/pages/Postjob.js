@@ -1,7 +1,6 @@
 import "../styles/signup.css";
 import { useState } from "react";
-import jwtDecode from 'jwt-decode';
-
+import { URL } from "../requests/Requests";
 export default function Postjob(){
 
 
@@ -50,7 +49,7 @@ function Inputs(){
         e.preventDefault() ;
         
         
-        const response = await fetch('http://localhost:3000/job/postjob' , {
+        const response = await fetch(`${URL}/job/postjob` , {
           method : "POST" , 
           headers : {
             "Content-Type" : "application/json" , 
@@ -59,14 +58,15 @@ function Inputs(){
           body : JSON.stringify({
             title, department , description , location , deadline , salary
           })
-        });
+        }).then(response=> response.json()).then(data => data);
 
-           
+        if(response.created){
+            window.location.href = "/chome/jobsposted"
+        }
+        
 
-
-         console.log("sent.....")
-          const data = await response.json()
-          console.log(data)
+        
+          
           
           
           

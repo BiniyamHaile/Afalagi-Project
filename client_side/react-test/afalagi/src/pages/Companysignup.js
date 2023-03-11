@@ -1,6 +1,6 @@
 import "./../styles/signup.css"
 import { useState } from 'react';
-
+import { URL } from "../requests/Requests";
 export default function Companysignup() {
  
   const [password , setPassword] = useState("");
@@ -14,7 +14,7 @@ export default function Companysignup() {
     
     e.preventDefault() ;
      
-    const response = await fetch('http://localhost:3000/company/signin', {
+    const response = await fetch(`${URL}/company/signin`, {
       method : "POST" , 
       headers : {
         "Content-Type" : "application/json"

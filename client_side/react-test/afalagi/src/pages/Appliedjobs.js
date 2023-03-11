@@ -13,7 +13,7 @@ export default function Appliedjobs(){
     useEffect(()=>{
         async function fetcher(){
             const response = await httpGetAppliedJobs()
-            console.log(`response is ${response}`)
+           
             setJobs(response)
     
         } 

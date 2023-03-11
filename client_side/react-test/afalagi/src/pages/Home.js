@@ -6,7 +6,7 @@ import Newsfeed from "./Newsfeed";
 import { useEffect, useState } from "react";
 import httpGetUser from "../requests/httpGetUser";
 import Appliedjobs from "./Appliedjobs";
-
+import { URL } from "../requests/Requests";
 export default function Home(){
     const[user , setUser] = useState({})
     // useEffect(()=>{
@@ -16,12 +16,15 @@ export default function Home(){
     
     useEffect(
         ()=>{
-            fetch('http://localhost:3000/user' , {
+            fetch(`${URL}/user` , {
                 headers : {
                     'x-access-token' : localStorage.getItem("token")
                 }
             }).then(response => response.json()).then(data => {
                 setUser(data)
+
+
+
                 console.log(data)
                 console.log(`data is ${data}`)
             })

@@ -1,6 +1,6 @@
 // Applying to job
 
-const URL = 'http://localhost:3000'
+export const URL = 'http://localhost:3000'
 
 
 
@@ -60,7 +60,7 @@ export async function httpGetAppliedJobs(){
     })
 
     const data = await response.json()
-
+ 
     return data
 }
 

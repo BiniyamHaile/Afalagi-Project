@@ -3,6 +3,7 @@ import Companylogin from "./Companylogin"
 import Header from './Header'
 import { useState } from "react";
 import "./../styles/login.css"
+
 export default function(){
 
     const[activate , setActivate] = useState("employee")

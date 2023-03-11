@@ -16,6 +16,7 @@ export default function Appliedpeople(){
            const data = await httpGetAppliedPeople(jobId)
           
             setPeople(data)
+            console.log(`data is ${data}`)
         }
 
         fetcher()
@@ -115,9 +116,9 @@ function Decline({jobId , personId}){
 function Message(){
     return(
         <>
-        <h1 className="text-success text-center">Sorry, Noone applied for this job yet.</h1>        
+        <h1 className="text-success text-center">Sorry, No one applied for this job yet.</h1>        
 
-        <div styles={"width:100%;height:0;padding-bottom:100%;position:relative;"}><iframe src="https://giphy.com/embed/fS5I4hHyFTu3HnqiZs" width="100%" height="100%" styles={"position:absolute"} frameBorder="0" class="giphy-embed" allowFullScreen></iframe></div>
+      
         
         </>
     )
