@@ -1,6 +1,6 @@
-
+import { URL } from "../requests/Requests";
 async function handleLogout(){
-    const res = await fetch("http://localhost:3000/logout").then(response=>response.json()).then((data)=>  data);
+    const res = await fetch(`${URL}/logout`).then(response=>response.json()).then((data)=>  data);
     console.log(res)
     if(res.ok ){
         localStorage.clear();
