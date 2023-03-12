@@ -2,10 +2,10 @@ import { BrowserRouter, Routes, Route, Link } from "react-router-dom";
 import Home from "./pages/Home";
 import Entry from "./pages/Entry";
 import Companyhome from "./pages/Companyhome";
-import Logincontainer from "./pages/Logincontainer";
+
 import Signupcontainer from "./pages/Signupcontainer";
 import ProtectedRoutes from "./pages/ProtectedRoutes";
-import Login from "./pages/LoginReuse";
+import Login from "./pages/Login";
 
 export default  function App() {
  
