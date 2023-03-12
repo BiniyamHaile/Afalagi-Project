@@ -1,6 +1,6 @@
 export default function Header(){
     function clickHandler(){
-        window.location.href = '/home'
+        window.location.href = '/'
     }
     return(
         <div>
