@@ -28,8 +28,7 @@
 
 .login-form{
     width : fit-content;
-    margin : auto;
-
+    min-height: 100vh;
 
 }
 
@@ -80,4 +79,25 @@
 }
 .home:hover{
     cursor :pointer;
+}
+
+.large-text{
+    font-size: 2rem;
+}
+
+
+.toggler{
+    cursor: pointer;
+}
+
+.login-container{
+    min-height: 100vh;
+}
+
+
+.signin-link{
+    padding : 0.4rem 1rem;
+    background-color: rgba(225,225,225, 0);
+    border-radius: 0.6rem;
+    border : 2px solid black;
 }
