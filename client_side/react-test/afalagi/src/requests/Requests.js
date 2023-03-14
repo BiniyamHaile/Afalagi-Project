@@ -1,6 +1,6 @@
 
 
-//export const URL = 'http://localhost:3000'
+//export const URL = 'http://localhost:5001'
 
 export const URL = 'https://mern-bllq.onrender.com'
 
@@ -114,4 +114,52 @@ export async function httpPostRequest(path , body){
         } , 
         body : JSON.stringify(body)
     }).then(response => response.json()).then(data=> data)
+}
+
+
+
+export async function httpCreateNotification(id , kind){
+    const name = localStorage.getItem("name")
+    const email = localStorage.getItem("email")
+    const msg = message(kind , name , email)
+    return fetch(`${URL}/freelancer/createnotification/${id}` , {
+        method : "POST" ,
+        headers : {
+            'x-access-token'  : localStorage.getItem("token")
+        },
+        body : JSON.stringify({
+            companyName :name , 
+            message : msg , 
+
+        })
+    }).then(response => response.json()).then(data => data)
+}
+
+
+function message(kind , name , email){
+    let msg;
+    if(kind === "connect"){
+         msg = `${name} company wants to contact you. Please check their email , ${email}`
+    }
+    else if(kind ==="accept"){
+         msg = `${name} company accepted your job application. Please check their email , ${email}`
+    }
+    else if(kind === "decline"){
+         msg = `Sorry, ${name} company didn't accept your job application.`
+    }
+    else{
+         msg = " "
+    }
+    return msg
+}
+
+
+export async function httpGetNotificationCount(){
+    const response =  await fetch(`${URL}/freelancer/notify`,  {
+        headers : {
+            'x-access-token'  : localStorage.getItem("token") 
+        }
+    })
+    const data = await response.json()
+    return data
 }

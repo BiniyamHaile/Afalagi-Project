@@ -45,6 +45,7 @@
     margin: 1.2rem auto;
 }
 
+
 .bi-google{
     display: inline;
     margin  : auto;
@@ -100,4 +101,9 @@
     background-color: rgba(225,225,225, 0);
     border-radius: 0.6rem;
     border : 2px solid black;
+}
+
+.signin-link:hover , .submit-btn:hover{
+    background-color: rgba(104, 211, 136 , 0.8);
+    
 }

@@ -1,8 +1,10 @@
-import { useEffect, useState } from "react";
+import { useContext, useEffect, useState } from "react";
 import { httpGetAppliedPeople } from "../requests/Requests.js";
 import male from "../images/male.jpg";
 import female from "../images/female.png" ;
 import {useParams} from "react-router-dom"
+import { ObjectContext } from "../components/Contexts.js";
+import { httpCreateNotification } from "../requests/Requests.js";
 
 // ... Don't forget to use "useContext  , createContext" here
 
@@ -12,23 +14,27 @@ export default function Appliedpeople(){
     useEffect( ()=>{
          async function fetcher(){
 
-            console.log("async function......")
+            
            const data = await httpGetAppliedPeople(jobId)
-          
+           console.log(data)
             setPeople(data)
-            console.log(`data is ${data}`)
+            
         }
 
         fetcher()
     } , [])
 
 
-    console.log(people)
+    
    
     return(
         <div>
-            {people && people.length > 0 && <h1 className="text-success text-center"> {people.length} {people.length == 1 ? "Person" : "People"  } Applied To This Job!</h1>}
-         {people && people.length > 0 && <Component jobId={jobId} people = {people} /> }
+        
+         {people && people.length > 0 && <h1 className="text-success text-center"> {people.length} {people.length == 1 ? "Person" : "People"  } Applied To This Job!</h1>}
+
+            <ObjectContext.Provider value = {[jobId ,  people ]}>
+                     {people  && people.length > 0 && <Component  /> }
+            </ObjectContext.Provider>
 
          {people && people.length === 0 && <Message />}
 
@@ -38,14 +44,18 @@ export default function Appliedpeople(){
 }
 
 
-function Component({people , jobId}){
+function Component(){
+    const [jobId , people] = useContext(ObjectContext)
+    console.log("right after this")
+    console.log(people)
+    console.log(people.isArray)
 
     return(
             <div key = {jobId} className="container-fluid mt-5">
 
             <div className = "row">
 
-            {people.map(person =>
+            { people  && people.map(person =>
                 
                 
                     <div key = {person.id} className = "col-md-4 col-lg-3">
@@ -66,8 +76,8 @@ function Component({people , jobId}){
                                 </ul>
                                 <div className="card-body">
                                  <div className="d-flex justify-content-around"> 
-                                    <Button value = {"Confirm"} jobId = {jobId} personId = {person.id} />
-                                    <Button value = {"Decline"} jobId = {jobId} personId = {person.id} />    
+                                    <Button value = {"Confirm"} personId = {person.id} />
+                                    <Button value = {"Decline"}  personId = {person.id} />    
                                  </div>
                                 </div>
                                 </div>
@@ -94,19 +104,27 @@ function Button({value , jobId , personId}){
 }
 
 
-function Confirm({jobId , personId}){
+function Confirm({ personId}){
+    const handleConfirm = async()=>{
+        const result =  await httpCreateNotification(personId , "accept" )
+        console.log(result)
+    }
     return (
         <>
-        <button className="btn btn-success"><i className="bi bi-check-lg text-info fw-bold " ></i> Accept</button>
+        <button className="btn btn-success" onClick={handleConfirm}><i className="bi bi-check-lg text-info fw-bold " ></i> Accept</button>
         </>
     )
 }
 
 
-function Decline({jobId , personId}){
+function Decline({ personId}){
+    const handleDecline = async()=>{
+        const result =  await httpCreateNotification(personId , "decline" )
+        console.log(result)
+    }
     return (
         <>
-        <button className="btn btn-primary"><i className="bi bi-check-lg text-danger " ></i> Decline</button>
+        <button className="btn btn-primary" onClick={handleDecline}><i className="bi bi-check-lg text-danger " ></i> Decline</button>
         </>
     )
 }
@@ -116,10 +134,7 @@ function Decline({jobId , personId}){
 function Message(){
     return(
         <>
-        <h1 className="text-success text-center">Sorry, No one applied for this job yet.</h1>        
-
-      
-        
+        <h1 className="text-success text-center">Sorry, No one applied for this job yet.</h1>         
         </>
     )
 }

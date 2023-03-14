@@ -3,9 +3,11 @@ import Sidebar from "../components/Sidebar";
 import { useState , useEffect } from "react";
 import { httpApplyToJob } from "../requests/Requests.js";
 import { URL } from "../requests/Requests.js";
+import { httpGetNotificationCount } from "../requests/Requests.js";
 
 export default function Newsfeed(){
     const [jobs , setJobs] = useState([])
+    const [count , setCount]= useState()
     useEffect( 
         ()=>{
             fetch(`${URL}/job/departmentjob` , {
@@ -21,6 +23,17 @@ export default function Newsfeed(){
                     }
                 }
             )
+
+            async function fetcher(){
+                const notification = await fetch(`${URL}/freelancer/ncount`  , {
+                    headers : {"x-access-token" : localStorage.getItem("token")}
+                }).then(response => response.json()).then(data => data)
+                setCount(notification)
+                console.log(notification)
+
+            }
+
+            fetcher()
         }
         , [])
 

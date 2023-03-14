@@ -1,20 +1,22 @@
 import "../styles/components/Homeheader.css"
 import profile from "../images/img-1.jpg"
 import {Logout} from "./Logout"
-import { createContext  , useContext} from "react"
+import { createContext  , useContext, useState} from "react"
 import { NavLink , Link } from "react-router-dom"
-
-
+import { httpGetNotificationCount } from "../requests/Requests"
+import { useEffect } from "react"
 const UserContext = createContext({})
 
 
 
-export default function Homeheader({user}){
-
-  console.log(user)
+export default function Homeheader({user , count}){
+    console.log("count is")
+    console.log(count)
+    
+    
 
     return(
-              <UserContext.Provider value = {user}>
+              <UserContext.Provider value = {[user, count]}>
                 <nav className="navbar navbar-expand-lg navbar-light bg-light">
                     <div className="container-fluid ">
                   
@@ -56,7 +58,8 @@ function Submit(){
 
 function List(){
 
-  const user = useContext(UserContext)
+
+  const [user] = useContext(UserContext)
   return(
       <ul className="navbar-nav me-auto mb-2 mb-lg-0  w-50 justify-content-around ms-5">
       <li className="nav-item">
@@ -90,9 +93,12 @@ function List(){
 
 
 function Navigation({path , aria , value}){
+  const [user , count] = useContext(UserContext)
+ 
   return(
     <>
     <NavLink to = {path}  className = "nav-link" aria-current = {aria ? "page" : ""}>{value}</NavLink>
+    <h1 className="notification text-center"> count : {count}</h1>
     </>
   )
 }
