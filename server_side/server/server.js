@@ -3,7 +3,7 @@
 
 const {app} = require('./app')
 const http = require("http")
-const PORT = 3000
+const PORT = 5001
 const mongoose = require("mongoose")
 
 const MONGO_URL = "mongodb+srv://biniyamhaile:LTJs4XhV5amZckG@cluster0.38iwkgp.mongodb.net/?retryWrites=true&w=majority"

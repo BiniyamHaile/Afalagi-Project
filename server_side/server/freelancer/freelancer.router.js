@@ -9,8 +9,14 @@ const {
     httpCreateFreelancer , 
     httpGetAppliedPeople, 
     httpGetRandomFreelancers,
+    httpCreateNotification , 
+    httpGetNotificationCount,
+    httpGetAllNotifications, 
 } = require("./freelancer.controller")
 const {checkCompany} = require("../components/checkCompany")
+const checkLoggedIn = require("../checkLoggedin")
+
+
 
 
 
@@ -19,7 +25,10 @@ const {checkCompany} = require("../components/checkCompany")
 
 const freelancerRouter = express.Router()
 
-freelancerRouter.get("/" , httpGetAllFreelancers)
+//freelancerRouter.get("/" , consoler , httpGetAllFreelancers)
+freelancerRouter.get("/notify" , checkLoggedIn  , httpGetNotificationCount)
+
+freelancerRouter.get("/messages" , checkLoggedIn , httpGetAllNotifications)
 
 freelancerRouter.get("/random" , checkCompany , httpGetRandomFreelancers)
 
@@ -27,10 +36,13 @@ freelancerRouter.get("/:id"  , httpGetFreelancerById)
 
 freelancerRouter.get("/appliedpeople/:id" , checkCompany , httpGetAppliedPeople)
 
+
+
 freelancerRouter.post("/signin" , httpCreateFreelancer)
 
 freelancerRouter.post("/login" , httpLoginFreelancer)
 
+freelancerRouter.post("/createnotification/:id" , checkCompany , httpCreateNotification)
 
 freelancerRouter.delete("/:id" , httpDeleteFreelancer)
 

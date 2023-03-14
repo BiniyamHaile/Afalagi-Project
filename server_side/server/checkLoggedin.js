@@ -4,15 +4,15 @@ const jwt = require('jsonwebtoken')
 
 function  checkLoggedIn(req, res , next){
     const token = req.headers['x-access-token']
+    console.log("reached here")
     
-   
 
     try {
         const decoded = jwt.verify(token , process.env.COOKIE_KEY)
       
        res.locals.email = decoded.email
         res.locals.department = decoded.department
-        
+       
         next()
     } catch (error) {
        

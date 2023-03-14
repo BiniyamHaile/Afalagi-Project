@@ -20,6 +20,10 @@ require("dotenv").config()
 
 
 
+function middleware(req, res, next){
+    console.log("...incoming request")
+    next()
+}
 
 
 
@@ -60,7 +64,9 @@ app.get("/logout" , (req, res)=>{
 
 
 
-app.use("/freelancer" , freelancerRouter)
+app.use("/freelancer" , middleware , freelancerRouter)
+
+
 
 
 

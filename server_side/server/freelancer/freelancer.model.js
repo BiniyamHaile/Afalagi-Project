@@ -125,9 +125,49 @@ async function getRandomFreelancers(){
 }
 
 
+async function createNotification(id , body){
+    try {
+        await freelancer.updateOne({id : id} , {$push : {notifications : body}})
+        return true
+    } catch (error) {
+        console.log(error)
+        return false
+    }
+}
 
+
+async function getNotificationCount(email){
+    
+    try {
+        result = await freelancer.find({email : email , 'notifications.unread' : true}).count()
+        console.log(result)
+        return result
+    } catch (error) {
+        console.log(error)
+        return false
+    }
+}
+
+async function getAllNotifications(email){
+
+   
+try{
+    result= await freelancer.find({
+        email : email 
+    } , {notifications : 1 , _id : 0})
+    
+   
+    return result[0].notifications
+}catch(error){
+    console.log(error)
+    return false
+}
+}
 
 module.exports = {
+    getAllNotifications ,
+    getNotificationCount , 
+    createNotification, 
     getRandomFreelancers,
     addAppliedJob , 
     createFreelancer , 
