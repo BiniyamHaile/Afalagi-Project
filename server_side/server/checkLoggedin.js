@@ -10,12 +10,11 @@ function  checkLoggedIn(req, res , next){
     try {
         const decoded = jwt.verify(token , process.env.COOKIE_KEY)
       
-       res.locals.email = decoded.email
+        res.locals.email = decoded.email
         res.locals.department = decoded.department
        
         next()
     } catch (error) {
-       
         res.status(401).json({user  : false })
     }
 }

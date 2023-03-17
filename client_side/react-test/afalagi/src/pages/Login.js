@@ -21,25 +21,25 @@ export default function Login() {
     
 
   return (
-  <div className="bg-secondary login-container ">
+  <div className="bg-light login-container ">
 
     
-    <div className="d-flex w-100 justify-content-between pt-4" >
+    <div className="d-flex w-100 justify-content-between pt-4 bg-secondary" >
             <Header/>
-            <Signlink/>
+           
     </div>
 
     <EmployerContext.Provider  value = {employer} >
     
 
     <div className = "row ">
-        <div className = "col-md-6 col-lg-6 d-md-flex align-items-center" >
+        <div className = "col-12" >
              <Message  />
         </div>
-        <div className = " login-form container col-md-4 col-lg-6   d-md-flex align-items-center ">
+        <div className = " login-form container    d-md-flex align-items-center ">
 
                     <div className="border ms-auto me-auto"> 
-                            <p className =  "large-text"> Sign in as <span onClick={handleToggle} className = "toggler fw-italics text-decoration-underline text-light"> {employer ? "Company" : "Freelancer" } </span> </p>
+                            <p className =  "large-text"> Sign in as <span onClick={handleToggle} className = "toggler fw-italics text-decoration-underline "> {employer ? "Company" : "Freelancer" } </span> </p>
                             <div>
                                 <p className="large-text" > Sign in with :  <span> <i className="bi bi-google"></i>  </span> </p>
                                 
@@ -47,6 +47,7 @@ export default function Login() {
 
 
                             <Form/>
+                            <Signlink/>
                     </div>
             
             </div>
@@ -83,7 +84,7 @@ function Errormessage({tried}){
 function Message({employer}){
     return(
         <div >
-        <h1 className = "lobster text-light text-center"> <span >አ</span>falagi! </h1>
+        <h1 className = "lobster text-center"> <span >አ</span>falagi! </h1>
         <p className="logoText text-center ">  We are pleased to make {employer ? "you get your dream job sooner! " : " your job done accordingly!"}  </p>
         </div>     
     )
@@ -140,7 +141,7 @@ function Form(){
 
 
     return(
-        <form onSubmit = {handleSubmit} >
+        <form onSubmit = {handleSubmit} className = "border">
         <label className={tried ? "border-danger m-4 fs-5" :  "m-4 fs-5"}> Email : 
             <input value = {email} type = "email" onChange = {(e)=>{setEmail(e.target.value)}} placeholder = {employer ? "Email  " : "Company Email  "} className="input" />
         </label>
@@ -151,7 +152,7 @@ function Form(){
         </label>
 
         <Errormessage tried = {tried}/>
-        <input type = "submit" value = "Log in" className="btn btn-secondary submit-btn border d-block" />
+        <input type = "submit" value = "Log in" className="btn btn-secondary w-100 p-3 submit-btn border d-block" />
  
     </form>
 
@@ -162,7 +163,10 @@ function Form(){
 function Signlink(){
     const handleClick = ()=>{ window.location.href = "/signup" }
     return(
-        <button className="signin-link me-md-5" onClick={handleClick} >  Sign up </button>
+        // <button className="signin-link me-md-5 btn-lg btn-secondary w-100" onClick={handleClick} >  Sign up </button>
+        <>
+        <p onClick={handleClick} className = "text-center cursor-pointer">  Create an account? </p>
+        </>
     )
 }
 

@@ -2,7 +2,7 @@
 
 export const URL = 'http://localhost:5001'
 
-// export const URL = 'https://mern-bllq.onrender.com'
+//export const URL = 'https://mern-bllq.onrender.com'
 
 
 
@@ -118,23 +118,51 @@ export async function httpPostRequest(path , body){
 
 
 
-export async function httpCreateNotification(id , kind){
+// export async function httpCreateNotification( id , kind){
+//     const name = localStorage.getItem("name")
+//     const email = localStorage.getItem("email")
+//     const msg = message(kind , name , email)
+//     const body =  {
+//         companyName : localStorage.getItem("name"), 
+//         message : msg , 
+//         email :localStorage.getItem("email")
+
+//     }
+
+//     console.log("body is ...")
+//     console.log(body)
+//     return await fetch(`${URL}/freelancer/createnotification/${id}` , {
+//         method : "POST" ,
+//         headers : {
+//             'x-access-token'  : localStorage.getItem("token")
+//         },
+//         body : JSON.stringify(body),
+//     }).then(response => response.json()).then(data => data)
+// }
+
+
+export async function httpCreateNotification(id, kind){
     const name = localStorage.getItem("name")
     const email = localStorage.getItem("email")
     const msg = message(kind , name , email)
-    return fetch(`${URL}/freelancer/createnotification/${id}` , {
-        method : "POST" ,
-        headers : {
-            'x-access-token'  : localStorage.getItem("token")
-        },
-        body : JSON.stringify({
-            companyName :name , 
-            message : msg , 
-            email : email
+    const msgbody =  {
+        companyName : localStorage.getItem("name"), 
+        message : msg , 
+        email :localStorage.getItem("email")
 
-        })
-    }).then(response => response.json()).then(data => data)
+    }
+
+    //console.log(body)
+
+    return fetch(`${URL}/freelancer/createnotification/${id}` , {
+        method : "POST" , 
+        headers : {
+            'x-access-token' : localStorage.getItem("token")
+        } , 
+        body : JSON.stringify(msgbody)
+    }).then(response => response.json()).then(data=> data)
 }
+
 
 
 function message(kind , name , email){

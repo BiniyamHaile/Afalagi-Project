@@ -28,7 +28,7 @@
 
 .login-form{
     width : fit-content;
-    min-height: 100vh;
+   
 
 }
 
@@ -36,7 +36,9 @@
 .lobster{   
     font-family: 'Lobster', cursive;
     font-size: 3.7rem;
-    text-shadow: 2px 2px #ff0000;
+    text-shadow: 2px 2px #000000;
+    /* color : #68d388; */
+    color : rgb(7, 38, 121);
  
 }
 
@@ -91,9 +93,7 @@
     cursor: pointer;
 }
 
-.login-container{
-    min-height: 100vh;
-}
+
 
 
 .signin-link{
@@ -103,7 +103,18 @@
     border : 2px solid black;
 }
 
-.signin-link:hover , .submit-btn:hover{
+/* .signin-link:hover , .submit-btn:hover{
     background-color: rgba(104, 211, 136 , 0.8);
     
+} */
+
+
+.login-form{
+    height: fit-content;
+    
+}
+
+.login-container{
+    min-height: 100vh;
+   
 }

@@ -17,6 +17,7 @@ export default function Chomepage(){
     return(
         <div className="display-flex justify-content-center ">
         <div className="border-danger">
+            <h1> Welcome {localStorage.getItem("name")} </h1>
         {freelancers && <Component freelancers={freelancers}/>}
         </div>
         </div>

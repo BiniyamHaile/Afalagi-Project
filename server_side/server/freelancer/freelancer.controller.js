@@ -86,8 +86,9 @@ async function httpGetRandomFreelancers(req, res){
 async function httpCreateNotification(req , res){
     const notification = req.body;
     id = req.params.id
+    console.log(req)
     notification.unread = true
-    console.log(notification)
+    
     
     const result =  await createNotification(id , notification)
 

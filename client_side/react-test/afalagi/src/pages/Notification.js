@@ -1,4 +1,4 @@
-import { useEffect } from "react"
+import { useEffect , useState} from "react"
 import { httpGetRequest } from "../requests/Requests"
 
 export default function Notification(){
@@ -9,6 +9,7 @@ export default function Notification(){
                 const response = await httpGetRequest("/freelancer/notifications")
                 setNotifications(response)
             }
+            fetcher()
         }
         ,[]
     )
