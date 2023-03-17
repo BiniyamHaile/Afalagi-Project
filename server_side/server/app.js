@@ -10,11 +10,6 @@ const {freelancerRouter}= require("./freelancer/freelancer.router")
 
 
 
-
-
-
-
-
 require("dotenv").config()
 
 

@@ -139,7 +139,29 @@ async function createNotification(id , body){
 async function getNotificationCount(email){
     
     try {
-        result = await freelancer.find({email : email , 'notifications.unread' : true}).count()
+        // result = await freelancer.find({email : email , 'notifications.unread' : true})
+        // console.log(result.length)
+
+        // result = await freelancer.aggregate([
+        //     {"$match" : {
+        //         email : email
+        //         }
+        //     }  , 
+        //     {
+        //         "$project" : {
+        //             _id : 0 , 
+        //             "notifications" :
+        //                      {"$size" :"$notifications" }
+        //     }
+        // }
+        // ])
+
+
+        result = await freelancer.find({email : email}, {notifications : {$elemMatch : {unread : true}}}).count()
+
+        num = await freelancer.find({email: email}).count({'notifications.unread': true});
+
+        console.log(num)
         console.log(result)
         return result
     } catch (error) {

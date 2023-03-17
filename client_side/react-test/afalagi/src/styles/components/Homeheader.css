@@ -18,3 +18,23 @@ body{
 .cursor-pointer{
     cursor : pointer;
 }
+
+
+.header-contain{
+    position : relative;
+    width : fit-content;
+}
+
+.count{
+    position : absolute;
+    background-color: orangered;
+    top : -30%;
+    height : 1.3rem ; 
+    width : 1.3rem;
+    border-radius : 50%;
+    color : #fdefef;
+    
+    text-align: center;
+    
+
+}

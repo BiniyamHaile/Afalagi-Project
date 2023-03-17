@@ -28,7 +28,7 @@ const freelancerRouter = express.Router()
 //freelancerRouter.get("/" , consoler , httpGetAllFreelancers)
 freelancerRouter.get("/notify" , checkLoggedIn  , httpGetNotificationCount)
 
-freelancerRouter.get("/messages" , checkLoggedIn , httpGetAllNotifications)
+freelancerRouter.get("/notifications" , checkLoggedIn , httpGetAllNotifications)
 
 freelancerRouter.get("/random" , checkCompany , httpGetRandomFreelancers)
 

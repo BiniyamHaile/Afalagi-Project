@@ -1,8 +1,8 @@
 
 
-//export const URL = 'http://localhost:5001'
+export const URL = 'http://localhost:5001'
 
-export const URL = 'https://mern-bllq.onrender.com'
+// export const URL = 'https://mern-bllq.onrender.com'
 
 
 
@@ -130,6 +130,7 @@ export async function httpCreateNotification(id , kind){
         body : JSON.stringify({
             companyName :name , 
             message : msg , 
+            email : email
 
         })
     }).then(response => response.json()).then(data => data)
@@ -163,3 +164,6 @@ export async function httpGetNotificationCount(){
     const data = await response.json()
     return data
 }
+
+
+

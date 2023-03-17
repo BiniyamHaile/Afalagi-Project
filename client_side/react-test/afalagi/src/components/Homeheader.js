@@ -70,7 +70,7 @@ function List(){
         <Navigation path = {`/freelancer/appliedjobs/${user.id}`} value = "Applied Jobs" />
       </li>
       <li className="nav-item">
-        <Navigation path = "/freelancer/notification"   value= "Notifications" />
+        <Notification path = "/freelancer/notification"   value= "Notifications"  />
       </li>
 
       <li className="nav-item d-lg-none">
@@ -93,12 +93,24 @@ function List(){
 
 
 function Navigation({path , aria , value}){
-  const [user , count] = useContext(UserContext)
+ 
  
   return(
     <>
-    <NavLink to = {path}  className = "nav-link" aria-current = {aria ? "page" : ""}>{value}</NavLink>
-    <h1 className="notification text-center"> count : {count}</h1>
+    <NavLink to = {path}  className = "nav-link border" aria-current = {aria ? "page" : ""}>  {value}
+      </NavLink>
+    
+    </>
+  )
+}
+
+function Notification({path , aria , value}){
+  const [user , count] = useContext(UserContext)
+  return(
+    <>
+     <NavLink to = {path}  className = "nav-link " aria-current = {aria ? "page" : ""}>
+     <div className="border header-contain">  {value} <span className={count > 0 ? "count" : "d-none"}>{count > 0 ? count : ""} </span> </div>
+      </NavLink>
     </>
   )
 }
@@ -112,14 +124,13 @@ function Navtoggler(){
 }
 
 function Dropdown(){
-  const user = useContext(UserContext)
-  console.log(user)
+
   return(
     <div>
           <div className="dropdown ">
             <div className="d-inline"><img src= {profile} alt = "..." className="photo" /></div>
             <a className="btn btn-secondary dropdown-toggle" href="#" role="button" id="dropdownMenuLink" data-bs-toggle="dropdown" aria-expanded="false">
-              {user.firstName}
+              {localStorage.getItem("name")}
             </a>
 
             <ul className="dropdown-menu" aria-labelledby="dropdownMenuLink">
