@@ -8,6 +8,7 @@ const
         getAllJobs,   
         closeJob ,     
         getJobByDepartment , 
+        searchJobs,
     }
  = require("./job.model")
 
@@ -125,6 +126,16 @@ async function httpGetAppliedJobs(req , res){
         }
 }
 
+async function httpSearchJobs(req ,res){
+    const title = req.body.title
+    const result = await searchJobs(title)
+    if(result){
+        res.status(200).json(result)
+    }else{
+        res.status(400).json({ok : false})
+    }
+} 
+
 module.exports = {
     httpApplyToJob , 
     httpCloseJob , 
@@ -135,4 +146,5 @@ module.exports = {
     httpGetAllJobs,
     httpGetJobByDepartment,
     httpGetAppliedJobs,
+    httpSearchJobs
 }

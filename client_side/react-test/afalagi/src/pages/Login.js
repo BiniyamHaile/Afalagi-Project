@@ -4,7 +4,6 @@ import { useContext, useEffect, useState } from 'react';
 import jwtDecode from 'jwt-decode';
 import { URL } from "../requests/Requests";
 import { EmployerContext } from "../components/Contexts";
-import { Link, useSearchParams } from "react-router-dom";
 import Header from "./Header";
 
 
@@ -24,7 +23,7 @@ export default function Login() {
   <div className="bg-light login-container ">
 
     
-    <div className="d-flex w-100 justify-content-between pt-4 bg-secondary" >
+    <div className="d-flex w-100 justify-content-between  pt-4 " >
             <Header/>
            
     </div>
@@ -33,15 +32,15 @@ export default function Login() {
     
 
     <div className = "row ">
-        <div className = "col-12" >
+        <div className = "col-12 " >
              <Message  />
         </div>
-        <div className = " login-form container    d-md-flex align-items-center ">
+        <div className = " col-12 login-form container  ">
 
-                    <div className="border ms-auto me-auto"> 
+                    <div className=" ms-auto me-auto form-contain text-center "> 
                             <p className =  "large-text"> Sign in as <span onClick={handleToggle} className = "toggler fw-italics text-decoration-underline "> {employer ? "Company" : "Freelancer" } </span> </p>
                             <div>
-                                <p className="large-text" > Sign in with :  <span> <i className="bi bi-google"></i>  </span> </p>
+                                {/* <p className="large-text" > Sign in with :  <span> <i className="bi bi-google"></i>  </span> </p> */}
                                 
                             </div>
 
@@ -81,11 +80,11 @@ function Errormessage({tried}){
 
 
 
-function Message({employer}){
+function Message(){
     return(
-        <div >
+        <div className = "mb-5" >
         <h1 className = "lobster text-center"> <span >አ</span>falagi! </h1>
-        <p className="logoText text-center ">  We are pleased to make {employer ? "you get your dream job sooner! " : " your job done accordingly!"}  </p>
+        
         </div>     
     )
 }
@@ -141,18 +140,20 @@ function Form(){
 
 
     return(
-        <form onSubmit = {handleSubmit} className = "border">
-        <label className={tried ? "border-danger m-4 fs-5" :  "m-4 fs-5"}> Email : 
-            <input value = {email} type = "email" onChange = {(e)=>{setEmail(e.target.value)}} placeholder = {employer ? "Email  " : "Company Email  "} className="input" />
-        </label>
-        <br/>
-  
-        <label className={tried ? "border-danger fs-5" :  "fs-5"}>Password :
-            <input  value = {password} onChange = {(e)=>{setPassword(e.target.value)}} placeholder = "password" className="input" />
-        </label>
+        <form onSubmit = {handleSubmit} >
+       <div className="inputs">
+       <input  type = "text" onChange = {(e)=>{setEmail(e.target.value)}}   className={tried ? "input tried" : "input" } required />
+        <label className={tried ? "border-b-danger  " :  ""}> {employer ? "Email or Username " : "Company Email  or Username"} </label>
+       </div>
+      
+        <div className="inputs">
+        <input type = "password"   onChange = {(e)=>{setPassword(e.target.value)}}  className="input" required />
+        <label className={tried ? "border-b-danger " :  ""}>Password  </label>
+        </div>
+       
 
         <Errormessage tried = {tried}/>
-        <input type = "submit" value = "Log in" className="btn btn-secondary w-100 p-3 submit-btn border d-block" />
+        <input type = "submit" value = "Log in" className="btn btn-secondary w-75 p-3 submit-btn border d-block" />
  
     </form>
 

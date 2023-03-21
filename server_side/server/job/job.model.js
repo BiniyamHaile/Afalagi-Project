@@ -116,7 +116,41 @@ async function getAppliedJobs(email){
     }
 }
 
+async function searchJobs(title){
+    const pipeline =  [
+        {
+          $search: {
+            index: "Description",
+            text: {
+              query: title,
+              path: {
+                wildcard: "*"
+              },
+              fuzzy : {} ,
+            }
+          } , 
+        
+        } , 
+        {
+            $project : {
+                _id : 0 ,
+                personsApplied : 0
+              } ,
+        }
+      ]
+    try {
+        const result = await job.aggregate(pipeline)
+        console.log("result is ...")
+        return result
+    } catch (error) {
+        console.log(error) 
+        return false       
+    }
+
+}
+
 module.exports = {
+    searchJobs , 
     getAppliedJobs , 
     closeJob , 
     getPostedJobs , 

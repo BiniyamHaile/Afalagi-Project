@@ -4,15 +4,14 @@ import { Route, Routes } from "react-router-dom";
 import Notification from "./Notification" ; 
 import Newsfeed from "./Newsfeed";
 import { useEffect, useState } from "react";
-import httpGetUser from "../requests/httpGetUser";
 import Appliedjobs from "./Appliedjobs";
 import { httpGetNotificationCount, URL } from "../requests/Requests";
+import Jobsearch from "./Jobsearch";
+
+
 export default function Home(){
     const[user , setUser] = useState({})
     const[count  , setCount] = useState(0)
-    // useEffect(()=>{
-    //     setUser(httpGetUser())
-    // } , [])    
 
 
     
@@ -45,6 +44,7 @@ export default function Home(){
                 <Route path = "/" element = {<Newsfeed/>} exact />
                 <Route path = "/appliedjobs/:userId" element = {<Appliedjobs/>} exact />
                 <Route path = "/notification" element = {<Notification  />}  exact />
+                <Route path = "/search" element = {<Jobsearch/>} exact />
                 
             </Routes>
         </>    )}

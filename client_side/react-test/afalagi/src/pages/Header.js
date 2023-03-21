@@ -4,7 +4,7 @@ export default function Header(){
     }
     return(
         <div>
-            <div className = "shadow-lg p-3 fs-4 home" onClick={clickHandler}> <i className="bi bi-arrow-left"></i> Home</div>
+            <div className = " p-3 fs-4 home" onClick={clickHandler}> <i className="bi bi-arrow-left"></i> Home</div>
         </div>
     )
 }

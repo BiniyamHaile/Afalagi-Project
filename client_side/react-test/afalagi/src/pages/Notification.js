@@ -23,15 +23,25 @@ export default function Notification(){
 
 
 function Component({notifications}){
+   
     return(
         <div>
-            {notifications.map(notification => 
-                <div className= {notification.unread === true ? "mt-2 bg-secondary border" : "mt-2 bg-light border"} >
-                    <p > <span className="fw-bold"> {notification.companyName} </span> {notification.message}
-                    please check their email <span className="fs-italics fw-bold">{notification.email}</span>
-                    </p>
-                    
-                    </div>
+            {notifications.map(notification => {
+                   
+                    return(
+                       
+                        <div className= {notification.unread === true ? "mt-2 bg-light border" : "mt-2 bg-light border"} >
+                   
+                        <p  >   <span className="fw-bold"> {notification.companyName} </span> {notification.message}
+                        
+                        </p>
+                        
+                        </div>
+                    )
+                }
+            
+
+
                 
                 )}
         </div>

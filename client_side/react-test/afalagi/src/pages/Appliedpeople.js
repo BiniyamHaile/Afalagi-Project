@@ -1,12 +1,10 @@
 import { useContext, useEffect, useState } from "react";
 import { httpGetAppliedPeople } from "../requests/Requests.js";
 import male from "../images/male.jpg";
-import female from "../images/female.png" ;
 import {useParams} from "react-router-dom"
 import { ObjectContext } from "../components/Contexts.js";
 import { httpCreateNotification } from "../requests/Requests.js";
 
-// ... Don't forget to use "useContext  , createContext" here
 
 export default function Appliedpeople(){
    const {jobId} = useParams()
@@ -105,26 +103,29 @@ function Button({value , jobId , personId}){
 
 
 function Confirm({ personId}){
+    const[clicked , setClicked] = useState("Accept")
     const handleConfirm = async()=>{
         const result =  await httpCreateNotification(personId , "accept" )
-        console.log(result)
+       
+        result.ok ? setClicked("Accepted") : setClicked("Accepted");
     }
     return (
         <>
-        <button className="btn btn-success" onClick={handleConfirm}><i className="bi bi-check-lg text-info fw-bold " ></i> Accept</button>
+        <button className="btn btn-success" onClick={ clicked ==="Accept" ?  handleConfirm : ""}><i className="bi bi-check-lg text-info fw-bold " ></i>{clicked}</button>
         </>
     )
 }
 
 
 function Decline({ personId}){
+    const[decline , setDecline] = useState("Decline")
     const handleDecline = async()=>{
         const result =  await httpCreateNotification(personId , "decline" )
-        console.log(result)
+        result.ok ? setDecline("Declined!") : setDecline("Decline")
     }
     return (
         <>
-        <button className="btn btn-primary" onClick={handleDecline}><i className="bi bi-check-lg text-danger " ></i> Decline</button>
+        <button className="btn btn-primary" onClick={handleDecline}><i className="bi bi-check-lg text-danger " ></i> {decline}</button>
         </>
     )
 }

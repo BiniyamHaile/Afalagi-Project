@@ -110,7 +110,8 @@ export async function httpPostRequest(path , body){
     return fetch(`${URL}${path}` , {
         method : "POST" , 
         headers : {
-            'x-access-token' : localStorage.getItem("token")
+            'x-access-token' : localStorage.getItem("token") , 
+            "Content-Type" : "application/json"
         } , 
         body : JSON.stringify(body)
     }).then(response => response.json()).then(data=> data)
@@ -157,9 +158,15 @@ export async function httpCreateNotification(id, kind){
     return fetch(`${URL}/freelancer/createnotification/${id}` , {
         method : "POST" , 
         headers : {
-            'x-access-token' : localStorage.getItem("token")
+            'x-access-token' : localStorage.getItem("token"), 
+            'Content-Type' : "application/json"
         } , 
-        body : JSON.stringify(msgbody)
+        body : JSON.stringify( {
+            companyName : localStorage.getItem("name"), 
+            message : msg , 
+            email :localStorage.getItem("email")
+    
+        })
     }).then(response => response.json()).then(data=> data)
 }
 

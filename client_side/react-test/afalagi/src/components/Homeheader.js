@@ -3,8 +3,8 @@ import profile from "../images/img-1.jpg"
 import {Logout} from "./Logout"
 import { createContext  , useContext, useState} from "react"
 import { NavLink , Link } from "react-router-dom"
-import { httpGetNotificationCount } from "../requests/Requests"
-import { useEffect } from "react"
+import { httpGetNotificationCount, httpPostRequest } from "../requests/Requests"
+import Jobsearch from "../pages/Jobsearch"
 const UserContext = createContext({})
 
 
@@ -39,20 +39,29 @@ export default function Homeheader({user , count}){
 
 
 function Form(){
+  const[results , setResults] = useState([])
+  const[query , setQuery] = useState("")
+  
+  const handleClick = async (e)=>{
+    e.preventDefault();
+    console.log(e.target.value)
+    
+    const response = await httpPostRequest("/job/searchjob" , {title : query})
+    setResults(response)
+   
+
+
+  }
  return(
     <form className="form-inline my-2 my-lg-0 d-flex">
-          <input className="form-control mr-sm-2" type="search" placeholder={`search job`}/>
-          <Submit/>
+          <input className="form-control mr-sm-2" type="search" placeholder={`search job`} onChange = {(e)=>setQuery(e.target.value)}  />
+          <button className="btn btn-outline-success ms-2" type="submit" onClick={handleClick} >Search</button>
+          
   </form>
  )
 }
 
 
-function Submit(){
-    return(
-        <button className="btn btn-outline-success ms-2" type="submit">Search</button>
-    )
-}
 
 
 

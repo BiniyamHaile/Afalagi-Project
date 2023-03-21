@@ -3,7 +3,7 @@ export function Joblists(){
     return(
         <div className = "aliceblue shadow-lg mb-2">
        <div className = "alice-items container ">
-            <div className="mt-md-5" ><h4><i className="bi bi-code-square"></i> Software Development</h4>  </div>
+            <div  className="mt-md-5 " ><h4><i className="bi bi-code-square"></i> Software Development</h4>  </div>
             <div  className="mt-md-5"> <h4> <i className="bi bi-activity"></i>Health</h4>  </div>
             <div  className="mt-md-5">  <h4><i className="bi bi-camera-reels"></i> Video Editing</h4>  </div>
             <div  className="mt-md-5">  <h4> <i className="bi bi-bank"></i> Accounting and Finance</h4>  </div>

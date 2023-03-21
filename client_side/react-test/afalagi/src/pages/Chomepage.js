@@ -1,5 +1,5 @@
 import { useState , useEffect } from "react"
-import { httpGetRandomFreelancers } from "../requests/Requests.js"
+import { httpCreateNotification, httpGetRandomFreelancers } from "../requests/Requests.js"
 import male from "../images/male.jpg";
 export default function Chomepage(){
     const [freelancers , setFreelancers] = useState([])
@@ -79,12 +79,15 @@ function Component({freelancers}){
 
 
 
-function Connect(){
-    // TODO
-
+function Connect({personId}){
+    const[connect  , setConnect] = useState("Connect")
+    const handleClick = async ()=>{
+        const result = await httpCreateNotification(personId , "connect");
+        result.ok  ? setConnect("Connection request sent!")  : setConnect("Connect")
+    }
     return(
         <>
-            <button className="btn btn-lg btn-success" > Connect </button>
+            <button className="btn btn-lg btn-success" onClick = {handleClick} > {connect} </button>
         
         </>
     )

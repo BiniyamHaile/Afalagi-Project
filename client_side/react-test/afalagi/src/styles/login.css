@@ -85,7 +85,7 @@
 }
 
 .large-text{
-    font-size: 2rem;
+    font-size: 1rem;
 }
 
 
@@ -111,10 +111,71 @@
 
 .login-form{
     height: fit-content;
+    width: 100%;
     
 }
 
 .login-container{
     min-height: 100vh;
    
+}
+
+
+.inputs{
+    width : 100%;
+    position : relative;
+    margin-bottom: 1rem;
+
+}
+
+
+.inputs input{
+
+    display: inline-block;
+    border : none;
+    outline : none;
+    border-bottom: 1px solid rgb(3, 8, 14);
+    background-color: transparent;
+    width : 90%;
+    margin : 0;
+    padding : 1rem;
+}
+
+.inputs label{
+    position: absolute;
+    left : 1rem;
+    padding: 10px;
+    pointer-events: none;
+    transition: all .4s ease-in-out;
+    font-size: 1.2rem;
+    color: rgb(10, 38, 25);
+}
+
+.inputs input:hover ,.inputs input:focus , .inputs input:valid {
+    border : none;
+    border-bottom: 2px solid rgb(7, 19, 151);
+    background-color: transparent;
+    width : 90%;
+}
+
+.inputs input:focus ~ label , .inputs input:valid ~ label{
+    font-size: 0.8rem;
+    top : -30%;
+    left : 0.5rem;
+    color :rgb(7, 19, 151);
+    font-weight: bold;
+}
+
+
+ 
+
+
+.form-contain{
+    min-width: 100px;
+    max-width: 500px;
+}
+
+
+.tried , .tried:valid{
+    margin-bottom: 2px solid red;
 }

@@ -55,14 +55,14 @@ export default function Newsfeed(){
 
 
 
-function Components({jobs }){
+export function Components({jobs }){
     const handleApply = async (job_id)=>{
        
         const result  = await httpApplyToJob(job_id)
-        console.log(result)
+        
     }
     return(
-        <div >
+        <div className="joblist" >
             {jobs.map(job=>
                <div key = {job._id} className = "bg-light m-2 border">
                 <p className="text-center fw-bold title"> {job.title} </p>
