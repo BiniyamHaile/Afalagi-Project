@@ -157,12 +157,19 @@ async function getNotificationCount(email){
         // ])
 
 
-        result = await freelancer.find({email : email}, {notifications : {$elemMatch : {unread : true}}}).count()
+       // result = await freelancer.find({email : email}, {notifications : {$elemMatch : {unread : true}}}).count()
 
-        num = await freelancer.find({email: email}).count({'notifications.unread': true});
+        const user = await freelancer.find({email: email})
+        const checkNotifications = (notification) => notification.unread === true;
+        const listOfNotifications = user[0].notifications.filter(checkNotifications)
 
-        console.log(num)
-        console.log(result)
+        
+        console.log(listOfNotifications)
+        return listOfNotifications.length
+
+
+        // console.log(num)
+        // console.log(result)
         return result
     } catch (error) {
         console.log(error)
@@ -174,12 +181,19 @@ async function getAllNotifications(email){
 
    
 try{
-    result= await freelancer.find({
+   const  result= await freelancer.find({
         email : email 
-    } , {notifications : 1 , _id : 0})
+    } )
     
+    await freelancer.updateMany(
+        {email : email , "notifications.unread" : true}  , 
+        {$set : {"notifications.$.unread" : false}}
+    )
    
-    return result[0].notifications
+    console.log("result is ...")
+    console.log(result)
+    console.log(result[0])
+    return  result[0].notifications.reverse()
 }catch(error){
     console.log(error)
     return false

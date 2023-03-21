@@ -10,8 +10,7 @@ const UserContext = createContext({})
 
 
 export default function Homeheader({user , count}){
-    console.log("count is")
-    console.log(count)
+  
     
     
 
@@ -106,7 +105,7 @@ function Navigation({path , aria , value}){
  
   return(
     <>
-    <NavLink to = {path}  className = "nav-link border" aria-current = {aria ? "page" : ""}>  {value}
+    <NavLink to = {path}  className = "nav-link" aria-current = {aria ? "page" : ""}>  {value}
       </NavLink>
     
     </>
@@ -115,10 +114,15 @@ function Navigation({path , aria , value}){
 
 function Notification({path , aria , value}){
   const [user , count] = useContext(UserContext)
+  
+  const [num , setNum] = useState(count)
+  
+  console.log(`count is ${count}`)
+  console.log(`num is ${num}`)
   return(
     <>
      <NavLink to = {path}  className = "nav-link " aria-current = {aria ? "page" : ""}>
-     <div className="border header-contain">  {value} <span className={count > 0 ? "count" : "d-none"}>{count > 0 ? count : ""} </span> </div>
+     <div onClick={()=>setNum(0)} className=" header-contain">  {value} <span className={num > 0 ? "count" : "d-none"}>{num > 0 ? num : ""} </span> </div>
       </NavLink>
     </>
   )

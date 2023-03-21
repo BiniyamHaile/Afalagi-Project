@@ -1,6 +1,6 @@
 import { useEffect , useState} from "react"
 import { httpGetRequest } from "../requests/Requests"
-
+import  "../styles/notifications.css"
 export default function Notification(){
     const [notifications , setNotifications] = useState([])
     useEffect(
@@ -30,7 +30,7 @@ function Component({notifications}){
                    
                     return(
                        
-                        <div className= {notification.unread === true ? "mt-2 bg-light border" : "mt-2 bg-light border"} >
+                        <div className= {notification.unread === true ? "mt-2 unread shadow" : "mt-2 read shadow"} >
                    
                         <p  >   <span className="fw-bold"> {notification.companyName} </span> {notification.message}
                         
