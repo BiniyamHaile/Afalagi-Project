@@ -2,10 +2,14 @@
 
 @import url('https://fonts.googleapis.com/css2?family=Open+Sans:ital,wght@1,800&display=swap');
 
-
- .cards{
+*{
+ box-sizing: border-box;   
+}
+.cards{
   
      font-family: 'Source Sans Pro', sans-serif;
+    
+
  }
 .login{
     font-family: "Open Sans";
@@ -73,4 +77,18 @@ body{
     top: 0;
     width : 100%;
     z-index: 100;
+}
+
+.cards{
+    margin-top: 5vh;
+    display: flex;
+  
+    justify-content: center;
+    align-items: center;
+    box-sizing: border-box;
+}
+
+.cards>div{
+    width: 95%;
+  
 }

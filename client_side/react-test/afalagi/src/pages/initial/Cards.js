@@ -12,11 +12,11 @@ export default function Cards(){
       <div className = "cards">
 
 
-        <div className="row" >
+        <div className="row  container" >
 
 
 
-        <div className="card col-md-4" styles={"width: 18rem;"} >
+        <div className="card col-md-5 ms-3 me-5" styles={"width: 18rem;"} >
   <img src= {company_1} className="card-img-top " alt="..." styles={"height : 50px"}/>
   <div className="card-body">
     <h2 className="card-title  text-center"  >JS Tech Group</h2>
@@ -27,7 +27,7 @@ export default function Cards(){
 
   
 
-<div className="card employee  col-md-4" styles={"width: 18rem;"}>
+<div className="card employee  col-md-5 ms-5 me-5" styles={"width: 18rem;"}>
   <img src= {img_1} className="card-img-top " alt="..." />
   <div className="card-body">
     <h2 className="card-title text-center">Yonas Behailu</h2>
@@ -41,14 +41,7 @@ export default function Cards(){
   
 
 
-<div className="card  col-md-4" styles={"width: 18rem;"}>
-  <img src= {company_2} className="card-img-top" alt="..."/>
-  <div className="card-body">
-    <h2 className="card-title text-center">Tech.Co</h2>
-    <p className="card-text fs-5">"We've been using the freelancing website for a while now and it's been great. The interface is intuitive and the search function is very helpful. We've been able to find the right freelancers for our projects quickly and easily. Thank you!"</p>
-    <div><i className="bi bi-star-fill"></i><i className="bi bi-star-fill"></i><i className="bi bi-star-fill"></i><i className="bi bi-star-fill"></i><i className="bi bi-star-fill"></i></div>
-  </div>
-</div>
+
 
 
 
