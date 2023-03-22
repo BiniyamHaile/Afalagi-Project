@@ -37,83 +37,36 @@ export default function Jobsposted(){
         <>
         <h2 className="text-secondary f-italics text-center">list of jobs from {localStorage.getItem('name')} </h2>
        
-        <table class = "table table-striped container-md">
-        <thead>
-           
-        <tr>
-        <th>Job title</th>
-        <th className="d-none d-md-inherit">department</th>
-        <th>Deadline</th>
-        <th>People Applied</th>
-        <th>Status</th>
-        <th>Close</th>
-        <th>See more</th>
-
-        </tr>
-        </thead>
-        <tbody>
-            <Component jobs = {jobs} handleClose = {handleClose}/>
+     
+            <PostedJobs jobs = {jobs} handleClose = {handleClose}/>
   
-        </tbody>
-         </table>
+        
         </>
     )
 }
 
 
 
-function Component({jobs , handleClose }){
-    
 
-        const handleApplied = async (job)=>{
-
-
-                        const data =  await httpGetAppliedPeople(job.id)
-                        console.log(data)
-                        if(data){
-                          return <Appliedjobs people = {data} jobId = {job.id} />
-                        }
-        }
-
-
-
-
-
-
-        return(
-            <>
-                {jobs.map(job => 
-       
-       
-       <tr key={job._id}>
-        
-       <td>
-        {job.title}
-       </td>
-        <td className="d-none d-md-inherit">
-            {job.department}
-        </td>
-        <td>
-            {new Date(job.deadline).toLocaleDateString()}
-        </td>
-        <td  className="text-center">
-        <Link to = {`appliedpeople/${job.id}`} >  {job.personsApplied.length} </Link>
-          
-           
-        </td>
-        
-        <td>{job.status}</td>
-        <td ><button onClick = {()=>{handleClose( job)}} className="btn btn-primary"><i className="bi bi-x-square"></i></button></td>
-        <td><i className="bi bi-three-dots"></i></td>
-        
-
-         </tr>
-        
-        
-        )
-        
-        }
-            
-            </>
-        )
+function PostedJobs({jobs , handleClose}){
+ 
+    return (
+        <div className="bg-light ">
+            {jobs.map(job=>
+                <div key = {job._id} className = "job row" >
+                  <div className=" col-md-6">
+                  <h3> {job.title} </h3>
+                  <p className = "fs-italics"> {job.status}  </p> 
+                   <p> description : <br/> {job.description} </p>  
+                    </div>
+                    <div className="col-md-4">
+                        <p className="fs-italics">  {job.personsApplied.length} people applied </p>
+                        <Link to = {`appliedpeople/${job.id}`}  >  see applied people </Link>
+                        <button onClick = {()=>{handleClose(job)}} className="btn btn-primary d-block mt-3"><i className="bi bi-x-square"></i> Close job </button>
+                    </div>
+                                 
+                    </div>
+            )}
+        </div>
+    )
 }

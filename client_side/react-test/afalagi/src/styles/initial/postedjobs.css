@@ -5,3 +5,10 @@
     font-family: 'Source Sans Pro', sans-serif;
 }
 
+.job{
+    border-radius: 18px;
+    
+    width : 90%;
+    margin : 2rem auto ;
+    background-color: aliceblue;
+}

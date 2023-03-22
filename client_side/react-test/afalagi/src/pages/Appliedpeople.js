@@ -51,12 +51,12 @@ function Component(){
     return(
             <div key = {jobId} className="container-fluid mt-5">
 
-            <div className = "row">
+            <div className = " row">
 
             { people  && people.map(person =>
                 
                 
-                    <div key = {person.id} className = "col-md-4 col-lg-3">
+                    <div key = {person.id} className = "col-md-4 col-lg-3 m-auto">
 
 
                                 <div className="card" styles={"width: 18rem;"}>

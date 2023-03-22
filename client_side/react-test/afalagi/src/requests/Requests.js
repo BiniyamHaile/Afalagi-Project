@@ -86,10 +86,12 @@ export async function httpGetRandomFreelancers(){
 
 
 export async function httpCloseJob(id){
-          return fetch(`http://localhost:3000/job/closejob/${id}` , {
+          return fetch(`${URL}/job/closejob/${id}` , {
                                 method : "PATCH" , 
                                 headers : {
-                                    'x-access-token' : localStorage.getItem("token")
+                                    'x-access-token' : localStorage.getItem("token") ,
+                                    'Content-type' : "application/json"
+                                
                                 }
                                  }).then(response => response.json()).then(data =>data)
 }
@@ -110,7 +112,7 @@ export async function httpPostRequest(path , body){
         method : "POST" , 
         headers : {
             'x-access-token' : localStorage.getItem("token") , 
-            "Content-Type" : "application/json"
+            'Content-Type' : 'application/json'
         } , 
         body : JSON.stringify(body)
     }).then(response => response.json()).then(data=> data)
