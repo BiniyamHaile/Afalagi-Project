@@ -1,10 +1,12 @@
 import "../styles/components/Homeheader.css"
+
 import profile from "../images/img-1.jpg"
 import {Logout} from "./Logout"
-import { createContext  , useContext, useState} from "react"
-import { NavLink , Link } from "react-router-dom"
+import { createContext  , useContext, useEffect, useState} from "react"
+import { NavLink , Link , Navigate } from "react-router-dom"
 import { httpGetNotificationCount, httpPostRequest } from "../requests/Requests"
-import Jobsearch from "../pages/Jobsearch"
+import { Joblists } from "../pages/initial/Joblists"
+
 const UserContext = createContext({})
 
 
@@ -18,13 +20,13 @@ export default function Homeheader({user , count}){
               <UserContext.Provider value = {[user, count]}>
                 <nav className="navbar navbar-expand-lg navbar-light bg-light">
                     <div className="container-fluid ">
-                  
+                    <NavLink to = "" className="navbar-brand me-3" href="#">Afalagi</NavLink>
                         <Navtoggler/>
                     
                         <div className="collapse navbar-collapse" id="navbarTogglerDemo01">
 
                                   
-                                    <NavLink to = "" className="navbar-brand me-3" href="#">Afalagi</NavLink>
+                                   
                                     <Form/>  
                                     <List/>
                             
@@ -38,23 +40,36 @@ export default function Homeheader({user , count}){
 
 
 function Form(){
-  const[results , setResults] = useState([])
-  const[query , setQuery] = useState("")
-  
+  const[results , setResults] = useState(null)
+  const[query , setQuery] = useState(" ")
+  useEffect(
+    ()=>{}  ,
+   [])
   const handleClick = async (e)=>{
     e.preventDefault();
-    console.log(e.target.value)
+    console.log("value is  ... ")
+    console.log(query)
     
     const response = await httpPostRequest("/job/searchjob" , {title : query})
     setResults(response)
+ 
+   localStorage.setItem("joblist" , JSON.stringify(response));
+  
+   window.location.href = '/freelancer/search'
+ 
+  
    
 
 
   }
+
+  console.log(results)
+  console.log("rendered homeheader")
  return(
-    <form className="form-inline my-2 my-lg-0 d-flex">
-          <input className="form-control mr-sm-2" type="search" placeholder={`search job`} onChange = {(e)=>setQuery(e.target.value)}  />
-          <button className="btn btn-outline-success ms-2" type="submit" onClick={handleClick} >Search</button>
+    <form className="form-inline my-2 my-lg-0 d-flex" >
+          <input  className="form-control mr-sm-2" type="search" placeholder={`search job`} onChange = {(e)=>setQuery(e.target.value)}  />
+          <button  className="btn btn-outline-success ms-2" onClick={handleClick} >Search</button>
+          {/* <input type = "submit" className="btn btn-outline-success ms-2" value = "Search" onClick={handleClick} /> */}
           
   </form>
  )

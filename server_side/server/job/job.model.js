@@ -117,16 +117,37 @@ async function getAppliedJobs(email){
 }
 
 async function searchJobs(title){
+    // const pipeline =  [
+    //     {
+    //       $search: {
+    //         index: "Description",
+    //         text: {
+    //           query: title,
+    //           path: {
+    //             wildcard: "*"
+    //           },
+    //           fuzzy : {} ,
+    //         }
+    //       } , 
+        
+    //     } , 
+    //     {
+    //         $project : {
+    //             _id : 0 ,
+    //             personsApplied : 0
+    //           } ,
+    //     }
+    //   ]
+
+
     const pipeline =  [
         {
           $search: {
             index: "Description",
             text: {
               query: title,
-              path: {
-                wildcard: "*"
-              },
-              fuzzy : {} ,
+              path: ["title" , "description" , "companyName"],
+              
             }
           } , 
         

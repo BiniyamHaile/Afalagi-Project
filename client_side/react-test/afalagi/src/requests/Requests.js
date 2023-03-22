@@ -1,8 +1,8 @@
 
 
-//export const URL = 'http://localhost:5001'
+export const URL = 'http://localhost:5001'
 
-export const URL = 'https://mern-bllq.onrender.com'
+// export const URL = 'https://mern-bllq.onrender.com'
 
 
 
@@ -26,8 +26,7 @@ export async function httpApplyToJob(job_id){
                     body : JSON.stringify({
                         id : job_id , 
                         email : localStorage.getItem("email")
-
-                    })
+    })
                     
             }).then(response => response.json())
                 .then(data => {
