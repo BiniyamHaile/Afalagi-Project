@@ -20,6 +20,11 @@ export default function Description(){
 <h4><i className="bi bi-patch-check-fill"></i> Based on mutual agreement...</h4>
 
 <h4><i className="bi bi-patch-check-fill"></i> Easy to use...</h4>
+<div className = "d-flex justify-content-around">
+<button className="btn btn-link text-light d-inline d-md-none">ABOUT US</button>
+<button className= "btn btn-link text-light d-inline d-md-none">CONTACT US</button>
+</div>
+
 </div>
   
  

@@ -4,8 +4,7 @@
 }
 .alice-items{
     
-    display: grid;
-    grid-template-columns: repeat(4 , auto);
+    
     row-gap: 1.3rem;
     padding: 40px 0;
 }
