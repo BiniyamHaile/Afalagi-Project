@@ -19,15 +19,17 @@ export default function Homeheader({user , count}){
     return(
               <UserContext.Provider value = {[user, count]}>
                 <nav className="navbar navbar-expand-lg navbar-light bg-light">
-                    <div className="container-fluid ">
-                    <NavLink to = "" className="navbar-brand me-3" href="#">Afalagi</NavLink>
-                        <Navtoggler/>
+                    <div className="container-fluid  nav-container">
+                    <div  className=" contain">
+                    <NavLink to = "" className="navbar-brand" href="#">Afalagi</NavLink>
+                         <span className="d-none d-lg-block"> <Form/>  </span> <Navtoggler/>
+                    </div>
                     
-                        <div className="collapse navbar-collapse" id="navbarTogglerDemo01">
+                        <div className="collapse navbar-collapse container nav-contain d-lg-flex justify-content-end " id="navbarTogglerDemo01">
 
                                   
                                    
-                                    <Form/>  
+                                  <span className="d-lg-none"> <Form/>  </span>
                                     <List/>
                             
                         </div>
@@ -84,7 +86,7 @@ function List(){
 
   const [user] = useContext(UserContext)
   return(
-      <ul className="navbar-nav me-auto mb-2 mb-lg-0  w-50 justify-content-around ms-5">
+      <ul className="navbar-nav  mb-2 mb-lg-0  w-75 justify-content-between  ms-5">
       <li className="nav-item">
         <Navigation path =  "/freelancer/" aria = {true} value = "Home" /> 
        </li>

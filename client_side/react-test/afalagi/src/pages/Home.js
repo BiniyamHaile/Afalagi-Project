@@ -6,7 +6,6 @@ import Newsfeed from "./Newsfeed";
 import { useEffect, useState } from "react";
 import Appliedjobs from "./Appliedjobs";
 import { httpGetNotificationCount, URL } from "../requests/Requests";
-import Jobsearch from "./Jobsearch";
 import Searchresult from "./Searchresult";
 
 export default function Home(){
@@ -30,9 +29,7 @@ export default function Home(){
                 const number = await httpGetNotificationCount()
                 setCount(number)
                 localStorage.setItem("notification-count" , number)
-                console.log(`notifications :  ${number}`)
-                console.log(number)
-                
+              
             }
             fetcher()
         } , [])

@@ -74,7 +74,7 @@ export function Components({jobs }){
 
                 <button onClick = {()=>{
                     
-                    handleApply(job.id)}} className="btn btn-info btn-sm apply p-2">Apply</button>
+                    handleApply(job.id)}} className="btn  btn-lg  apply  shadow ">Apply</button>
                 </div>
 
             )}

@@ -38,3 +38,22 @@ body{
     
 
 }
+
+
+
+
+
+
+.contain{
+    display: flex;
+    flex-direction: row;
+    justify-content: space-between;
+}
+
+.nav-contain{
+    width : fit-content;
+    display: flex;
+    flex-direction: row;
+    justify-content:start;
+    
+}
