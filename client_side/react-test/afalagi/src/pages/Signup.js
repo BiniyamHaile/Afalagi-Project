@@ -1,6 +1,7 @@
 
 import { useState } from 'react';
 import "../styles/signup.css";
+import "../styles/login.css"
 import { URL } from '../requests/Requests';
 
 export default function Signup() {
@@ -49,47 +50,73 @@ export default function Signup() {
 
 
   return (
-  <div className =  "sign-container d-flex flex-direction-column align-items-center">
+  <div className =  "sign-container d-flex flex-direction-column align-items-center shadow-lg pb-5">
   
-   <form onSubmit = {handleSubmit} className = "shadow-lg form-container "> 
+   <form onSubmit = {handleSubmit} className = " form-container container-fluid "> 
 
-      <div className = 'inputs-container'>
+      <div className = 'container row'>
 
 
 
-      <div className='input-container border '>
-    <label htmlFor="fname">First name :  </label>
-    <input name="fname" id="fname" value = {firstName} onChange = {(e)=>{setFirstName(e.target.value)}}  />
+      <div className='inputs   '>
+   
+    <input type= "text" value = {firstName} onChange = {(e)=>{setFirstName(e.target.value)}} required />
+    <label>First name :  </label>
     </div>
 
 
-    <div className='input-container border'>
-    <label htmlFor = "lname">Last name : </label>
-    <input value = {lastName} onChange = {(e)=>{setLastName(e.target.value)}}  />
+    <div className='inputs  '>
+   
+    <input type= "text" onChange = {(e)=>{setLastName(e.target.value)}} required />
+    <label >Last name : </label>
     </div>
 
-    <div className='input-container border'>
-    <label htmlFor = 'email'>Email  : </label>
-    <input id = 'email' value = {email} onChange = {(e)=>{setEmail(e.target.value)}} />
+    <div className='inputs  '>
+   
+    <input type = "email" onChange = {(e)=>{setEmail(e.target.value)}} required/>
+    <label>Email  : </label>
     </div>
 
 
     
-   <div className='input-container border'>
-   <label >Phone : </label>
-    <input value={phone}  onChange = {(e)=>{setPhone(e.target.value)} }/>
+   <div className='inputs  '>
+   
+   
+    <input type = "text"  onChange = {(e)=>{setPhone(e.target.value)} } required/>
+    <label >Phone : </label>
    </div>
 
 
-    <div className='input-container border'>
+    <div className='inputs  '>
+    
+    <input type = "password" onChange = {(e)=>{setPassword(e.target.value)}} required />
     <label>Password : </label>
-    <input value = {password} onChange = {(e)=>{setPassword(e.target.value)}} />
     </div>
 
+   
 
-    <div className='input-container border'>
-    <label> Department :  </label>
-    <select name = "department" defaultValue={"IT"} onChange={(e)=>setDepartment(e.target.value)}>
+     
+    
+
+  
+
+    <div className='inputs  '>
+    <input type  = "text"   onChange = {(e)=>{setExperience(e.target.value)}} required/>
+    <label>Experience  :</label>
+    
+    </div>
+   
+
+    <div className='inputs  '>
+    <input  type = "text" onChange = {(e)=>{setLocation(e.target.value)}} required/>
+    <label>Location :  </label>
+   
+    </div>
+    
+
+    <div className='input-container  '>
+    <label className = "padding"> Department :  </label>
+    <select name = "department" defaultValue={"IT"} onChange={(e)=>setDepartment(e.target.value)} className = "d-block" >
                         <option value = "IT" >IT</option>
                         <option value = "Law">Law</option>
                         <option value = "Psychology">Psychology</option>
@@ -98,31 +125,20 @@ export default function Signup() {
                     </select>
     </div>
 
-     
-    <div className='input-container border'>
-    <label >Description : </label>
-     <textarea value={description} onChange={(e)=>{setDescription(e.target.value)}}></textarea>  
-    </div>
-
-
-
-
-    <div className='input-container border'>
-    <label>Experience  :</label>
-    <input value={experience} onChange = {(e)=>{setExperience(e.target.value)}} />
-    </div>
-
-
-    <div className='input-container border'>
-    <label>Location :  </label>
-    <input value={location} onChange = {(e)=>{setLocation(e.target.value)}} />
-    </div>
+    <div className='input-container  '>
+      <label className='padding' >Description : </label>
+     <textarea type = "text" onChange={(e)=>{setDescription(e.target.value)}} required></textarea>  
     
+    </div>
 
-
+    <div className=' inputs'>
+      <input type = "submit" value = "sign up" className='mx-auto btn btn-lg border mt-2 sign-up'  required />
       </div>
+      
+      
+    </div>
     
-    <div className='d-flex justify-content-center'><input type = "submit" value = "sign in" className='mx-auto btn btn-lg border shadow-lg bg-muted'  /></div>
+  
 
 
    </form>

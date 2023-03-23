@@ -80,7 +80,7 @@ function Errormessage({tried}){
 
 
 
-function Message(){
+export function Message(){
     return(
         <div className = "mb-5" >
         <h1 className = "lobster text-center"> <span >አ</span>falagi! </h1>

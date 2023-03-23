@@ -2,13 +2,15 @@ const express = require("express")
 const jobRouter = express.Router()
 const {checkCompany} = require("../components/checkCompany")
 const checkLoggedin = require("../checkLoggedin")
-const {httpSearchJobs , httpGetAppliedJobs ,  httpApplyToJob,  httpCreateJob , httpGetAllJobs , httpGetPostedJobs , httpCloseJob , httpGetJobByDepartment} = require("./job.controller")
+const { httpGetDeptJobs , httpSearchJobs , httpGetAppliedJobs ,  httpApplyToJob,  httpCreateJob , httpGetAllJobs , httpGetPostedJobs , httpCloseJob , httpGetJobByDepartment} = require("./job.controller")
 
 jobRouter.get("/jobs" , httpGetAllJobs)
 
 jobRouter.get("/postedjobs" , checkCompany ,  httpGetPostedJobs)
 
 jobRouter.get("/departmentjob" , checkLoggedin , httpGetJobByDepartment)
+
+jobRouter.get("/department/:department" , checkLoggedin , httpGetDeptJobs)
 
 jobRouter.get("/appliedjobs" , checkLoggedin , httpGetAppliedJobs)
 

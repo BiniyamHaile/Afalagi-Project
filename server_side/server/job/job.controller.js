@@ -91,6 +91,17 @@ async function httpGetJobByDepartment(req ,  res){
 }
 
 
+async function httpGetDeptJobs(req , res){
+    console.log("request reached to the controller")
+    const value = await getJobByDepartment(req.params.department)
+    if(value){
+        res.status(200).json(value)
+    }   
+    else{
+        res.status(404).json({ok : false})
+    }    
+}
+
 async function httpApplyToJob(req, res){
     email = req.body.email , 
     id = req.body.id
@@ -146,5 +157,6 @@ module.exports = {
     httpGetAllJobs,
     httpGetJobByDepartment,
     httpGetAppliedJobs,
-    httpSearchJobs
+    httpSearchJobs, 
+    httpGetDeptJobs
 }
