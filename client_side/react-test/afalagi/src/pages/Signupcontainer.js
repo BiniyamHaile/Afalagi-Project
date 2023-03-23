@@ -38,7 +38,7 @@ export default function Signupcontainer(){
                                         Already have an account? 
                                         <span className="text-decoration-underline"> <Link to = "/login">Log in</Link> </span> 
                                        </p>
-                                <p> Sign in as <span onClick={handleToggle} className = "toggler fw-italics text-decoration-underline "> {position} </span>  </p>
+                                <p> Sign up as <span onClick={handleToggle} className = "toggler fw-italics text-decoration-underline "> {position} </span>  </p>
                                         {position === "Company" ? <Signup/> : <Companysignup/>}   
                                 </div>
                     </div>
