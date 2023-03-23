@@ -5,6 +5,7 @@ import { Joblists } from "./initial/Joblists";
 import Cards from "./initial/Cards";
 import About from "./initial/About";
 import { NavLink } from "react-router-dom";
+import Footer from "./Footer";
 
 
 export default function Entry(){
@@ -28,7 +29,7 @@ export default function Entry(){
         <About/>
 
         </div>
-
+        <Footer/>
 
         </div>
     )

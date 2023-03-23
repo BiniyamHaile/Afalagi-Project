@@ -4,7 +4,7 @@ const jwt = require('jsonwebtoken')
 
 function  checkLoggedIn(req, res , next){
     const token = req.headers['x-access-token']
-   
+   console.log(" ... incoming request")
     
 
     try {

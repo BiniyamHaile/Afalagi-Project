@@ -1,10 +1,7 @@
 import "../styles/initial/postedjobs.css"
 import { useEffect  , useState} from "react"
-import { httpGetAppliedPeople } from "../requests/Requests.js"
-import Appliedjobs from "./Appliedjobs"
 import { Link } from "react-router-dom"
 import { httpCloseJob } from "../requests/Requests.js"
-import Appliedpeople from "./Appliedpeople"
 import { URL } from "../requests/Requests.js"
 export default function Jobsposted(){
     const [close , setClose] = useState(false)

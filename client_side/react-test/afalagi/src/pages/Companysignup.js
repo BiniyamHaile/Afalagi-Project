@@ -40,20 +40,23 @@ export default function Companysignup() {
   <div className='sign-container '>
    <form onSubmit = {handleSubmit} className = "d-flex flex-column shadow-lg">
 
-    <div className='d-flex input-container  justify-content-between  mx-auto mb-4 mt-4'>
+    <div className='inputs'>
+   
+    <input id = "cname" type = "text" onChange = {(e)=>{setName(e.target.value)}} required/>
     <label for = "cname">Company Name:  </label>
-    <input id = "cname" value = {name} onChange = {(e)=>{setName(e.target.value)}}/>
     </div>
 
-    <div className='d-flex  input-container justify-content-between  mx-auto mb-4 '>
+    <div className='inputs'>
+   
+    <input id = 'cemail' type = "email" onChange = {(e)=>{setEmail(e.target.value)}} required />
     <label for = "cemail">Email  : </label>
-    <input id = 'cemail' value = {email} onChange = {(e)=>{setEmail(e.target.value)}} />
     </div>
     
    
-    <div className='d-flex input-container justify-content-between  mx-auto mb-4'>
-    <label for = "cpassword">Password :</label>
-    <input id = 'cpassword' value = {password} onChange = {(e)=>{setPassword(e.target.value)}} />
+    <div className='inputs'>
+   
+    <input id = 'cpassword' type = "password" onChange = {(e)=>{setPassword(e.target.value)}} required />
+    <label for = "cpassword">Password :</label> 
     </div>
     
   

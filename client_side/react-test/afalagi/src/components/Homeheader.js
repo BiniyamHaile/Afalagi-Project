@@ -20,13 +20,14 @@ export default function Homeheader({user , count}){
               <UserContext.Provider value = {[user, count]}>
                 <nav className="navbar navbar-expand-lg navbar-light bg-light">
                     <div className="container-fluid  nav-container">
-                    <div  className=" contain">
+                    <div  className=" contain d-flex">
                     <NavLink to = "" className="navbar-brand" href="#">Afalagi</NavLink>
-                         <span className="d-none d-lg-block"> <Form/>  </span> <Navtoggler/>
+                         <span className="d-none d-lg-block"> <Form/>  </span> 
+                         <Navtoggler/>
                     </div>
                     
-                        <div className="collapse navbar-collapse container nav-contain d-lg-flex justify-content-end " id="navbarTogglerDemo01">
-
+                        <div className="collapse navbar-collapse container  nav-contain d-lg-flex justify-content-end " id="navbarTogglerDemo01">
+                        
                                   
                                    
                                   <span className="d-lg-none"> <Form/>  </span>
@@ -157,7 +158,7 @@ function Dropdown(){
 
   return(
     <div>
-          <div className="dropdown ">
+          <div className="dropdown d-none d-lg-block">
             <div className="d-inline"><img src= {profile} alt = "..." className="photo" /></div>
             <a className="btn btn-secondary dropdown-toggle" href="#" role="button" id="dropdownMenuLink" data-bs-toggle="dropdown" aria-expanded="false">
               {localStorage.getItem("name")}
