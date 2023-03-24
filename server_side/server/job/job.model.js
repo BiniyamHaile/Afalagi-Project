@@ -96,7 +96,7 @@ async function getJobByDepartment(department){
     try{
         return await job.find({
             department : department
-           })
+           }).sort({dateCreated: -1 , status  : -1})
     }
     catch(e){
         console.log(e)
@@ -109,35 +109,17 @@ async function getAppliedJobs(email){
     try{
         return await job.find({
             personsApplied : email
-        })
+        }).sort({_id : -1})
     }catch(e){
         console.log(e)
         return false
     }
 }
 
+
+
 async function searchJobs(title){
-    // const pipeline =  [
-    //     {
-    //       $search: {
-    //         index: "Description",
-    //         text: {
-    //           query: title,
-    //           path: {
-    //             wildcard: "*"
-    //           },
-    //           fuzzy : {} ,
-    //         }
-    //       } , 
-        
-    //     } , 
-    //     {
-    //         $project : {
-    //             _id : 0 ,
-    //             personsApplied : 0
-    //           } ,
-    //     }
-    //   ]
+  
 
 
     const pipeline =  [
@@ -157,6 +139,7 @@ async function searchJobs(title){
                 _id : 0 ,
                 personsApplied : 0
               } ,
+              
         }
       ]
     try {

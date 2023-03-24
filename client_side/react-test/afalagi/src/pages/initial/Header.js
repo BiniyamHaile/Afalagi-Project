@@ -12,7 +12,7 @@ export default function Header(){
 
 
     function handleScroll(){
-        console.log(window.scrollY)
+    
      window.scrollY > 107 ? setFixed(true) : setFixed(false)
 
     }

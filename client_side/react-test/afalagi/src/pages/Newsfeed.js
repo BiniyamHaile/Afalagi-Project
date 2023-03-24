@@ -41,10 +41,10 @@ export default function Newsfeed(){
     
 
         return(
-            <div className="container ">
+            <div className="container-fluid w-100">
                <div className="row">
                     <div className=" d-none d-md-block col-md-2 col-lg-3  position-relative p-0"> <p className="invisible">sidebar</p>  <div className="side-bar"><Sidebar setJobs = {setJobs} /></div> </div>
-                    <div className="col-md-9 col-lg-8 ms-5"> {jobs.length > 0 ?  <Components jobs = {jobs}  /> : 
+                    <div className="col-md-9 col-lg-8 "> {jobs.length > 0 ?  <Components jobs = {jobs}  /> : 
                     <div class="spinner-border" role="status">
   <span class="visually-hidden">Loading...</span>
 </div>} </div>
@@ -56,11 +56,7 @@ export default function Newsfeed(){
 
 
 export function Components({jobs }){
-    const handleApply = async (job_id)=>{
-       
-        const result  = await httpApplyToJob(job_id)
-        
-    }
+
     return(
         <div className="joblist" >
             {jobs.map(job=>
@@ -69,15 +65,32 @@ export function Components({jobs }){
                 <p className=" company ms-md-5"> Company :  {job.companyName} </p>
                 <p className=" fs-italics department ms-md-5"> Department :  {job.department} </p>
                 <p className="ms-md-5 deadline" > Deadline :  <span>{new Date(job.deadline).toLocaleDateString()}</span> </p>
-                
-                <p className = "description ms-md-3"> <p>Description : </p> <span className="ms-2"> {job.description} </span> </p>
-
-                <button onClick = {()=>{
-                    
-                    handleApply(job.id)}} className="btn  btn-lg  apply  shadow ">Apply</button>
+                <p className="ms-md-5 deadline"> {job.status} </p>
+                <p className = "description ms-md-5"> <p>Description : </p> <span > {job.description} </span> </p>
+                <Apply job={job}/>
                 </div>
 
             )}
         </div>
     )
+}
+
+
+export  function Apply({job}){
+    const[apply  , setApply] = useState("Apply")
+    const [applied , setApplied] = useState(false)
+    
+    const handleApply = async (job_id)=>{
+       
+        const result  = await httpApplyToJob(job_id)
+        result.ok ? setApply("Applied") : setApplied(true)
+        }
+    
+        return(
+            <button onClick = {()=>{
+                handleApply(job.id)
+            }} className= {job.status === "Open" ? "btn  btn-lg  apply  shadow " : "d-none" }>
+                {applied === false ?  apply : "Already Applied Before"}</button>
+    
+        )
 }

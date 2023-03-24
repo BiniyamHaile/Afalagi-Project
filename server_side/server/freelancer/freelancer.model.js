@@ -113,7 +113,7 @@ async function getAppliedPeople(job_id){
         return result
     }
     catch(error){
-        console.log(error)
+      
         return false
     }
 }
@@ -139,37 +139,17 @@ async function createNotification(id , body){
 async function getNotificationCount(email){
     
     try {
-        // result = await freelancer.find({email : email , 'notifications.unread' : true})
-        // console.log(result.length)
-
-        // result = await freelancer.aggregate([
-        //     {"$match" : {
-        //         email : email
-        //         }
-        //     }  , 
-        //     {
-        //         "$project" : {
-        //             _id : 0 , 
-        //             "notifications" :
-        //                      {"$size" :"$notifications" }
-        //     }
-        // }
-        // ])
-
-
-       // result = await freelancer.find({email : email}, {notifications : {$elemMatch : {unread : true}}}).count()
-
+      
         const user = await freelancer.find({email: email})
         const checkNotifications = (notification) => notification.unread === true;
         const listOfNotifications = user[0].notifications.filter(checkNotifications)
 
         
-        console.log(listOfNotifications)
+       
         return listOfNotifications.length
 
 
-        // console.log(num)
-        // console.log(result)
+    
         return result
     } catch (error) {
         console.log(error)
@@ -190,9 +170,7 @@ try{
         {$set : {"notifications.$.unread" : false}}
     )
    
-    console.log("result is ...")
-    console.log(result)
-    console.log(result[0])
+   
     return  result[0].notifications.reverse()
 }catch(error){
     console.log(error)
@@ -200,9 +178,27 @@ try{
 }
 }
 
+
+async function checkApplied(email , jobId){
+    try{
+        const result = await freelancer.find(
+            {
+                email : email , 
+                appliedJobs : jobId
+            }
+        )
+       
+        return result.length
+    } catch(error){
+        console.log(error)
+        return false
+    }
+}
+
 module.exports = {
+    checkApplied , 
     getAllNotifications ,
-    getNotificationCount , 
+    getNotificationCount, 
     createNotification, 
     getRandomFreelancers,
     addAppliedJob , 

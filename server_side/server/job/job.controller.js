@@ -15,7 +15,7 @@ const
 
 
 
- const {addAppliedJob} = require("../freelancer/freelancer.model")
+ const {addAppliedJob , checkApplied} = require("../freelancer/freelancer.model")
 
 
 
@@ -103,11 +103,19 @@ async function httpGetDeptJobs(req , res){
 }
 
 async function httpApplyToJob(req, res){
+    let result;
+    let add;  
+
     email = req.body.email , 
     id = req.body.id
 
-    const apply  =  await applyToJob(id , email)
-    const add = await addAppliedJob(email , id)
+   
+    const checkApply = await checkApplied(email , id)
+
+    if (!checkApply){
+        result  =  await applyToJob(id , email)
+        add = await addAppliedJob(email , id)
+    }
     if(result && add){
         res.status(200).json({ok : true})
     }else{

@@ -12,13 +12,22 @@ const UserContext = createContext({})
 
 
 export default function Homeheader({user , count}){
-  
+  const[isFixed , setFixed] = useState(false)
     
+  function handleScroll(){
     
+    window.scrollY > 107 ? setFixed(true) : setFixed(false)
+
+   }
+   
+   window.addEventListener("scroll"  , handleScroll)
+
+
 
     return(
-              <UserContext.Provider value = {[user, count]}>
-                <nav className="navbar navbar-expand-lg navbar-light bg-light">
+              <UserContext.Provider value = {[user, count]} >
+                <div className= "">
+                <nav className={isFixed ? "ps-0 navbar navbar-expand-lg navbar-light bg-info fixed w-100" : "navbar navbar-expand-lg navbar-light bg-light"} >
                     <div className="container-fluid  nav-container">
                     <div  className=" contain d-flex">
                     <NavLink to = "" className="navbar-brand" href="#">Afalagi</NavLink>
@@ -36,6 +45,7 @@ export default function Homeheader({user , count}){
                         </div>
                     </div>
                 </nav>
+                </div>
               </UserContext.Provider>
             )   
    }
