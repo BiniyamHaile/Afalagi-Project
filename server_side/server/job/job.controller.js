@@ -92,7 +92,7 @@ async function httpGetJobByDepartment(req ,  res){
 
 
 async function httpGetDeptJobs(req , res){
-    console.log("request reached to the controller")
+ 
     const value = await getJobByDepartment(req.params.department)
     if(value){
         res.status(200).json(value)
