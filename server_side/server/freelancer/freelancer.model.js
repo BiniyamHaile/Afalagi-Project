@@ -195,7 +195,88 @@ async function checkApplied(email , jobId){
     }
 }
 
+async function searchFreelancer(name){
+    
+    const pipeline =  [
+        {
+          $search: {
+            index: "name",
+            text: {
+              query: name,
+              path: ["firstName" , "lastName" , "description"],
+              
+            }
+          } , 
+        
+        } , 
+        {
+            $project : {
+                _id : 0 ,
+                appliedJobs : 0 , 
+                notifications  : 0 , 
+                password  : 0
+              } ,
+              
+        }
+      ]
+
+
+
+      try{
+        const result = await freelancer.aggregate(pipeline)
+        return result
+      }catch(error){
+        console.log(error)
+        return false
+      }
+}
+
+async function pushConnection(id  , email){
+    
+    try {
+        const result  = await freelancer.updateOne(
+            { id: id},
+            { $push: { connections: email } }
+         )
+       
+        console.log("result is ....")
+        console.log(result)
+        return result
+
+    } catch (error) {
+        console.log(error)
+        return false
+    }
+}
+
+
+async function checkConnection(personId ,companyEmail){
+    try {
+        const result = await freelancer.findOne(
+            {
+                id : personId ,
+                connections : companyEmail
+            }
+        )
+            
+            
+       
+        if(result === null){
+           
+            return false
+        }
+        console.log("RESULT!!1")
+        return true
+    } catch (error) {
+        console.log(error)
+        return false
+    }
+}
+
 module.exports = {
+    checkConnection , 
+    pushConnection , 
+    searchFreelancer , 
     checkApplied , 
     getAllNotifications ,
     getNotificationCount, 

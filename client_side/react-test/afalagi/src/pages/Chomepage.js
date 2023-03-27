@@ -1,6 +1,7 @@
-import { useState , useEffect } from "react"
-import { httpCreateNotification, httpGetRandomFreelancers } from "../requests/Requests.js"
+import { useState , useEffect } from "react";
+import { httpCreateNotification, httpGetRandomFreelancers, httpGetRequest } from "../requests/Requests.js"
 import male from "../images/male.jpg";
+
 export default function Chomepage(){
     const [freelancers , setFreelancers] = useState([])
 
@@ -9,7 +10,7 @@ export default function Chomepage(){
             async function fetcher(){
                 const result =  await httpGetRandomFreelancers()
                 setFreelancers(result)
-                console.log(result)
+               
             }
     
             fetcher() 
@@ -79,8 +80,19 @@ function Component({freelancers}){
 
 
 
-function Connect({personId}){
-    const[connect  , setConnect] = useState("Connect")
+export function Connect({personId}){
+    const[connect  , setConnect] = useState()
+    useEffect(()=>{
+        const fetcher = async()=>{
+            const response = await httpGetRequest(`/freelancer/checkconnection/${personId}`)
+            console.log(response)
+            response.ok ? setConnect("Connection request sent!") : setConnect("Connect")
+        }
+
+        fetcher()
+    } , [])
+
+    
     const handleClick = async ()=>{
         const result = await httpCreateNotification(personId , "connect");
         result.ok  ? setConnect("Connection request sent!")  : setConnect("Connect")

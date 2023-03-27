@@ -2,6 +2,7 @@ const express = require("express")
 const Freelancer = require("./freelancer.mongoose")
 const {passport} = require("./../app")
 const {
+    httpCheckConnection, 
     httpGetAllFreelancers ,
     httpGetFreelancerById, 
     httpDeleteFreelancer  , 
@@ -12,6 +13,8 @@ const {
     httpCreateNotification , 
     httpGetNotificationCount,
     httpGetAllNotifications, 
+    httpSearchFreelancer, 
+    httpCheckApplied, 
 } = require("./freelancer.controller")
 const {checkCompany} = require("../components/checkCompany")
 const checkLoggedIn = require("../checkLoggedin")
@@ -32,11 +35,15 @@ freelancerRouter.get("/notifications" , checkLoggedIn , httpGetAllNotifications)
 
 freelancerRouter.get("/random" , checkCompany , httpGetRandomFreelancers)
 
-freelancerRouter.get("/:id"  , httpGetFreelancerById)
+freelancerRouter.get("/:id"  , checkCompany ,  httpGetFreelancerById)
 
 freelancerRouter.get("/appliedpeople/:id" , checkCompany , httpGetAppliedPeople)
 
+freelancerRouter.get("/checkapplied/:id" , checkLoggedIn , httpCheckApplied)
 
+freelancerRouter.get("/search/:name"  , httpSearchFreelancer)
+
+freelancerRouter.get("/checkconnection/:id" , checkCompany , httpCheckConnection)
 
 freelancerRouter.post("/signin" , httpCreateFreelancer)
 
@@ -45,6 +52,8 @@ freelancerRouter.post("/login" , httpLoginFreelancer)
 freelancerRouter.post("/createnotification/:id" , checkCompany , httpCreateNotification)
 
 freelancerRouter.delete("/:id" , httpDeleteFreelancer)
+
+
 
 
 

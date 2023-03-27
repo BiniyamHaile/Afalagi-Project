@@ -92,7 +92,7 @@ function Inputs(){
 
       
         <div className = "inputs-container  "> 
-                <div className="input-container">
+                <div className="input-container ">
                 <label htmlFor="title">
                     Title : 
                 </label>

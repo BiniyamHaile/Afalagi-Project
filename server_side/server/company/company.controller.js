@@ -1,6 +1,4 @@
 const {createCompany , loginCompany} = require("./company.model") 
-
-
 async function httpCreateCompany(req, res){
     const body = req.body
     const returned  = await createCompany(body);
@@ -19,7 +17,6 @@ async function httpCreateCompany(req, res){
 async function httpLoginCompany(req, res){
     return await loginCompany(req, res)
 }
-
 
 module.exports = {
     httpCreateCompany ,

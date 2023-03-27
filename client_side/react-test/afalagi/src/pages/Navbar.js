@@ -1,6 +1,7 @@
-import { NavLink } from "react-router-dom"
+import { NavLink  , Link } from "react-router-dom"
 import {Logoutbtn} from "../components/Logout"
 import "../styles/search.css"
+import {useState } from "react"
 export default function Navbar(){
 
     
@@ -23,23 +24,28 @@ export default function Navbar(){
 
 
 
-function Form({name}){
- return(
-    <form className="form-inline my-2 my-lg-0 d-flex">
-    <input className="form-control mr-sm-2" type="search" placeholder={`search ${name}`}/>
-   <Submit/>
-  </form>
- )
-}
 
-
-function Submit(){
-    return(
-        <button className="btn btn-outline-success ms-2" type="submit">Search</button>
-    )
-}
-
-
+   function Form(){
+    const[results , setResults] = useState(null)
+    const[query , setQuery] = useState("")
+   
+   
+  
+   
+   return(
+      <form className="form-inline my-2 my-lg-0 d-flex" >
+            <input  className="form-control mr-sm-2" type="search" placeholder={`search job`} onChange = {(e)=>{
+            
+            setQuery(e.target.value)}
+            }  />
+            <Link to = {query? `/chome/search/${query}` : ""}  className="btn btn-outline-success ms-2" >Search</Link>
+         
+            
+    </form>
+   )
+  }
+  
+  
 
 
 

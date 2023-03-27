@@ -1,7 +1,7 @@
 import "../styles/components/newsfeed.css"
 import Sidebar from "../components/Sidebar";
 import { useState , useEffect } from "react";
-import { httpApplyToJob } from "../requests/Requests.js";
+import { httpApplyToJob, httpGetRequest } from "../requests/Requests.js";
 import { URL } from "../requests/Requests.js";
 import { httpGetNotificationCount } from "../requests/Requests.js";
 
@@ -77,20 +77,28 @@ export function Components({jobs }){
 
 
 export  function Apply({job}){
-    const[apply  , setApply] = useState("Apply")
-    const [applied , setApplied] = useState(false)
+    const[applied  , setApplied] = useState()
+    useEffect(
+        ()=>{
+          const fetcher  = async ()=>{
+            const result = await httpGetRequest(`/freelancer/checkapplied/${job.id}`)
+            result.ok ? setApplied("Applied") : setApplied("Apply")
+          }   
+          fetcher()  
+        } , []
+    )
     
     const handleApply = async (job_id)=>{
        
         const result  = await httpApplyToJob(job_id)
-        result.ok ? setApply("Applied") : setApplied(true)
+        result.ok ? setApplied("Applied") : setApplied("Apply")
         }
     
         return(
             <button onClick = {()=>{
                 handleApply(job.id)
             }} className= {job.status === "Open" ? "btn  btn-lg  apply  shadow " : "d-none" }>
-                {applied === false ?  apply : "Already Applied Before"}</button>
+                {applied}</button>
     
         )
 }

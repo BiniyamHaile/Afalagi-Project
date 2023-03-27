@@ -6,7 +6,12 @@ const {getNotificationCount ,
      createNotification ,  
      deleteFreelancerById, 
      loginFreelancer , 
-     getAppliedPeople} = require("./freelancer.model");
+     getAppliedPeople , 
+        checkApplied, 
+        searchFreelancer,
+        checkConnection, 
+        pushConnection
+    } = require("./freelancer.model");
 
 async function httpCreateFreelancer(req , res){
     const body  = req.body
@@ -72,7 +77,7 @@ async function httpGetAppliedPeople(req, res){
 
 
 async function httpGetRandomFreelancers(req, res){
-    console.log("... Incoming request ... ")
+  
     result = await getRandomFreelancers()
     if(result){
       return  res.status(200).json(result)
@@ -84,11 +89,31 @@ async function httpGetRandomFreelancers(req, res){
 
 
 async function httpCreateNotification(req , res){
+    console.log("request")
     const notification = req.body;
-    id = req.params.id
-    console.log(req)
+    const id = req.params.id
     notification.unread = true
-    
+    const email = res.locals.companyEmail
+    console.log("email is " , email)
+    if(notification['kind'] === 'connect'){
+        check = await checkConnection(id , email);
+        
+         
+        if(check){
+            
+            return  res.status(400).json({ok : false})
+        }else{
+            
+            const result = await pushConnection(id , email)
+            
+            if(result){
+                return res.status(200).json({ok:true})
+            }else{
+                return res.status(400).json({ok : false})
+            }
+        }
+
+    }
     
     const result =  await createNotification(id , notification)
 
@@ -119,7 +144,50 @@ async function httpGetAllNotifications(req , res){
         res.status(400).json({ok:false})
     }
 }
+
+
+async function httpSearchFreelancer(req, res){
+    const name = req.params.name
+    const result = await searchFreelancer(name)
+    if(result){
+        res.status(200).json(result)
+    }else{
+        res.status(404).json(result)
+    }
+}
+
+async function httpCheckApplied(req , res){
+    const email  = res.locals.email
+    const jobId = req.params.id
+    const result = await checkApplied(email , jobId)
+    if(result){
+        res.status(200).json({ok : true})
+    }else{
+        res.status(404).json({ok : false})
+    }
+
+}
+
+
+async function httpCheckConnection(req , res){
+   
+    const id = req.params.id
+    const email =res.locals.companyEmail
+    
+    const result = await checkConnection(id , email)
+    if(result === true){
+        res.status(200).json({ok : true})
+    }else{
+        res.status(200).json({ok : false})
+    }
+}
+
+
+
 module.exports = {
+    httpCheckConnection ,
+    httpCheckApplied , 
+    httpSearchFreelancer , 
     httpGetAllNotifications,
     httpGetRandomFreelancers , 
     httpCreateFreelancer , 

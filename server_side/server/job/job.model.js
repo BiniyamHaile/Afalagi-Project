@@ -144,7 +144,7 @@ async function searchJobs(title){
       ]
     try {
         const result = await job.aggregate(pipeline)
-        console.log("result is ...")
+      
         return result
     } catch (error) {
         console.log(error) 
@@ -152,6 +152,14 @@ async function searchJobs(title){
     }
 
 }
+
+
+
+
+
+
+
+
 
 module.exports = {
     searchJobs , 

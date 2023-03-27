@@ -51,12 +51,9 @@ const freelancerSchema = new mongoose.Schema(
                 type: String ,
                 required : true ,
             } , 
-            notifications : []
+            notifications : [],
+            connections : []
             
-
-
-
-  
         }
 )
 

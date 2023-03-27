@@ -1,11 +1,10 @@
 import "../styles/components/Homeheader.css"
-
-import profile from "../images/img-1.jpg"
+import "../styles/components/searchStyle.css"
 import {Logout} from "./Logout"
 import { createContext  , useContext, useEffect, useState} from "react"
 import { NavLink , Link , Navigate } from "react-router-dom"
-import { httpGetNotificationCount, httpPostRequest } from "../requests/Requests"
-import { Joblists } from "../pages/initial/Joblists"
+import {  httpPostRequest } from "../requests/Requests"
+
 
 const UserContext = createContext({})
 
@@ -55,9 +54,7 @@ export default function Homeheader({user , count}){
 function Form(){
   const[results , setResults] = useState(null)
   const[query , setQuery] = useState(" ")
-  useEffect(
-    ()=>{}  ,
-   [])
+ 
   const handleClick = async (e)=>{
     e.preventDefault();
     console.log("value is  ... ")
@@ -82,7 +79,7 @@ function Form(){
     <form className="form-inline my-2 my-lg-0 d-flex" >
           <input  className="form-control mr-sm-2" type="search" placeholder={`search job`} onChange = {(e)=>setQuery(e.target.value)}  />
           <button  className="btn btn-outline-success ms-2" onClick={handleClick} >Search</button>
-          {/* <input type = "submit" className="btn btn-outline-success ms-2" value = "Search" onClick={handleClick} /> */}
+         
           
   </form>
  )
@@ -169,10 +166,19 @@ function Dropdown(){
   return(
     <div>
           <div className="dropdown d-none d-lg-block">
-            <div className="d-inline"><img src= {profile} alt = "..." className="photo" /></div>
-            <a className="btn btn-secondary dropdown-toggle" href="#" role="button" id="dropdownMenuLink" data-bs-toggle="dropdown" aria-expanded="false">
+            <div className="d-inline fw-bold border photo-container">
+              <div  className = "photo" >
+              <h1> {localStorage.getItem("name").slice(0 , 1)}</h1>
+                
+              </div>
+              
+                </div>
+            <a className="btn btn-secondary dropdown-toggle name" href="#" role="button" id="dropdownMenuLink" data-bs-toggle="dropdown" aria-expanded="false">
               {localStorage.getItem("name")}
             </a>
+
+           
+           
 
             <ul className="dropdown-menu" aria-labelledby="dropdownMenuLink">
               <li><Link to = "" className="dropdown-item" >Profile</Link></li>

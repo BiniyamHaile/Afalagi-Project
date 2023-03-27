@@ -9,6 +9,7 @@ const
         closeJob ,     
         getJobByDepartment , 
         searchJobs,
+        isApplied ,
     }
  = require("./job.model")
 
@@ -154,6 +155,8 @@ async function httpSearchJobs(req ,res){
         res.status(400).json({ok : false})
     }
 } 
+
+
 
 module.exports = {
     httpApplyToJob , 
