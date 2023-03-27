@@ -4,7 +4,7 @@ const jwt = require('jsonwebtoken')
 
 function  checkLoggedIn(req, res , next){
     const token = req.headers['x-access-token']
- 
+
     
 
     try {
@@ -12,7 +12,7 @@ function  checkLoggedIn(req, res , next){
       
         res.locals.email = decoded.email
         res.locals.department = decoded.department
-       
+        res.locals.id = decoded.id
         next()
     } catch (error) {
         res.status(401).json({user  : false })

@@ -76,7 +76,7 @@ if(!user){
 }   
 else if(await bcrypt.compare(req.body.password , user.password )){
     const token = jwt.sign(
-        {email : user.email , name : user.firstName  , department : user.department} , config.COOKIE_KEY
+        {email : user.email , name : user.firstName  , department : user.department , id : user.id} , config.COOKIE_KEY
     )
     return res.status(201).json({   user : token})
 }
@@ -88,10 +88,10 @@ else{
 }
            
  
-async function addAppliedJob(email , job_id){
+async function addAppliedJob(email , job){
         try {
            await freelancer.updateOne(
-            {email  : email}  , {$push : {appliedJobs : job_id}})
+            {email  : email}  , {$push : {appliedJobs : job}})
 
             const me = await freelancer.find({email : email})
            
@@ -150,11 +150,32 @@ async function getNotificationCount(email){
 
 
     
-        return result
+        
     } catch (error) {
         console.log(error)
         return false
     }
+}
+
+async function getFreelancerByEmail(email){
+    try{
+        const result =  await freelancer.find({
+            email : email
+        }, {
+            password  : 0 , 
+            appliedJobs : 0 , 
+            notifications : 0 , 
+            connections : 0 , 
+            _id : 0 , 
+            __v : 0
+        })
+
+        console.log(result)
+
+        return result[0]
+    }catch(error){
+        return false
+}
 }
 
 async function getAllNotifications(email){
@@ -181,14 +202,15 @@ try{
 
 async function checkApplied(email , jobId){
     try{
-        const result = await freelancer.find(
+        const result = await freelancer.findOne(
             {
                 email : email , 
-                appliedJobs : jobId
+                "appliedJobs.id" : jobId
             }
-        )
+        )   
        
-        return result.length
+
+        return result
     } catch(error){
         console.log(error)
         return false
@@ -273,7 +295,25 @@ async function checkConnection(personId ,companyEmail){
     }
 }
 
+async function getAppliedJobs(email){
+        try{
+            const result =  await freelancer.find({
+                email : email
+            } , {
+                appliedJobs : 1,
+                _id : 0
+            })
+            console.log(result)
+            return result[0]['appliedJobs']
+
+        }catch(error){
+            return false
+        }
+}
+
 module.exports = {
+    getFreelancerByEmail ,
+    getAppliedJobs , 
     checkConnection , 
     pushConnection , 
     searchFreelancer , 

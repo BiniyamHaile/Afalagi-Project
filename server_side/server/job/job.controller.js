@@ -9,14 +9,17 @@ const
         closeJob ,     
         getJobByDepartment , 
         searchJobs,
-        isApplied ,
+        getJobById,
+        getAppliedPeople,
+       
     }
  = require("./job.model")
 
 
 
 
- const {addAppliedJob , checkApplied} = require("../freelancer/freelancer.model")
+ const {addAppliedJob , checkApplied, getFreelancerByEmail} = require("../freelancer/freelancer.model")
+const { application } = require("express")
 
 
 
@@ -33,13 +36,6 @@ async function httpCreateJob(req , res){
 }
 
 
-async function httpApplyToJob(req , checkLoggedIn ,res){
-    // TODO
-    const jobId = req.params.id;
-    const email = res.locals.email;
-    result = await httpApplyToJob(jobId , email)
-    
-}
 
 function httpGetAppliedPeople(req , res){
     // TODO
@@ -107,17 +103,35 @@ async function httpApplyToJob(req, res){
     let result;
     let add;  
 
-    email = req.body.email , 
-    id = req.body.id
+    email = req.body.email ;
+    jobId = req.body.id
+    freelancerId= req.body.personId
+    //body = await getFreelancerByEmail(email);
+    
+    // let application = body.toObject()
 
-   
-    const checkApply = await checkApplied(email , id)
+    
+    
+    
+     
+    
+    // application['response'] = "pending"
+    // console.log("application is")
+    // console.log(application)
+ //   job = await getJobById(jobId)
+  
+  
+  TODO
+    // const checkApply = await checkApplied(email , id)
+ 
 
     if (!checkApply){
-        result  =  await applyToJob(id , email)
-        add = await addAppliedJob(email , id)
+       
+        result  =  await applyToJob(id , application)
+        add = await addAppliedJob(freelancerId , jobId)
     }
     if(result && add){
+        console.log("result and add")
         res.status(200).json({ok : true})
     }else{
         res.status(400).json({ok : false})
@@ -156,9 +170,22 @@ async function httpSearchJobs(req ,res){
     }
 } 
 
+async function httpGetAppliedPeople(req, res){
+    jobId = req.params.id
 
+
+    console.log("request reached here")
+    result = await getAppliedPeople(jobId)
+
+    if(result){
+       return res.status(200).json(result)
+    }else{
+       return  res.status(200).json({})
+    }
+}
 
 module.exports = {
+    httpGetAppliedPeople , 
     httpApplyToJob , 
     httpCloseJob , 
     httpGetPostedJobs,

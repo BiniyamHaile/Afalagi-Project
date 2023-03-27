@@ -31,11 +31,16 @@ async function deleteJobById(job_id){
     })
 }
 
-async function applyToJob(job_id , email){
+async function applyToJob(job_id , body){
+   
+    body.status = 'pending';
+    
+    
+    
     try{
        result =  await job.findOneAndUpdate(
             { id: job_id },
-            { $push: { personsApplied: email } } ,   {upsert : true}
+            { $push: { personsApplied: body } } ,   {upsert : true}
          )
        
       return result
@@ -154,14 +159,49 @@ async function searchJobs(title){
 }
 
 
+async function getJobById(jobId){
+    try {
+        result = await job.findOne({
+            id : jobId
+        } , 
+        {
+            personsApplied : 0, 
+
+        }
+        ).lean();
+        return result
+    } catch (error) {
+        return false
+    }
+}
 
 
 
+async function getAppliedPeople(jobId){
+
+    console.log("and now here")
+    try{
+        result = await job.findOne({
+            id : jobId
+        } , {
+            _id : 0 , 
+            personsApplied : 1
+        })
+
+        console.log(result)
 
 
+        return result['personsApplied']
+    }catch(err){
+        console.log(err)
+        return false
+    }
+}
 
 
 module.exports = {
+    getAppliedPeople , 
+    getJobById , 
     searchJobs , 
     getAppliedJobs , 
     closeJob , 

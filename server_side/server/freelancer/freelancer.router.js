@@ -15,10 +15,10 @@ const {
     httpGetAllNotifications, 
     httpSearchFreelancer, 
     httpCheckApplied, 
+    httpGetAppliedJobs,
 } = require("./freelancer.controller")
 const {checkCompany} = require("../components/checkCompany")
 const checkLoggedIn = require("../checkLoggedin")
-
 
 
 
@@ -32,6 +32,8 @@ const freelancerRouter = express.Router()
 freelancerRouter.get("/notify" , checkLoggedIn  , httpGetNotificationCount)
 
 freelancerRouter.get("/notifications" , checkLoggedIn , httpGetAllNotifications)
+
+freelancerRouter.get("/appliedjobs" ,  checkLoggedIn , httpGetAppliedJobs )
 
 freelancerRouter.get("/random" , checkCompany , httpGetRandomFreelancers)
 

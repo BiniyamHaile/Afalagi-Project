@@ -126,6 +126,9 @@ function Form(){
             localStorage.setItem("email" , decoded.email)
             localStorage.setItem("token" , data.user)
             
+            if(employer){
+                localStorage.setItem("id" , decoded.id)
+            } 
             
             window.location.href = employer ? "/freelancer" : "/chome"
             }else{

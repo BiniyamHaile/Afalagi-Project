@@ -10,7 +10,8 @@ const {getNotificationCount ,
         checkApplied, 
         searchFreelancer,
         checkConnection, 
-        pushConnection
+        pushConnection,
+        getAppliedJobs
     } = require("./freelancer.model");
 
 async function httpCreateFreelancer(req , res){
@@ -63,7 +64,7 @@ async function httpLoginFreelancer( req , res){
 async function httpGetAppliedPeople(req, res){
     const id = req.params.id
     const result = await getAppliedPeople(id)
-    
+    console.log(result)
     if(result){ 
         return res.status(200).json(result)
     }
@@ -183,8 +184,23 @@ async function httpCheckConnection(req , res){
 }
 
 
+async function httpGetAppliedJobs(req , res){
+    email = res.locals.email
+    console.log("request.......")
+    result = await getAppliedJobs(email)
+    console.log("applied jobs ...")
+    console.log(result)
+    if(result){
+        res.status(200).json(result)
+    }else{
+        res.status(400).json({ok : false})
+    }
+    
+}
+
 
 module.exports = {
+    httpGetAppliedJobs , 
     httpCheckConnection ,
     httpCheckApplied , 
     httpSearchFreelancer , 

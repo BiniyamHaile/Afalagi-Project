@@ -57,8 +57,7 @@ function Form(){
  
   const handleClick = async (e)=>{
     e.preventDefault();
-    console.log("value is  ... ")
-    console.log(query)
+  
     
     const response = await httpPostRequest("/job/searchjob" , {title : query})
     setResults(response)
@@ -73,8 +72,7 @@ function Form(){
 
   }
 
-  console.log(results)
-  console.log("rendered homeheader")
+ 
  return(
     <form className="form-inline my-2 my-lg-0 d-flex" >
           <input  className="form-control mr-sm-2" type="search" placeholder={`search job`} onChange = {(e)=>setQuery(e.target.value)}  />
@@ -100,7 +98,7 @@ function List(){
        </li>
       <li className="nav-item">
       
-        <Navigation path = {`/freelancer/appliedjobs/${user.id}`} value = "Applied Jobs" />
+        <Navigation path = {`/freelancer/appliedjobs`} value = "Applied Jobs" />
       </li>
       <li className="nav-item">
         <Notification path = "/freelancer/notification"   value= "Notifications"  />
@@ -142,8 +140,7 @@ function Notification({path , aria , value}){
   
   const [num , setNum] = useState(count)
   
-  console.log(`count is ${count}`)
-  console.log(`num is ${num}`)
+ 
   return(
     <>
      <NavLink to = {path}  className = "nav-link " aria-current = {aria ? "page" : ""}>

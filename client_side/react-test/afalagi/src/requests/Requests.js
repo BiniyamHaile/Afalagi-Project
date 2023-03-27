@@ -25,7 +25,7 @@ export async function httpApplyToJob(job_id){
                         "x-access-token" : localStorage.getItem("token")} ,
                     body : JSON.stringify({
                         id : job_id , 
-                        email : localStorage.getItem("email")
+                        personId : localStorage.getItem("id")
     })
                     
             }).then(response => response.json())
@@ -38,7 +38,7 @@ export async function httpApplyToJob(job_id){
 
 
 export async function httpGetAppliedPeople(jobId){
-    const response =  await fetch(`${URL}/freelancer/appliedpeople/${jobId}` , {
+    const response =  await fetch(`${URL}/job/appliedpeople/${jobId}` , {
         headers : {
             'x-access-token' : localStorage.getItem("token")
         }
@@ -54,13 +54,13 @@ export async function httpGetAppliedPeople(jobId){
 
 
 export async function httpGetAppliedJobs(){
-    const response = await fetch(`${URL}/job/appliedjobs` , {
+    const response = await fetch(`${URL}/freelancer/appliedjobs` , {
         headers : {
             'x-access-token' : localStorage.getItem("token")
         }
     })
 
-    const data = await response.json()
+    const data =  await response.json()
  
     return data
 }

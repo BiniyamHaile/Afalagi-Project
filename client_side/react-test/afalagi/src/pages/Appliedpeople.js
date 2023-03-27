@@ -4,7 +4,7 @@ import male from "../images/male.jpg";
 import {useParams} from "react-router-dom"
 import { ObjectContext } from "../components/Contexts.js";
 import { httpCreateNotification } from "../requests/Requests.js";
-
+import "../styles/applied.css";
 
 export default function Appliedpeople(){
    const {jobId} = useParams()
@@ -64,7 +64,7 @@ function Component(){
                                 <div className="card-body">
                                     <h5 className="card-title"> {person.firstName} {person.lastName} </h5>
                                     <p > <span className="fw-bold">  Experience : </span> {person.experience} years. </p>
-                                    <p className="card-text"> {person.description} </p>
+                                   <div className="description">  <p className="card-text"> {person.description} </p> </div>
                                 </div>
                                 <ul className="list-group list-group-flush">
                                     <li className="list-group-item"> <span className="fw-bold">  Location : </span> {person.location} </li>

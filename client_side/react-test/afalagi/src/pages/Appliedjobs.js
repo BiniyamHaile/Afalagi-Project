@@ -1,4 +1,4 @@
-import { useParams } from "react-router-dom"
+
 import { useState , useEffect , useContext} from "react"
 import { httpGetAppliedJobs } from "../requests/Requests.js"
 import { JobContext } from "../components/Contexts"
@@ -13,13 +13,14 @@ export default function Appliedjobs(){
     useEffect(()=>{
         async function fetcher(){
             const response = await httpGetAppliedJobs()
-           
+       
             setJobs(response)
-    
+            console.log(jobs)
         } 
         fetcher()
     }, [])
 
+    console.log("applied jobs....")
     console.log(jobs)
 
    
@@ -68,6 +69,7 @@ function Component(){
 
 function Tablebody(){
     const jobs = useContext(JobContext)
+    console.log(jobs)
     return(
         <tbody>
         {jobs.map(job=>

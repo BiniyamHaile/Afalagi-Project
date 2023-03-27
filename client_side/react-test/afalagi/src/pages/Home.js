@@ -39,7 +39,7 @@ export default function Home(){
            <Homeheader user ={user} count = {count }/>
             <Routes>
                 <Route path = "/" element = {<Newsfeed/>} exact />
-                <Route path = "/appliedjobs/:userId" element = {<Appliedjobs/>} exact />
+                <Route path = "/appliedjobs" element = {<Appliedjobs/>} exact />
                 <Route path = "/notification" element = {<Notification  />}  exact />
                 <Route path = "/search" element = {<Searchresult/>} exact />
                 
