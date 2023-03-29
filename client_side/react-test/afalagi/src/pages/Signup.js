@@ -22,9 +22,7 @@ export default function Signup() {
    
     
     e.preventDefault() ;
-     console.log({
-      firstName ,lastName ,  password , email , phone , department  ,description , experience  , location
-    })
+ 
     const response = await fetch(`${URL}/freelancer/signin`, {
       method : "POST" , 
       headers : {
@@ -40,9 +38,9 @@ export default function Signup() {
     })
 
       const data = await response.json()
-      console.log(`data is ${data.status}`)
+      
     if(data.ok === true){
-     console.log("you are signed in")
+    
      window.location.href  = "/login"
     }     
     

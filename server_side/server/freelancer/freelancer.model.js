@@ -88,16 +88,16 @@ else{
 }
            
  
-async function addAppliedJob(email , job){
+async function addAppliedJob(freelancerId , jobId){
         try {
            await freelancer.updateOne(
-            {email  : email}  , {$push : {appliedJobs : job}})
+            {id  : freelancerId}  , {$push : {appliedJobs : jobId}})
 
-            const me = await freelancer.find({email : email})
-           
+            const me = await freelancer.find({id : freelancerId})
+
            return me
         } catch (error) {
-            console.log(error)
+           
             return false
         }
 }
@@ -170,7 +170,8 @@ async function getFreelancerByEmail(email){
             __v : 0
         })
 
-        console.log(result)
+       
+
 
         return result[0]
     }catch(error){
@@ -199,16 +200,37 @@ try{
 }
 }
 
+async function getAppliedFreelancer(freelancerId){
+    try{
+       return await freelancer.findOne({
+            id : freelancerId
+        } , {
+            _id: 0 , 
+            connections : 0 , 
+            notifications : 0 , 
+            appliedJobs : 0 , 
+            __v : 0 ,
+        })
 
-async function checkApplied(email , jobId){
+    }catch(err){
+        console.log(err)
+        return false
+    }
+}
+
+
+async function checkApplied(freelancerId , jobId){
     try{
         const result = await freelancer.findOne(
             {
-                email : email , 
-                "appliedJobs.id" : jobId
+                id : freelancerId , 
+                appliedJobs : jobId
+            } , {
+                appliedJobs : 1
             }
         )   
-       
+
+   
 
         return result
     } catch(error){
@@ -261,12 +283,11 @@ async function pushConnection(id  , email){
             { $push: { connections: email } }
          )
        
-        console.log("result is ....")
-        console.log(result)
+       
         return result
 
     } catch (error) {
-        console.log(error)
+       
         return false
     }
 }
@@ -287,7 +308,7 @@ async function checkConnection(personId ,companyEmail){
            
             return false
         }
-        console.log("RESULT!!1")
+       
         return true
     } catch (error) {
         console.log(error)
@@ -311,7 +332,11 @@ async function getAppliedJobs(email){
         }
 }
 
+
+
+
 module.exports = {
+    getAppliedFreelancer , 
     getFreelancerByEmail ,
     getAppliedJobs , 
     checkConnection , 

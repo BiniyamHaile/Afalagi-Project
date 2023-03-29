@@ -7,6 +7,7 @@ function checkCompany(req, res, next){
         const decoded = jwt.verify(token , process.env.COOKIE_KEY)
         res.locals.companyName = decoded.name;
         res.locals.companyEmail = decoded.email;
+        res.locals.companyId = decoded.id;
         next()
     }
     catch(e){

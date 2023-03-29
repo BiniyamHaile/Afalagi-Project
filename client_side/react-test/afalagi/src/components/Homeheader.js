@@ -3,7 +3,7 @@ import "../styles/components/searchStyle.css"
 import {Logout} from "./Logout"
 import { createContext  , useContext, useEffect, useState} from "react"
 import { NavLink , Link , Navigate } from "react-router-dom"
-import {  httpPostRequest } from "../requests/Requests"
+import {  httpGetNotificationCount, httpPostRequest } from "../requests/Requests"
 
 
 const UserContext = createContext({})
@@ -51,37 +51,40 @@ export default function Homeheader({user , count}){
 
 
 
-function Form(){
-  const[results , setResults] = useState(null)
-  const[query , setQuery] = useState(" ")
- 
-  const handleClick = async (e)=>{
-    e.preventDefault();
-  
-    
-    const response = await httpPostRequest("/job/searchjob" , {title : query})
-    setResults(response)
- 
-   localStorage.setItem("joblist" , JSON.stringify(response));
-  
-   window.location.href = '/freelancer/search'
+
+
  
   
    
 
 
+   function Form(){
+   
+    const[query , setQuery] = useState("")
+   
+   
+   
+   return(
+      <form className="form-inline my-2 my-lg-0 d-flex" >
+            <input  className="form-control mr-sm-2" type="search" placeholder={`search job`} onChange = {(e)=>{
+            
+            setQuery(e.target.value)}
+            }  />
+            <Link to = {query? `/freelancer/search/${query}` : ""}  className="btn btn-outline-success ms-2" >Search</Link>
+         
+            
+    </form>
+   )
   }
 
+
+
+
+
+
+
+
  
- return(
-    <form className="form-inline my-2 my-lg-0 d-flex" >
-          <input  className="form-control mr-sm-2" type="search" placeholder={`search job`} onChange = {(e)=>setQuery(e.target.value)}  />
-          <button  className="btn btn-outline-success ms-2" onClick={handleClick} >Search</button>
-         
-          
-  </form>
- )
-}
 
 
 
@@ -136,11 +139,22 @@ function Navigation({path , aria , value}){
 }
 
 function Notification({path , aria , value}){
-  const [user , count] = useContext(UserContext)
+  // const [user , count] = useContext(UserContext)
   
-  const [num , setNum] = useState(count)
+  const [num , setNum] = useState(0)
   
- 
+  useEffect(
+    ()=>{
+        const fetcher = async ()=>{
+          const result = await httpGetNotificationCount()
+
+          setNum(result)
+        }
+
+        fetcher()
+    } , []
+  )
+  
   return(
     <>
      <NavLink to = {path}  className = "nav-link " aria-current = {aria ? "page" : ""}>

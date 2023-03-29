@@ -4,7 +4,7 @@ import Chomepage from "./Chomepage";
 import Postjob from "./Postjob";
 import Jobsposted from "./Jobsposted";
 import Appliedpeople from "./Appliedpeople";
-import Test from "./Test";
+
 import Freelancersearch from "./Freelancersearch";
 
 export default function Companyhome(){
@@ -18,7 +18,6 @@ export default function Companyhome(){
                     <Route path = "/jobsposted" element = {<Jobsposted/>}  exact />
                     <Route path="/postjob" element = {<Postjob />} exact/>
                     <Route path = "/jobsposted/appliedpeople/:jobId" element = {<Appliedpeople />} exact/>
-                    <Route path = "/test/:jobId" element = {<Test />} exact />
                     <Route path = "/search/:query" element = {<Freelancersearch/>} exact />
 
                     

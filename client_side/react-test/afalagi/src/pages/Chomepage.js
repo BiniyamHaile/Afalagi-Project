@@ -85,7 +85,7 @@ export function Connect({personId}){
     useEffect(()=>{
         const fetcher = async()=>{
             const response = await httpGetRequest(`/freelancer/checkconnection/${personId}`)
-            console.log(response)
+           
             response.ok ? setConnect("Connection request sent!") : setConnect("Connect")
         }
 

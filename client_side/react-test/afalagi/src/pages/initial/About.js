@@ -4,7 +4,7 @@ export default function About(){
 
     return(
 
-        <div className = "container aliceblue">
+        <div className = "container aliceblue" id = "about">
 
 <div className = "row mt-5 shadow-lg border">
       

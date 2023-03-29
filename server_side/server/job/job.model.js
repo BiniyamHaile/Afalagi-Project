@@ -4,6 +4,7 @@ const job = require("./job.mongoose")
 
 
 
+
 async function createJob(jobObj){
     if(!jobObj.title || !jobObj.department || !jobObj.description || !jobObj.location   || !jobObj.deadline 
         ){
@@ -13,8 +14,12 @@ async function createJob(jobObj){
         }
     jobObj.deadline = new Date(jobObj.deadline)
     jobObj.dateCreated = new Date()
-    jobObj.id = uuid4.v4()
-  return  await job.create(jobObj)
+
+
+
+    // jobObj.id = uuid4.v4()
+    await job.create(jobObj)
+    return true
   
 
 }
@@ -33,7 +38,7 @@ async function deleteJobById(job_id){
 
 async function applyToJob(job_id , body){
    
-    body.status = 'pending';
+    
     
     
     
@@ -54,12 +59,14 @@ async function applyToJob(job_id , body){
 }
 
 
-async function getPostedJobs(companyName){
-    const postedJobs =  await job.find(
-        {companyName : companyName}
-    )
-    return postedJobs
-}
+// not efficient!
+
+// async function getPostedJobs(companyName){
+//     const postedJobs =  await job.find(
+//         {companyName : companyName}
+//     )
+//     return postedJobs
+// }
 
 async function getAllJobs(){
     return await job.find({})
@@ -69,7 +76,7 @@ async function getAllJobs(){
 
 
 async function closeJob(id , name){
-    console.log(id)
+    
     try{
 
         const result =  await job.findOne({
@@ -104,7 +111,7 @@ async function getJobByDepartment(department){
            }).sort({dateCreated: -1 , status  : -1})
     }
     catch(e){
-        console.log(e)
+       
         return false
     }
 }
@@ -163,12 +170,7 @@ async function getJobById(jobId){
     try {
         result = await job.findOne({
             id : jobId
-        } , 
-        {
-            personsApplied : 0, 
-
-        }
-        ).lean();
+        }).lean();
         return result
     } catch (error) {
         return false
@@ -179,7 +181,7 @@ async function getJobById(jobId){
 
 async function getAppliedPeople(jobId){
 
-    console.log("and now here")
+    
     try{
         result = await job.findOne({
             id : jobId
@@ -188,7 +190,7 @@ async function getAppliedPeople(jobId){
             personsApplied : 1
         })
 
-        console.log(result)
+        
 
 
         return result['personsApplied']
@@ -199,13 +201,52 @@ async function getAppliedPeople(jobId){
 }
 
 
+
+async function acceptFreelancer(jobId , companyName , freelancerId){
+    try {
+
+        console.log(jobId , companyName , freelancerId)
+        const result =  await job.updateOne({
+            id : jobId , 
+            companyName : companyName ,
+            "personsApplied.id" : freelancerId
+
+        } , {
+            $set : {"personsApplied.$.response":   "Accepted"}
+        })
+        
+       
+        return result
+    } catch (error) {
+        console.log(error)
+        return result
+    }
+}
+
+
+
+async function getAppliedJob(jobId){
+    try {
+        return await job.find({
+            id : jobId
+        } , {
+            _id : 0 , 
+            personsApplied : 0
+        })
+    } catch (error) {
+        console.log(error)
+        return false
+    }
+}
 module.exports = {
+    getAppliedJob , 
+    acceptFreelancer ,     
     getAppliedPeople , 
     getJobById , 
     searchJobs , 
     getAppliedJobs , 
     closeJob , 
-    getPostedJobs , 
+  //  getPostedJobs , 
     createJob , 
     deleteJobById,
     applyToJob , 

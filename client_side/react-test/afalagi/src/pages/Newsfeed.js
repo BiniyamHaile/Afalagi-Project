@@ -17,23 +17,20 @@ export default function Newsfeed(){
             }).then(response => response.json()).then(
                 (data)=>{
                     if(data){
-                        console.log(data)
+                       
                         setJobs(data)
                        
                     }
                 }
             )
 
-            async function fetcher(){
-                const notification = await fetch(`${URL}/freelancer/ncount`  , {
-                    headers : {"x-access-token" : localStorage.getItem("token")}
-                }).then(response => response.json()).then(data => data)
-                setCount(notification)
-                console.log(notification)
+       
 
-            }
 
-            fetcher()
+
+
+
+
         }
         , [])
 
@@ -45,8 +42,8 @@ export default function Newsfeed(){
                <div className="row">
                     <div className=" d-none d-md-block col-md-2 col-lg-3  position-relative p-0"> <p className="invisible">sidebar</p>  <div className="side-bar"><Sidebar setJobs = {setJobs} /></div> </div>
                     <div className="col-md-9 col-lg-8 "> {jobs.length > 0 ?  <Components jobs = {jobs}  /> : 
-                    <div class="spinner-border" role="status">
-  <span class="visually-hidden">Loading...</span>
+                    <div className="spinner-border" role="status">
+  <span className="visually-hidden">Loading...</span>
 </div>} </div>
                </div>
             </div>
@@ -66,7 +63,7 @@ export function Components({jobs }){
                 <p className=" fs-italics department ms-md-5"> Department :  {job.department} </p>
                 <p className="ms-md-5 deadline" > Deadline :  <span>{new Date(job.deadline).toLocaleDateString()}</span> </p>
                 <p className="ms-md-5 deadline"> {job.status} </p>
-                <p className = "description ms-md-5"> <p>Description : </p> <span > {job.description} </span> </p>
+                <p className = "description ms-md-5"> Description :  <span > {job.description} </span> </p>
                 <Apply job={job}/>
                 </div>
 

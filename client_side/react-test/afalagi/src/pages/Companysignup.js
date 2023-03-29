@@ -27,9 +27,9 @@ export default function Companysignup() {
     })
 
       const data = await response.json()
-      console.log(`data is ${data.status}`)
+      
     if(data.ok === true){
-     console.log("you are signed in")
+  
      window.location.href  = "/login"
     }     
     

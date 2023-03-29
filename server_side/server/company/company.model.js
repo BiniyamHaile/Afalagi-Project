@@ -1,7 +1,7 @@
 const jwt = require("jsonwebtoken")
 const bcrypt = require("bcrypt")
 const company = require("./company.mongoose")
-
+const uuid = require("uuid")
 
 require("dotenv").config()
 
@@ -19,6 +19,7 @@ async function createCompany(body){
     hashedPassword = await bcrypt.hash(body["password"] , 10)
 
     body["password"] =hashedPassword; 
+    body['id'] = uuid.v4()
 
     try {
         if (!existObj.length){
@@ -48,7 +49,7 @@ async function loginCompany(req , res){
     }   
     else if(await bcrypt.compare(req.body.password , user.password )){
         const token = jwt.sign(
-            {email : user.email , name : user.name} , config.COOKIE_KEY
+            {email : user.email , name : user.name , id : user.id} , config.COOKIE_KEY
         )
         return res.status(201).json({   user : token})
     }
@@ -59,6 +60,43 @@ async function loginCompany(req , res){
 
 
 
+async function postJob(companyEmail , jobId){
+    try{
+         await company.updateOne({
+            email : companyEmail
+        } , {
+            $push : {
+                jobsPosted : jobId
+            }
+        })
+        return true
+    }catch(e){
+        console.log(e)
+        return false
+    }
+}
+
+
+async function getPostedJobs(id){
+    console.log(id)
+    try {
+        const result = await   company.findOne({
+            id : id
+        }, 
+        {_id : 0 , 
+        jobsPosted : 1})
+            console.log("result is .....")
+            console.log(result)
+            return result['jobsPosted']
+
+    } catch (error) {
+        console.log(error)
+        return false
+    }
+
+}
+
+
 module.exports = {
-    createCompany , loginCompany
+    createCompany , loginCompany , postJob  , getPostedJobs
 }

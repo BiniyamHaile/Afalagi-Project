@@ -1,13 +1,40 @@
 import { useEffect, useState } from "react";
-import { useLoaderData, useLocation } from "react-router-dom";
-import { Apply, Components } from "./Newsfeed";
+import { useParams } from "react-router-dom";
+import { httpPostRequest, httpSearchJob } from "../requests/Requests";
+
+import { Apply } from "./Newsfeed";
+
+
 
 
 export default function Searchresult(){
 
-    const jobList = JSON.parse(localStorage.getItem("joblist"))
-    console.log(jobList)
-    console.log("job list ........")
+    const {query} = useParams()
+
+   
+    const[jobList  , setJobList] = useState([])
+
+    useEffect(
+        ()=>{
+                const fetcher = async()=>{
+                
+                    const response = await httpSearchJob({'title' : query})
+                    setJobList(response)
+                } 
+
+                fetcher()
+
+
+                
+        } , []
+    )
+   
+      
+        
+       
+     
+      //  localStorage.setItem("joblist" , JSON.stringify(response));
+      
     
     return(
         <div className="container text-center">
@@ -20,6 +47,7 @@ export default function Searchresult(){
 
               
 function ListOfJobs({jobs}){
+    console.log(jobs)
     return(
         <div className="row">
             {jobs?.map(job=>

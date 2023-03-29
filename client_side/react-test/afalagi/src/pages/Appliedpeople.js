@@ -1,9 +1,8 @@
 import { useContext, useEffect, useState } from "react";
-import { httpGetAppliedPeople } from "../requests/Requests.js";
+import { httpAcceptFreelancer, httpGetAppliedPeople, httpGetAppliedPerson } from "../requests/Requests.js";
 import male from "../images/male.jpg";
 import {useParams} from "react-router-dom"
 import { ObjectContext } from "../components/Contexts.js";
-import { httpCreateNotification } from "../requests/Requests.js";
 import "../styles/applied.css";
 
 export default function Appliedpeople(){
@@ -14,7 +13,7 @@ export default function Appliedpeople(){
 
             
            const data = await httpGetAppliedPeople(jobId)
-           console.log(data)
+         
             setPeople(data)
             
         }
@@ -44,49 +43,24 @@ export default function Appliedpeople(){
 
 function Component(){
     const [jobId , people] = useContext(ObjectContext)
-    console.log("right after this")
-    console.log(people)
-    console.log(people.isArray)
+   
+
+    
 
     return(
             <div key = {jobId} className="container-fluid mt-5">
 
             <div className = " row">
 
-            { people  && people.map(person =>
-                
-                
-                    <div key = {person.id} className = "col-md-4 col-lg-3 m-auto">
-
-
-                                <div className="card" styles={"width: 18rem;"}>
-                                <img src={male} className="card-img-top" alt="..." />
-                                <div className="card-body">
-                                    <h5 className="card-title"> {person.firstName} {person.lastName} </h5>
-                                    <p > <span className="fw-bold">  Experience : </span> {person.experience} years. </p>
-                                   <div className="description">  <p className="card-text"> {person.description} </p> </div>
-                                </div>
-                                <ul className="list-group list-group-flush">
-                                    <li className="list-group-item"> <span className="fw-bold">  Location : </span> {person.location} </li>
-                                    <li className="list-group-item"> <span className = "fw-bold"> Email :  </span> {person.email} </li>
-                                    <li className="list-group-item">  <span className = "fw-bold"> Phone :  </span>   {person.phone} </li>
-                                    
-                                </ul>
-                                <div className="card-body">
-                                 <div className="d-flex justify-content-around"> 
-                                    <Button value = {"Confirm"} personId = {person.id} />
-                                    <Button value = {"Decline"}  personId = {person.id} />    
-                                 </div>
-                                </div>
-                                </div>
-
-
-
-
+            { people  && people.map(data =>
+                <div key = {data.id}>
+                    <AppliedPerson data = {data} jobId = {jobId} />
                     </div>
-
                 
                 )}
+
+
+
                 </div>
 
             </div>
@@ -95,19 +69,67 @@ function Component(){
 
 
 
-function Button({value , jobId , personId}){
-    return(
-        value === "Confirm" ? <Confirm jobId = {jobId} personId = {personId} /> : <Decline jobId = {jobId}  personId = {personId} />
+function AppliedPerson({data , jobId}){
+    const[person , setPerson] = useState([])
+    const personId = data.id
+    const response = data.response
+    useEffect(
+        ()=>{
+            const fetcher = async()=>{
+                const response = await httpGetAppliedPerson(personId)
+                setPerson(response)
+            }
+
+            fetcher()
+        } , []
+    )
+
+       
+        return(
+        <div key = {person.id} className = "col-md-4  m-auto mt-3">
+
+
+        <div className="card" styles={"width: 18rem;"}>
+        <img src={male} className="card-img-top" alt="..." />
+        <div className="card-body">
+            <h5 className="card-title"> {person.firstName} {person.lastName} </h5>
+            <p > <span className="fw-bold">  Experience : </span> {person.experience} years. </p>
+           <div className="desc">  <p className="card-text"> {person.description} </p> </div>
+        </div>
+        <ul className="list-group list-group-flush">
+            <li className="list-group-item"> <span className="fw-bold">  Location : </span> {person.location} </li>
+            <li className="list-group-item"> <span className = "fw-bold"> Email :  </span> {person.email} </li>
+            <li className="list-group-item">  <span className = "fw-bold"> Phone :  </span>   {person.phone} </li>
+            
+        </ul>
+        <div className="card-body">
+         <div className="d-flex justify-content-around"> 
+            <Button response = {response} personId = {person.id} jobId = {jobId} />
+             
+         </div>
+        </div>
+        </div>
+</div>
     )
 }
 
 
-function Confirm({ personId}){
+function Button({response , jobId , personId}){
+    return(
+        response === "Pending" ? <Confirm jobId = {jobId} personId = {personId} /> : <Accepted />
+    )
+}
+
+
+function Confirm({ personId , jobId}){
     const[clicked , setClicked] = useState("Accept")
+
+
     const handleConfirm = async()=>{
-        const result =  await httpCreateNotification(personId , "accept" )
+        const result =  await httpAcceptFreelancer(jobId , personId  )
+
        
-        result.ok ? setClicked("Accepted") : setClicked("Accepted");
+        result.ok ? setClicked("Accepted") : setClicked("Acceptt");
     }
     return (
         <>
@@ -117,15 +139,12 @@ function Confirm({ personId}){
 }
 
 
-function Decline({ personId}){
-    const[decline , setDecline] = useState("Decline")
-    const handleDecline = async()=>{
-        const result =  await httpCreateNotification(personId , "decline" )
-        result.ok ? setDecline("Declined!") : setDecline("Decline")
-    }
+function Accepted(){
+   
+ 
     return (
         <>
-        <button className="btn btn-primary" onClick={handleDecline}><i className="bi bi-check-lg text-danger " ></i> {decline}</button>
+        <button className="btn btn-primary" ><i className="bi bi-check-lg text-danger " ></i>Accepted</button>
         </>
     )
 }

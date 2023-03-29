@@ -16,7 +16,7 @@ export default function Cards(){
 
 
 
-        <div className="card col-md-5 ms-3 me-5" styles={"width: 18rem;"} >
+        <div className="card col-md-5 ms-md-1 ms-lg-3 me-5" styles={"width: 18rem;"} >
   <img src= {company_1} className="card-img-top " alt="..." styles={"height : 50px"}/>
   <div className="card-body">
     <h2 className="card-title  text-center"  >JS Tech Group</h2>
@@ -27,7 +27,7 @@ export default function Cards(){
 
   
 
-<div className="card employee  col-md-5 ms-5 me-5" styles={"width: 18rem;"}>
+<div className="card employee  col-md-5 ms-md-1  ms-lg-3 me-5" styles={"width: 18rem;"}>
   <img src= {img_1} className="card-img-top " alt="..." />
   <div className="card-body">
     <h2 className="card-title text-center">Yonas Behailu</h2>

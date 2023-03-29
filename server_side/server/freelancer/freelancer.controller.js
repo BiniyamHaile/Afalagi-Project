@@ -1,4 +1,7 @@
-const {getNotificationCount ,
+const { acceptFreelancer } = require("../job/job.model");
+const {
+    getAppliedFreelancer,
+    getNotificationCount ,
     getAllNotifications ,
     getRandomFreelancers , 
      createFreelancer , 
@@ -90,12 +93,13 @@ async function httpGetRandomFreelancers(req, res){
 
 
 async function httpCreateNotification(req , res){
-    console.log("request")
+   
     const notification = req.body;
+
     const id = req.params.id
     notification.unread = true
     const email = res.locals.companyEmail
-    console.log("email is " , email)
+    console.log(notification)
     if(notification['kind'] === 'connect'){
         check = await checkConnection(id , email);
         
@@ -115,6 +119,8 @@ async function httpCreateNotification(req , res){
         }
 
     }
+
+    
     
     const result =  await createNotification(id , notification)
 
@@ -128,7 +134,8 @@ async function httpCreateNotification(req , res){
 async function httpGetNotificationCount(req , res){
     const email = res.locals.email
     result = await getNotificationCount(email)
-    if(result){
+    
+    if(result !== false){
         res.status(200).json(result)
     }else{
         res.status(400).json({ok : false})
@@ -158,13 +165,13 @@ async function httpSearchFreelancer(req, res){
 }
 
 async function httpCheckApplied(req , res){
-    const email  = res.locals.email
+    const email  = res.locals.id
     const jobId = req.params.id
     const result = await checkApplied(email , jobId)
     if(result){
         res.status(200).json({ok : true})
     }else{
-        res.status(404).json({ok : false})
+        res.status(200).json({ok : false})
     }
 
 }
@@ -198,8 +205,20 @@ async function httpGetAppliedJobs(req , res){
     
 }
 
+async function httpGetAppliedFreelancer(req , res){
+    const freelancerId = req.params.id
+
+    const result = await getAppliedFreelancer(freelancerId) ; 
+    console.log(result)
+    if(result){
+        res.status(200).json(result)
+    }else{
+        res.status(400).json({ok : false})
+    }
+}
 
 module.exports = {
+    httpGetAppliedFreelancer , 
     httpGetAppliedJobs , 
     httpCheckConnection ,
     httpCheckApplied , 

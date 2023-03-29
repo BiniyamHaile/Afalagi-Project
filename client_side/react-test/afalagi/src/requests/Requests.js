@@ -162,6 +162,34 @@ function message(kind , name , email){
 }
 
 
+export async  function httpAcceptFreelancer(jobId , freelancerId){
+    console.log(`jobId is  : ${jobId}`)
+    const name = localStorage.getItem("name")
+    const email  = localStorage.getItem("email")
+    // const message = message("accept" , name , email)
+
+    const message = `${name} company accepted your job application. Please check their email , ${email}`
+    const body = {
+        
+        jobId : jobId  ,
+        freelancerId :  freelancerId ,
+        contain  : {
+            message : message , 
+            kind : "accept"
+        }
+
+    }
+    return await httpPostRequest('/job/acceptfreelancer' , body )
+}
+
+
+
+
+
+
+
+
+
 export async function httpGetNotificationCount(){
     const response =  await fetch(`${URL}/freelancer/notify`,  {
         headers : {
@@ -172,5 +200,26 @@ export async function httpGetNotificationCount(){
     return data
 }
 
+export async function httpGetPostedJob(jobId){
+    return await httpGetRequest(`/job/postedjob/${jobId}`)
+}
 
 
+export async function httpGetAppliedJob(jobId){
+   return await httpGetRequest(`/job/appliedjob/${jobId}`)
+}
+
+export async function httpGetAppliedPerson(freelancerId){
+    return await httpGetRequest(`/freelancer/appliedfreelancer/${freelancerId}`)
+
+}
+
+
+export async function httpGetPostedJobs(){
+    return await httpGetRequest("/company/jobsposted");
+}
+
+
+export async function httpSearchJob(body){
+    return await httpPostRequest('/job/searchjob' , body)
+}

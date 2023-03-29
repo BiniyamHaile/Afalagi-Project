@@ -25,7 +25,7 @@ export default function Entry(){
         <Joblists/>
        <Cards/>
 
-        <div className = "description">
+        <div className = "description" id = "about">
         <About/>
 
         </div>

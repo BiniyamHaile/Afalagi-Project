@@ -5,7 +5,7 @@ import { getUser } from "../requests/getUser";
 
 const ProtectedRoutes =()=>{
   const user =  getUser()
-  console.log(`user is ${user}`)
+
   return(
      !user.user ? <Outlet /> : <Navigate to = "/login"/>
   )

@@ -17,7 +17,7 @@ export default function Sidebar({setJobs}){
 function Accordion({setJobs}){
       const hadleClick = async (department)=>{
         const result = await httpGetRequest(`/job/department/${department}`)
-        console.log(result)
+       
         setJobs(result)
       }
     return(

@@ -41,7 +41,7 @@ export default function Home(){
                 <Route path = "/" element = {<Newsfeed/>} exact />
                 <Route path = "/appliedjobs" element = {<Appliedjobs/>} exact />
                 <Route path = "/notification" element = {<Notification  />}  exact />
-                <Route path = "/search" element = {<Searchresult/>} exact />
+                <Route path = "/search/:query" element = {<Searchresult/>} exact />
                 
             </Routes>
         </>    )}
