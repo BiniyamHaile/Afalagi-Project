@@ -5,16 +5,15 @@ const {
     getAllNotifications ,
     getRandomFreelancers , 
      createFreelancer , 
-     getFreelancerById  , 
-     createNotification ,  
-     deleteFreelancerById, 
+     createNotification ,
      loginFreelancer , 
      getAppliedPeople , 
         checkApplied, 
         searchFreelancer,
         checkConnection, 
         pushConnection,
-        getAppliedJobs
+        getAppliedJobs,
+        getProfile
     } = require("./freelancer.model");
 
 async function httpCreateFreelancer(req , res){
@@ -35,13 +34,6 @@ async function httpCreateFreelancer(req , res){
 }
 
 
-function  httpGetFreelancerById(req  ,res){
-//    const id = +req.params.id
-//     const freelancer = getFreelancerById(id)
-//     console.log(freelancer)
-//     res.status(200).json(freelancer)
-
-}
 
 
 function httpDeleteFreelancer(req  ,res){
@@ -217,6 +209,18 @@ async function httpGetAppliedFreelancer(req , res){
     }
 }
 
+async function httpGetProfile(req , res){
+    const freelancerId = req.params.id
+
+    const result  = await getProfile(freelancerId)
+
+    if(result){
+      return  res.status(200).json(result)
+    }else{
+        return res.status(400).json({ok  : false})
+    }
+}
+
 module.exports = {
     httpGetAppliedFreelancer , 
     httpGetAppliedJobs , 
@@ -228,7 +232,6 @@ module.exports = {
     httpCreateFreelancer , 
     httpDeleteFreelancer , 
     httpGetAllFreelancers , 
-    httpGetFreelancerById , 
     httpLoginFreelancer , 
     httpGetAppliedPeople, 
     httpCreateNotification, 

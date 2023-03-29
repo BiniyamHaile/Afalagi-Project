@@ -16,7 +16,8 @@ const {
     httpSearchFreelancer, 
     httpCheckApplied, 
     httpGetAppliedJobs,
-    httpGetAppliedFreelancer
+    httpGetAppliedFreelancer , 
+    httpGetProfile,
 } = require("./freelancer.controller")
 const {checkCompany} = require("../components/checkCompany")
 const checkLoggedIn = require("../checkLoggedin")
@@ -39,6 +40,8 @@ freelancerRouter.get("/appliedjobs" ,  checkLoggedIn , httpGetAppliedJobs )
 freelancerRouter.get("/random" , checkCompany , httpGetRandomFreelancers)
 
 freelancerRouter.get("/:id"  , checkCompany ,  httpGetFreelancerById)
+
+freelancerRouter.get("/profile" , checkCompany  , httpGetProfile)
 
 freelancerRouter.get("/appliedpeople/:id" , checkCompany , httpGetAppliedPeople)
 

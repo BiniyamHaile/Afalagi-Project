@@ -94,7 +94,7 @@ function AppliedPerson({data , jobId}){
         <div className="card-body">
             <h5 className="card-title"> {person.firstName} {person.lastName} </h5>
             <p > <span className="fw-bold">  Experience : </span> {person.experience} years. </p>
-           <div className="desc">  <p className="card-text"> {person.description} </p> </div>
+           <div className="persondescription">  <p className="card-text"> {person.description} </p> </div>
         </div>
         <ul className="list-group list-group-flush">
             <li className="list-group-item"> <span className="fw-bold">  Location : </span> {person.location} </li>

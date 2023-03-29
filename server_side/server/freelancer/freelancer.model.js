@@ -45,15 +45,8 @@ async function createFreelancer(body){
 }
 
 
-async function getFreelancerById(id_num){
-    return await freelancer.get(id_num)
-}
-   
 
 
-async function deleteFreelancerById(id_num){
-    return await  freelancer.delete(id_num)
-}
 
 
 
@@ -332,7 +325,23 @@ async function getAppliedJobs(email){
         }
 }
 
-
+async function getProfile(freelancerId){
+    try {
+        return await freelancer.findOne({
+            id : freelancerId
+        } , {
+              
+            _id : 0 , 
+            firstName : 1  , 
+            lastName : 1 , 
+            email : 1 , 
+            description : 1 , 
+        })
+    } catch (error) {
+        console.log(error)
+        return false
+    }
+}
 
 
 module.exports = {
@@ -349,8 +358,7 @@ module.exports = {
     getRandomFreelancers,
     addAppliedJob , 
     createFreelancer , 
-    getFreelancerById  ,
-    deleteFreelancerById , 
     loginFreelancer, 
     getAppliedPeople ,
+    getProfile
 }
