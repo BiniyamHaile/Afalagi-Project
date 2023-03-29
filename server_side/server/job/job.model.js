@@ -59,14 +59,7 @@ async function applyToJob(job_id , body){
 }
 
 
-// not efficient!
 
-// async function getPostedJobs(companyName){
-//     const postedJobs =  await job.find(
-//         {companyName : companyName}
-//     )
-//     return postedJobs
-// }
 
 async function getAllJobs(){
     return await job.find({})

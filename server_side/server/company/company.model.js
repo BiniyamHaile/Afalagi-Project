@@ -78,16 +78,15 @@ async function postJob(companyEmail , jobId){
 
 
 async function getPostedJobs(id){
-    console.log(id)
+   
     try {
         const result = await   company.findOne({
             id : id
         }, 
         {_id : 0 , 
         jobsPosted : 1})
-            console.log("result is .....")
-            console.log(result)
-            return result['jobsPosted']
+           
+            return result['jobsPosted'].reverse()
 
     } catch (error) {
         console.log(error)
