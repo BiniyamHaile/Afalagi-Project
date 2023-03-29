@@ -1,7 +1,7 @@
 import { useState , useEffect } from "react";
 import { httpCreateNotification, httpGetRandomFreelancers, httpGetRequest } from "../requests/Requests.js"
 import male from "../images/male.jpg";
-
+import "../styles/chome.css"
 export default function Chomepage(){
     const [freelancers , setFreelancers] = useState([])
 
@@ -47,7 +47,7 @@ function Component({freelancers}){
                                 <div className="card-body">
                                     <h5 className="card-title"> {freelancer.firstName} {freelancer.lastName} </h5>
                                     <p > <span className="fw-bold">  Experience : </span> {freelancer.experience} years. </p>
-                                    <p className="card-text"> {freelancer.description} </p>
+                                    <p className="card-text description"> {freelancer.description} </p>
                                 </div>
                                 <ul className="list-group list-group-flush">
                                     <li className="list-group-item"> <span className="fw-bold">  Location : </span> {freelancer.location} </li>
