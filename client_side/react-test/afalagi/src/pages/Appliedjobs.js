@@ -82,7 +82,7 @@ function FetchJob(){
 
 
 function Jobdetail({jobId}){
-    const[job , setJob] = useState({})
+    const[job , setJob] = useState()
     useEffect(
         ()=>{
             const fetcher = async ()=>{
@@ -98,7 +98,9 @@ function Jobdetail({jobId}){
 
     return(
         <>
-     <Tablebody job = {job} />
+    {
+        job&& <Tablebody job = {job} />
+    }
         </>
     )
 }

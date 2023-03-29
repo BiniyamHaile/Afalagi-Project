@@ -43,7 +43,7 @@ function ListOfJobs({jobs}){
     return(
         <>
         {jobs.map(jobId =>
-            <PostedJobs jobId = {jobId} />
+            <PostedJobs jobId = {jobId} key = {jobId} />
             
             )}
         </>
@@ -54,19 +54,30 @@ function ListOfJobs({jobs}){
 
 function PostedJobs({jobId}){
     const[job , setJob] = useState()
+    const[jobStatus , setStatus] = useState()
     useEffect(
         ()=>{
             const fetcher = async ()=>{
                 const result = await httpGetPostedJob(jobId)
                 setJob(result)
+                setStatus(job.status)
             }
             fetcher()
         } , []
     )
 
+    
+     
+    
 
-    console.log("job is  ......")
-    console.log(job)
+        async function handleClose( jobId){
+        
+
+
+        const data = await httpCloseJob(jobId)
+        
+        setStatus(data.status) }
+ 
 
     return (
         <div className="bg-light ">
@@ -74,13 +85,15 @@ function PostedJobs({jobId}){
                { job&& < div key = {job._id} className = "job row" >
                   <div className=" col-md-6">
                   <h3> {job.title} </h3>
-                  <p className = "fs-italics"> {job.status}  </p> 
+                  <p className = "fs-italics"> {jobStatus}  </p> 
                    <p> description : <br/> {job.description} </p>  
                     </div>
                     <div className="col-md-4">
                         <p className="fs-italics">  {job.personsApplied.length} people applied </p>
                         <Link to = {`appliedpeople/${job.id}`}  >  see applied people </Link>
-                   <Button jobId = {job.id} status = {job.status}/>
+                   {/* <Button jobId = {job.id} status = {job.status}/> */}
+
+                    <button onClick = {()=>{ if(jobStatus === "Open"){  handleClose(job.id)   } }} className={jobStatus === "Open" ? "btn btn-primary d-block mt-3" : "btn  d-block mt-3 disabled"}><i className="bi bi-x-square"></i> Close job </button>
                     </div>
                                  
                     </div>
@@ -90,65 +103,4 @@ function PostedJobs({jobId}){
 }
 
 
-function Button({jobId  , status}){
-    const[jobStatus , setStatus] = useState(status)
-    useEffect(()=>{
 
-    } , [])
-    async function handleClose( jobId){
-        
-
-
-        const data = await httpCloseJob(jobId)
-        
-        setStatus(data.status) }
-
-    console.log(jobStatus)
-    console.log(status)
-    return(
-
-
-
-        <button onClick = {()=>{
-                            
-            if(jobStatus === "Open"){
-                handleClose(jobId)
-            }
-            
-            }} className={jobStatus === "Open" ? "btn btn-primary d-block mt-3" : "btn  d-block mt-3 disabled"}><i className="bi bi-x-square"></i> Close job </button>
-    )
-
-
-
-
-
-}
-
-// function PostedJobs({jobs , handleClose}){
- 
-//     return (
-//         <div className="bg-light ">
-//             {jobs.map(job=>
-//                 <div key = {job._id} className = "job row" >
-//                   <div className=" col-md-6">
-//                   <h3> {job.title} </h3>
-//                   <p className = "fs-italics"> {job.status}  </p> 
-//                    <p> description : <br/> {job.description} </p>  
-//                     </div>
-//                     <div className="col-md-4">
-//                         <p className="fs-italics">  {job.personsApplied.length} people applied </p>
-//                         <Link to = {`appliedpeople/${job.id}`}  >  see applied people </Link>
-//                         <button onClick = {()=>{
-                            
-//                             if(job.status === "Open"){
-//                                 handleClose()
-//                             }
-                            
-//                             }} className={job.status === "Open" ? "btn btn-primary d-block mt-3" : "btn  d-block mt-3 disabled"}><i className="bi bi-x-square"></i> Close job </button>
-//                     </div>
-                                 
-//                     </div>
-//             )}
-//         </div>
-//     )
-// }
