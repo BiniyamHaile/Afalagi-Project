@@ -60,7 +60,8 @@ function PostedJobs({jobId}){
             const fetcher = async ()=>{
                 const result = await httpGetPostedJob(jobId)
                 setJob(result)
-                setStatus(job.status)
+                
+                setStatus(result.status)
             }
             fetcher()
         } , []
