@@ -60,3 +60,50 @@
     display: grid;
     grid-template-columns: 60% 40%;
 }
+
+@media screen and (max-width : 991px){
+    .inputs-container{
+    
+        display: flex;
+        flex-direction: column;
+        
+        width: 90%;
+        
+     
+        margin : 2rem 5%;
+        
+        
+    }
+    .input-container{
+        display: flex;
+        justify-content: space-between;
+        align-items: center;
+        width : 80%;
+        margin: auto;
+       
+    }
+    
+}
+
+
+
+@media screen and (max-width : 500px){
+
+    .input-container{
+       
+        display: block;
+      
+        width : 80%;
+        margin: auto;
+       
+
+    }
+    .input-container > label , .input-container > input{
+        display: block;
+    }
+
+    .input-container > input , .input-container > textarea , .input-container >select{
+        width : 80%;
+    }
+    
+}

@@ -3,7 +3,7 @@ import { httpAcceptFreelancer, httpGetAppliedPeople, httpGetAppliedPerson } from
 import male from "../images/male.jpg";
 import {useParams} from "react-router-dom"
 import { ObjectContext } from "../components/Contexts.js";
-import "../styles/applied.css";
+import  "../styles/applied.css"
 
 export default function Appliedpeople(){
    const {jobId} = useParams()
