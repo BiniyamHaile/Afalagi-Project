@@ -2,7 +2,7 @@ import "../styles/initial/postedjobs.css"
 import { useEffect  , useState} from "react"
 import { Link } from "react-router-dom"
 import { httpCloseJob, httpGetPostedJob, httpGetPostedJobs } from "../requests/Requests.js"
-import { URL } from "../requests/Requests.js"
+
 export default function Jobsposted(){
     const [close , setClose] = useState(false)
     const [jobs , setJobs] = useState([])
@@ -82,13 +82,13 @@ function PostedJobs({jobId}){
     return (
         <div className="bg-light ">
             
-               { job&& < div key = {job._id} className = "job row" >
+               { job&& < div key = {job._id} className = "job row  p-md-4"  >
                   <div className=" col-md-6">
                   <h3> {job.title} </h3>
                   <p className = "fs-italics"> {jobStatus}  </p> 
                    <p> description : <br/> {job.description} </p>  
                     </div>
-                    <div className="col-md-4">
+                    <div className="col-md-4 ps-md-5">
                         <p className="fs-italics">  {job.personsApplied.length} people applied </p>
                         <Link to = {`appliedpeople/${job.id}`}  >  see applied people </Link>
                    {/* <Button jobId = {job.id} status = {job.status}/> */}
