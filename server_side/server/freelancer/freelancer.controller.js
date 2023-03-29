@@ -67,7 +67,7 @@ async function httpLoginFreelancer( req , res){
 async function httpGetAppliedPeople(req, res){
     const id = req.params.id
     const result = await getAppliedPeople(id)
-    console.log(result)
+    
     if(result){ 
         return res.status(200).json(result)
     }
@@ -76,6 +76,7 @@ async function httpGetAppliedPeople(req, res){
     }
 }     
      
+
 
 
 
@@ -193,10 +194,9 @@ async function httpCheckConnection(req , res){
 
 async function httpGetAppliedJobs(req , res){
     email = res.locals.email
-    console.log("request.......")
+   
     result = await getAppliedJobs(email)
-    console.log("applied jobs ...")
-    console.log(result)
+
     if(result){
         res.status(200).json(result)
     }else{
@@ -209,7 +209,7 @@ async function httpGetAppliedFreelancer(req , res){
     const freelancerId = req.params.id
 
     const result = await getAppliedFreelancer(freelancerId) ; 
-    console.log(result)
+   
     if(result){
         res.status(200).json(result)
     }else{

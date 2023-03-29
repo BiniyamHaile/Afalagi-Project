@@ -92,7 +92,7 @@ function PostedJobs({jobId}){
                     <div className="col-md-4 ps-md-5">
                         <p className="fs-italics">  {job.personsApplied.length} people applied </p>
                         <Link to = {`appliedpeople/${job.id}`}  >  see applied people </Link>
-                   {/* <Button jobId = {job.id} status = {job.status}/> */}
+                  
 
                     <button onClick = {()=>{ if(jobStatus === "Open"){  handleClose(job.id)   } }} className={jobStatus === "Open" ? "btn btn-primary d-block mt-3" : "btn  d-block mt-3 disabled"}><i className="bi bi-x-square"></i> Close job </button>
                     </div>

@@ -120,7 +120,7 @@ async function httpApplyToJob(req, res){
     email = req.body.email ;
     jobId = req.body.id
     freelancerId= req.body.personId
-    //body = await getFreelancerByEmail(email);
+  
    
     const application = {id : freelancerId  ,  response : "Pending"}
 
@@ -129,10 +129,7 @@ async function httpApplyToJob(req, res){
     
      
     
-    // application['response'] = "pending"
-    // console.log("application is")
-    // console.log(application)
- //   job = await getJobById(jobId)
+   
   
   
   
@@ -177,9 +174,9 @@ async function httpGetAppliedJobs(req , res){
 async function httpSearchJobs(req ,res){
     const title = req.body.title
     const result = await searchJobs(title)
-    console.log(result)
-    console.log(`title is ${title}`)
-    console.log(req.body)
+  
+
+    
     if(result){
         res.status(200).json(result)
     }else{

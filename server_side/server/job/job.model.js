@@ -198,7 +198,7 @@ async function getAppliedPeople(jobId){
 async function acceptFreelancer(jobId , companyName , freelancerId){
     try {
 
-        console.log(jobId , companyName , freelancerId)
+       
         const result =  await job.updateOne({
             id : jobId , 
             companyName : companyName ,
