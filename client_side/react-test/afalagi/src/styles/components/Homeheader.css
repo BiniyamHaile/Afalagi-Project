@@ -57,3 +57,10 @@ body{
     justify-content:start;
     
 }
+
+.toggle-icon{
+   
+
+    position: absolute;
+    right : 2rem;
+}

@@ -28,10 +28,10 @@ export default function Homeheader({user , count}){
                 <div className= "">
                 <nav className={isFixed ? "ps-0 navbar navbar-expand-lg navbar-light bg-info fixed w-100" : "navbar navbar-expand-lg navbar-light bg-light"} >
                     <div className="container-fluid  nav-container">
-                    <div  className=" contain d-flex">
+                    <div  className=" contain d-flex " >
                     <NavLink to = "" className="navbar-brand" href="#">Afalagi</NavLink>
                          <span className="d-none d-lg-block"> <Form/>  </span> 
-                         <Navtoggler/>
+                         <span className = " toggle-icon"><Navtoggler/> </span>
                     </div>
                     
                         <div className="collapse navbar-collapse container  nav-contain d-lg-flex justify-content-end " id="navbarTogglerDemo01">
@@ -166,7 +166,7 @@ function Notification({path , aria , value}){
 
 function Navtoggler(){
         return(
-            <button className="navbar-toggler" type="button" data-bs-toggle="collapse" data-bs-target="#navbarTogglerDemo01" aria-controls="navbarTogglerDemo01" aria-expanded="false" aria-label="Toggle navigation">
+            <button className="navbar-toggler position-relative" type="button" data-bs-toggle="collapse" data-bs-target="#navbarTogglerDemo01" aria-controls="navbarTogglerDemo01" aria-expanded="false" aria-label="Toggle navigation">
             <span className="navbar-toggler-icon"></span>
           </button>
         )

@@ -135,15 +135,18 @@ async function getNotificationCount(email){
       
         const user = await freelancer.find({email: email})
         const checkNotifications = (notification) => notification.unread === true;
-        const listOfNotifications = user[0].notifications.filter(checkNotifications)
-
-        
+        if(user[0].notifications){
+            const listOfNotifications = user[0].notifications.filter(checkNotifications)
+      
        
-        return listOfNotifications.length
+            return listOfNotifications.length
+        }else{
+            return 0
+        }
 
 
     
-        
+          
     } catch (error) {
         console.log(error)
         return false
