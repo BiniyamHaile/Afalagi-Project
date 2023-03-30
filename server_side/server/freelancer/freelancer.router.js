@@ -41,7 +41,7 @@ freelancerRouter.get("/random" , checkCompany , httpGetRandomFreelancers)
 
 
 
-freelancerRouter.get("/profile" , checkCompany  , httpGetProfile)
+freelancerRouter.get("/profile" , checkLoggedIn  , httpGetProfile)
 
 freelancerRouter.get("/appliedpeople/:id" , checkCompany , httpGetAppliedPeople)
 

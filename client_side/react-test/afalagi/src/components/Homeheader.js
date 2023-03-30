@@ -192,7 +192,7 @@ function Dropdown(){
            
 
             <ul className="dropdown-menu" aria-labelledby="dropdownMenuLink">
-              <li><Link to = "/freelancer/profile" className="dropdown-item" >Profile</Link></li>
+              <li><Link to = "" className="dropdown-item" >Profile</Link></li>
               <li ><Logout className="all-unset dropdown-item w-100 "/></li>
               
             </ul>

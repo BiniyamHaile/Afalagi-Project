@@ -327,7 +327,7 @@ async function getAppliedJobs(email){
 
 async function getProfile(freelancerId){
     try {
-        return await freelancer.findOne({
+        result =  await freelancer.findOne({
             id : freelancerId
         } , {
               
@@ -337,6 +337,9 @@ async function getProfile(freelancerId){
             email : 1 , 
             description : 1 , 
         })
+
+
+        console.log(result)
     } catch (error) {
         console.log(error)
         return false

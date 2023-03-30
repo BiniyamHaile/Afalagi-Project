@@ -6,6 +6,7 @@ export function Profile(){
     useEffect(()=>{
         const fetcher = async ()=>{
             const response = await httpGetProfile()
+            console.log(response)
             setUser(response)
 
         }
