@@ -54,7 +54,11 @@
 }
 
 
-
+.desc-profile{
+    display: inline-block;
+    height: 6rem;
+   
+}
 
 .header{
     display: grid;

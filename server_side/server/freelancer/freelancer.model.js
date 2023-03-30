@@ -327,7 +327,7 @@ async function getAppliedJobs(email){
 
 async function getProfile(freelancerId){
     try {
-        return await freelancer.findOne({
+        result =  await freelancer.findOne({
             id : freelancerId
         } , {
               
@@ -336,7 +336,15 @@ async function getProfile(freelancerId){
             lastName : 1 , 
             email : 1 , 
             description : 1 , 
+            phone : 1,
+            department : 1
+
         })
+
+
+        console.log(result)
+
+        return result
     } catch (error) {
         console.log(error)
         return false
@@ -344,7 +352,39 @@ async function getProfile(freelancerId){
 }
 
 
+async function checkEmail(email){
+    try{
+        result = await freelancer.find({
+            email : email
+        })
+       
+        return result.length
+    }catch{
+
+    }
+}
+
+async function updateProfile(freelancerId , body){
+    try {
+        result = await freelancer.updateOne(
+            {
+                id : freelancerId
+            } , 
+            body
+        )
+
+        return true
+    } catch (error) {
+        return false
+    }
+
+
+    
+}
+
 module.exports = {
+    updateProfile,
+    checkEmail ,
     getAppliedFreelancer , 
     getFreelancerByEmail ,
     getAppliedJobs , 
