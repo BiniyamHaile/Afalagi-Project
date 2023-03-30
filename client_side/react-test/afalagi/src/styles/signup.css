@@ -1,6 +1,8 @@
 .sign-container{
+    
     min-height: 100vh;
     margin-top: 4rem;
+    overflow-y: auto;
 }
 
 .form-container{
@@ -54,11 +56,7 @@
 }
 
 
-.desc-profile{
-    display: inline-block;
-    height: 6rem;
-   
-}
+
 
 .header{
     display: grid;

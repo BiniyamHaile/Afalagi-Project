@@ -252,8 +252,12 @@ async function httpUpdateProfile(req, res){
     }else if(changed === true & result ===0){
         exist = false
     }
-    const response = await updateProfile(id , body)
 
+    if(result === false){
+        return res.status(400).json({ok : "error"})
+    }
+    const response = await updateProfile(id , body)
+    
 
     if(!exist & response ){
         res.status(200).json({ok : true})

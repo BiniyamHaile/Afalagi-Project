@@ -363,7 +363,7 @@ async function checkEmail(email){
        
         return result.length
     }catch{
-
+        return false
     }
 }
 
