@@ -228,3 +228,8 @@ export async function httpSearchJob(body){
 export async function httpGetProfile(){
     return await httpGetRequest('/freelancer/profile')
 }
+
+
+export async function httpUpdateProfile(body){
+    return await httpPostRequest('/freelancer/updateprofile' , body)
+}

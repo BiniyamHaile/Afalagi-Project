@@ -4,7 +4,7 @@ const {passport} = require("./../app")
 const {
     httpCheckConnection, 
     httpGetAllFreelancers ,
-    httpGetFreelancerById, 
+    httpUpdateProfile , 
     httpDeleteFreelancer  , 
     httpLoginFreelancer ,
     httpCreateFreelancer , 
@@ -58,6 +58,8 @@ freelancerRouter.post("/signin" , httpCreateFreelancer)
 freelancerRouter.post("/login" , httpLoginFreelancer)
 
 freelancerRouter.post("/createnotification/:id" , checkCompany , httpCreateNotification)
+
+freelancerRouter.post("/updateprofile" , checkLoggedIn , httpUpdateProfile)
 
 freelancerRouter.delete("/:id" , httpDeleteFreelancer)
 

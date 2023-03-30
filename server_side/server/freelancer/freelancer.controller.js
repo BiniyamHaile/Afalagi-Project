@@ -1,3 +1,4 @@
+const { response } = require("express");
 const { acceptFreelancer } = require("../job/job.model");
 const {
     getAppliedFreelancer,
@@ -13,7 +14,9 @@ const {
         checkConnection, 
         pushConnection,
         getAppliedJobs,
-        getProfile
+        getProfile,
+        checkEmail,
+        updateProfile
     } = require("./freelancer.model");
 
 async function httpCreateFreelancer(req , res){
@@ -211,17 +214,59 @@ async function httpGetAppliedFreelancer(req , res){
 
 async function httpGetProfile(req , res){
     const freelancerId = res.locals.id
+<<<<<<< HEAD
     console.log(`freelancer Id is ${freelancerId}`)
     const result  = await getProfile(freelancerId)
 
     if(result !==false){
+=======
+
+    const result  = await getProfile(freelancerId)
+
+    if(result !== false){
+>>>>>>> profile
       return  res.status(200).json(result)
     }else{
         return res.status(400).json({ok  : false})
     }
 }
 
+
+
+async function httpUpdateProfile(req, res){
+    let changed;
+    let exist;
+    body = req.body
+    bodyEmail = body.email
+    email = res.locals.email
+    id = res.locals.id
+    
+    changed =  email === bodyEmail ? false : true 
+    
+
+
+    const result = await checkEmail(bodyEmail)
+    if(changed === false){
+        exist = false
+    }else if(changed === true & result === 1){
+        exist = true
+    }else if(changed === true & result ===0){
+        exist = false
+    }
+    const response = await updateProfile(id , body)
+
+
+    if(!exist & response ){
+        res.status(200).json({ok : true})
+    }else{
+        res.status(400).json({ok : false})
+    }
+
+
+
+}
 module.exports = {
+    httpUpdateProfile, 
     httpGetProfile , 
     httpGetAppliedFreelancer , 
     httpGetAppliedJobs , 
