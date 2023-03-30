@@ -343,11 +343,11 @@ async function getProfile(freelancerId){
 
 
         console.log(result)
-<<<<<<< HEAD
-=======
+
+
 
         return result
->>>>>>> profile
+
     } catch (error) {
         console.log(error)
         return false

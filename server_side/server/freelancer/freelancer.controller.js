@@ -214,22 +214,21 @@ async function httpGetAppliedFreelancer(req , res){
 
 async function httpGetProfile(req , res){
     const freelancerId = res.locals.id
-<<<<<<< HEAD
-    console.log(`freelancer Id is ${freelancerId}`)
+
     const result  = await getProfile(freelancerId)
 
     if(result !==false){
-=======
+
 
     const result  = await getProfile(freelancerId)
 
     if(result !== false){
->>>>>>> profile
+
       return  res.status(200).json(result)
     }else{
         return res.status(400).json({ok  : false})
     }
-}
+}}
 
 
 
