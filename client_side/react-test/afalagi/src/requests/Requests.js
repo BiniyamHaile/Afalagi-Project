@@ -1,8 +1,8 @@
 
 
-//export const URL = 'http://localhost:5001'
+export const URL = 'http://localhost:5001'
 
-  export const URL = 'https://mern-bllq.onrender.com'
+//   export const URL = 'https://mern-bllq.onrender.com'
 
 
 
@@ -222,4 +222,9 @@ export async function httpGetPostedJobs(){
 
 export async function httpSearchJob(body){
     return await httpPostRequest('/job/searchjob' , body)
+}
+
+
+export async function httpGetProfile(){
+    return await httpGetRequest('/freelancer/profile')
 }

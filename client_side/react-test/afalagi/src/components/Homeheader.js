@@ -108,7 +108,7 @@ function List(){
       </li>
 
       <li className="nav-item d-lg-none">
-        <Link to = "" className="dropdown-item mt-1" aria-current = "" >Profile</Link>
+        <Link to = "/freelancer/profile" className="dropdown-item mt-1" aria-current = "" >Profile</Link>
         </li>
       
       <li className="nav-item d-lg-none mt-1 " aria-current = "">
@@ -192,7 +192,7 @@ function Dropdown(){
            
 
             <ul className="dropdown-menu" aria-labelledby="dropdownMenuLink">
-              <li><Link to = "" className="dropdown-item" >Profile</Link></li>
+              <li><Link to = "/freelancer/profile" className="dropdown-item" >Profile</Link></li>
               <li ><Logout className="all-unset dropdown-item w-100 "/></li>
               
             </ul>

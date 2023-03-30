@@ -7,6 +7,7 @@ import { useEffect, useState } from "react";
 import Appliedjobs from "./Appliedjobs";
 import { httpGetNotificationCount, URL } from "../requests/Requests";
 import Searchresult from "./Searchresult";
+import { Profile } from "./Profile";
 
 export default function Home(){
     const[user , setUser] = useState({})
@@ -42,6 +43,6 @@ export default function Home(){
                 <Route path = "/appliedjobs" element = {<Appliedjobs/>} exact />
                 <Route path = "/notification" element = {<Notification  />}  exact />
                 <Route path = "/search/:query" element = {<Searchresult/>} exact />
-                
+                <Route path = "/profile" element = {<Profile/>} exact />
             </Routes>
         </>    )}

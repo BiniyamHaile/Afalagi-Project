@@ -222,6 +222,7 @@ async function httpGetProfile(req , res){
 }
 
 module.exports = {
+    httpGetProfile , 
     httpGetAppliedFreelancer , 
     httpGetAppliedJobs , 
     httpCheckConnection ,
