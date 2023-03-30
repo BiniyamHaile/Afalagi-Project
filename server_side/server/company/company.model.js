@@ -11,6 +11,7 @@ const config = {
 
 
 
+
 async function createCompany(body){
     
     const existObj =   await company.find({email : body.email})

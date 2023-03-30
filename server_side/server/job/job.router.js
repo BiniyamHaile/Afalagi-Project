@@ -6,6 +6,8 @@ const {httpGetJobById,  httpAcceptFreelancer ,  httpGetDeptJobs,  httpSearchJobs
 
 jobRouter.get("/jobs" , httpGetAllJobs)
 
+
+
 jobRouter.get("/postedjobs" , checkCompany ,  httpGetPostedJobs)
 
 jobRouter.get("/departmentjob" , checkLoggedin , httpGetJobByDepartment)

@@ -99,7 +99,7 @@ export default function Signup() {
   
 
     <div className='inputs  '>
-    <input type  = "text"   onChange = {(e)=>{setExperience(e.target.value)}} required/>
+    <input type  = "number"   onChange = {(e)=>{setExperience(e.target.value)}} required/>
     <label>Experience  :</label>
     
     </div>

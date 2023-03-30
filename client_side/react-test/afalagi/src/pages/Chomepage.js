@@ -1,7 +1,7 @@
 import { useState , useEffect } from "react";
 import { httpCreateNotification, httpGetRandomFreelancers, httpGetRequest } from "../requests/Requests.js"
 import male from "../images/male.jpg";
-import "../styles/chome.css"
+
 export default function Chomepage(){
     const [freelancers , setFreelancers] = useState([])
 
