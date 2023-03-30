@@ -16,8 +16,10 @@ const {
         getAppliedJobs,
         getProfile,
         checkEmail,
-        updateProfile
+        updateProfile , 
+        config
     } = require("./freelancer.model");
+const jwt = require('jsonwebtoken'); 
 
 async function httpCreateFreelancer(req , res){
     const body  = req.body
@@ -95,7 +97,7 @@ async function httpCreateNotification(req , res){
     const id = req.params.id
     notification.unread = true
     const email = res.locals.companyEmail
-    console.log(notification)
+    
     if(notification['kind'] === 'connect'){
         check = await checkConnection(id , email);
         
@@ -235,13 +237,14 @@ async function httpGetProfile(req , res){
 async function httpUpdateProfile(req, res){
     let changed;
     let exist;
+    let response;
     body = req.body
     bodyEmail = body.email
     email = res.locals.email
     id = res.locals.id
     
     changed =  email === bodyEmail ? false : true 
-    
+  
 
 
     const result = await checkEmail(bodyEmail)
@@ -252,15 +255,27 @@ async function httpUpdateProfile(req, res){
     }else if(changed === true & result ===0){
         exist = false
     }
-
+   
     if(result === false){
         return res.status(400).json({ok : "error"})
     }
-    const response = await updateProfile(id , body)
+    if(exist === true){
+        return res.status(400).json({ok :false})
+
+    }else if(exist ===false){
+        response = await updateProfile(id , body)
+    }
+    
+   
+    
+    
     
 
     if(!exist & response ){
-        res.status(200).json({ok : true})
+        const token = jwt.sign(
+            {email : body.email , name : body.firstName  , department : body.department , id : id} , config.COOKIE_KEY
+        )
+        res.status(200).json({ok : true , token : token})
     }else{
         res.status(400).json({ok : false})
     }

@@ -1,8 +1,7 @@
 
 
-export const URL = 'http://localhost:5001'
-
-//   export const URL = 'https://mern-bllq.onrender.com'
+// export const URL = 'http://localhost:5001'
+export const URL = 'https://mern-bllq.onrender.com'
 
 
 

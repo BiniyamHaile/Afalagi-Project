@@ -1,7 +1,8 @@
 import { useState , useEffect } from "react"
 import { httpGetProfile, httpUpdateProfile } from "../requests/Requests"
 import "../styles/signup.css";
-import "../styles/profile.css"
+import "../styles/profile.css";
+import jwtDecode from 'jwt-decode';
 export function Profile(){
     const[user , setUser] = useState()
     useEffect(()=>{
@@ -39,8 +40,19 @@ function Component({user}){
         const  body =   { firstName , lastName , email , description , department , phone}
         const result = await  httpUpdateProfile(body)
         setResponse(result.ok)
+        if(result.ok === true){
+           
+                const decoded = jwtDecode(result.token)
+                localStorage.clear()
+                
+                localStorage.setItem("name" , decoded.name)
+                localStorage.setItem("email" , decoded.email)
+                localStorage.setItem("token" , result.token)
+                localStorage.setItem("id" , decoded.id)
+                
         
-    }
+        
+    }}
 
     console.log(response)
     return(
@@ -103,7 +115,7 @@ function Component({user}){
               
                  <button onClick = {()=>{handleClick()}} className = {response !=null  ? "d-none" : "btn btn-primary p-md-3 me-5  btn-lg"} > <i class="bi bi-pen"></i> Submit changes </button>
                 <div className= {response === true ? "d-block" : "d-none"}> <p className="text-success lead text-center">  Submitted! </p> </div>
-                <div className= {response === false ? "d-block" : "d-none"}>  <p className="lead danger"> This email address is used by another user. </p> </div>
+                <div className= {response === false ? "d-block" : "d-none"}>  <p className="lead text-danger"> This email address is used by another user. </p> </div>
                 <div className= {response === "error" ? "d-block" : "d-none"}>  <p className="lead danger"> Can't perform the requested action.  </p> </div>
           </div>
       

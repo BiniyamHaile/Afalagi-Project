@@ -4,7 +4,7 @@ const jwt = require("jsonwebtoken")
 const uuid = require("uuid")
 require("dotenv").config()
 
-const config = {
+ const config = {
     COOKIE_KEY : process.env.COOKIE_KEY
 }
 
@@ -342,7 +342,9 @@ async function getProfile(freelancerId){
         })
 
 
-        console.log(result)
+       
+
+        
 
 
 
@@ -375,6 +377,8 @@ async function updateProfile(freelancerId , body){
             } , 
             body
         )
+    
+   
 
         return true
     } catch (error) {
@@ -403,5 +407,6 @@ module.exports = {
     createFreelancer , 
     loginFreelancer, 
     getAppliedPeople ,
-    getProfile
+    getProfile, 
+    config
 }
