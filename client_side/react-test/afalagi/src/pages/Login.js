@@ -5,12 +5,13 @@ import jwtDecode from 'jwt-decode';
 import { URL } from "../requests/Requests";
 import { EmployerContext } from "../components/Contexts";
 import Header from "./Header";
+import { Navigate } from "react-router-dom";
 
 
 
 export default function Login() {
-
- 
+    
+    
     const [employer , setEmployer] = useState(true)
     
 
@@ -83,7 +84,7 @@ function Errormessage({tried}){
 export function Message(){
     return(
         <div className = "mb-5" >
-        <h1 className = "lobster text-center"> <span >አ</span>falagi! </h1>
+        <h1 className = "lobster text-center"> <span >አ</span>falagi! </h1>   
         
         </div>     
     )
@@ -125,11 +126,12 @@ function Form(){
             localStorage.setItem("name" , decoded.name)
             localStorage.setItem("email" , decoded.email)
             localStorage.setItem("token" , data.user)
+            localStorage.setItem("id" , decoded.id)
             
             if(employer){
                 localStorage.setItem("id" , decoded.id)
             } 
-            
+            <Navigate to = "/freelancer"/>
             window.location.href = employer ? "/freelancer" : "/chome"
             }else{
             setTried(true)

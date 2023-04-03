@@ -113,12 +113,12 @@ function Component({user}){
             <div  className= {response ===true ?   "d-flex justify-content-center  align-items-center mt-4" : "d-flex justify-content-end  align-items-center mt-4"}> 
               
               
-                 <button onClick = {()=>{handleClick()}} className = {response !=null  ? "d-none" : "btn btn-primary p-md-3 me-5  btn-lg"} > <i class="bi bi-pen"></i> Submit changes </button>
+                 <button onClick = {()=>{handleClick()}} className = {response !=null  ? "d-none" : "btn btn-primary p-md-3 me-5  btn-lg"} > <i className="bi bi-pen"></i> Submit changes </button>
                 <div className= {response === true ? "d-block" : "d-none"}> <p className="text-success lead text-center">  Submitted! </p> </div>
                 <div className= {response === false ? "d-block" : "d-none"}>  <p className="lead text-danger"> This email address is used by another user. </p> </div>
                 <div className= {response === "error" ? "d-block" : "d-none"}>  <p className="lead danger"> Can't perform the requested action.  </p> </div>
           </div>
-      
+    
 
           
           

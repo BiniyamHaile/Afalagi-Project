@@ -1,17 +1,18 @@
-import { URL } from "./Requests";
+import { URL, httpGetRequest } from "./Requests";
 async function getUser(){
    
 
-    return fetch(`${URL}/user` , {
-        headers : {
-            'x-access-token'  : localStorage.getItem('token')
-        }
-    }).then(response => response.json()).then(data => data)
-
-    
-
+    return httpGetRequest(`/user`)
 
     
 }
 
-export {getUser}
+async function getCompany(){
+    return fetch(`${URL}/cloggedin` , {
+        headers : {
+            'x-access-token'  : localStorage.getItem('token')
+        }
+    }).then(response => response.json()).then(data => data)
+}
+
+export {getUser , getCompany}

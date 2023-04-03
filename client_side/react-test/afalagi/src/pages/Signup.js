@@ -15,7 +15,7 @@ export default function Signup() {
   const [phone , setPhone] =  useState("")
   const [experience , setExperience]=  useState(0)
   const [location , setLocation] = useState("")
-
+  const [errorMsg , setErrorMsg] = useState(null) 
 
 
   async function handleSubmit(e){
@@ -42,6 +42,8 @@ export default function Signup() {
     if(data.ok === true){
     
      window.location.href  = "/login"
+    }else{
+      setErrorMsg(data.message)
     }     
     
   }
@@ -128,14 +130,14 @@ export default function Signup() {
      <textarea type = "text" onChange={(e)=>{setDescription(e.target.value)}} required></textarea>  
     
     </div>
-
+  
+    {errorMsg && <div> <p className='text-danger'> {errorMsg} </p> </div>}
     <div className=' inputs'>
       <input type = "submit" value = "sign up" className='mx-auto btn btn-lg border mt-2 sign-up'  required />
       </div>
       
       
     </div>
-    
   
 
 
