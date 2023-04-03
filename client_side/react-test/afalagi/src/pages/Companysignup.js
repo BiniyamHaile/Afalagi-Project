@@ -6,7 +6,7 @@ export default function Companysignup() {
   const [password , setPassword] = useState("");
   const [email , setEmail] = useState("");
   const [name , setName] = useState("")
-
+  const [errorMsg , setMessage] = useState("")
 
 
   async function handleSubmit(e){
@@ -31,7 +31,9 @@ export default function Companysignup() {
     if(data.ok === true){
   
      window.location.href  = "/login"
-    }     
+    }else{
+      setMessage(data.message)
+    }
     
   }
 
@@ -59,7 +61,9 @@ export default function Companysignup() {
     <label for = "cpassword">Password :</label> 
     </div>
     
-  
+  <div className={errorMsg ?  "text-danger" : "d-none"}>
+    <p> {errorMsg} </p>
+  </div>
     
     <div className='d-flex  input-containerjustify-content-center  mx-auto mb-4 '>
     <input type = "submit" value = "sign in" className='mx-auto btn btn-lg border shadow-lg bg-muted'  />
