@@ -38,7 +38,7 @@ export const ProtectedCompany = ()=>{
   useEffect(()=>{
     const fetcher = async()=>{
       const response = await getCompany()
-      setCompany(response.user)
+      setCompany(response.company)
       setLoading(false)
     }
     fetcher()
