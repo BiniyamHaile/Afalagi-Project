@@ -104,6 +104,8 @@ function Form(){
     async function handleSubmit(e){    
         e.preventDefault() ;    
         const role = employer ? "freelancer"  :"company"
+        console.log(`email is ${email}`)
+        console.log(`password is ${password}!`)
         const response = await fetch(`${URL}/${role}/login` , {
             method : "POST" , 
             headers : {
@@ -152,7 +154,7 @@ function Form(){
        </div>
       
         <div className="inputs">
-        <input type = "password"   onChange = {(e)=>{setPassword(e.target.value)}}  className="input" required />
+        <input type = "password"    onChange = {(e)=>{setPassword(e.target.value)}}  className="input" required />
         <label className={tried ? "border-b-danger " :  ""}>Password  </label>
         </div>
        
