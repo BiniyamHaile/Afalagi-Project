@@ -96,7 +96,9 @@ function Form(){
     const [password , setPassword] = useState("");
     const [email , setEmail] = useState("")
     const [tried , setTried] = useState(false)
+    useEffect(()=>{
 
+    } , [])
     const employer = useContext(EmployerContext)
 
 
@@ -104,8 +106,7 @@ function Form(){
     async function handleSubmit(e){    
         e.preventDefault() ;    
         const role = employer ? "freelancer"  :"company"
-        console.log(`email is ${email}`)
-        console.log(`password is ${password}!`)
+        
         const response = await fetch(`${URL}/${role}/login` , {
             method : "POST" , 
             headers : {
@@ -149,7 +150,7 @@ function Form(){
     return(
         <form onSubmit = {handleSubmit} >
        <div className="inputs">
-       <input  type = "text" value = {e.target.value} onChange = {(e)=>{setEmail(e.target.value)}}   className={tried ? "input tried" : "input" } required />
+       <input  type = "text" value={email} onChange = {(e)=>{setEmail(e.target.value)}}   className={tried ? "input tried" : "input" } required />
         <label className={tried ? "border-b-danger  " :  ""}> {employer ? "Email or Username " : "Company Email  or Username"} </label>
        </div>
       
