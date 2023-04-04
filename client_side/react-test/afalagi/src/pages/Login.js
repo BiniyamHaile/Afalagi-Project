@@ -149,7 +149,7 @@ function Form(){
     return(
         <form onSubmit = {handleSubmit} >
        <div className="inputs">
-       <input  type = "text" onChange = {(e)=>{setEmail(e.target.value)}}   className={tried ? "input tried" : "input" } required />
+       <input  type = "text" value = {e.target.value} onChange = {(e)=>{setEmail(e.target.value)}}   className={tried ? "input tried" : "input" } required />
         <label className={tried ? "border-b-danger  " :  ""}> {employer ? "Email or Username " : "Company Email  or Username"} </label>
        </div>
       
