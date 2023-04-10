@@ -38,6 +38,6 @@ app.get("/user" , checkLoggedIn , async (req , res)=>{
 
 app.get("/cloggedin" , checkCompany , async(req, res)=>{
     res.status(200).json({"company": true})
-})
+}) 
 
 module.exports =  {app  , config}

@@ -102,18 +102,15 @@ async function httpCreateNotification(req , res){
         check = await checkConnection(id , email);
         
          
-        if(check){
-            
+        if(check){console.log(`ok is false`)
             return  res.status(400).json({ok : false})
         }else{
             
             const result = await pushConnection(id , email)
             
-            if(result){
-                return res.status(200).json({ok:true})
-            }else{
+            if(!result){
                 return res.status(400).json({ok : false})
-            }
+            
         }
 
     }
@@ -127,7 +124,7 @@ async function httpCreateNotification(req , res){
    }else{
     res.status(400).json({ok : false})
    }
-}
+}}
 
 async function httpGetNotificationCount(req , res){
     const email = res.locals.email
@@ -143,6 +140,7 @@ async function httpGetNotificationCount(req , res){
 async function httpGetAllNotifications(req , res){
     const email = res.locals.email
     const result=  await getAllNotifications(email)
+   
     if(result){
        
         res.status(200).json(result)

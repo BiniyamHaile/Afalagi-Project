@@ -13,8 +13,8 @@ export async function Login(path , body){
         } , 
         body : body
       }).then(response =>response.json()).then(data => data)
-}
-
+} 
+ 
 export async function httpApplyToJob(job_id){
         
      return   fetch(`${URL}/job/applytojob` , {
