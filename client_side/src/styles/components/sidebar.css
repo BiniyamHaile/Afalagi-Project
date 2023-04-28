@@ -1,0 +1,20 @@
+.side-bar{
+   /* background-color :  #7386D5;*/
+   
+   padding-left: 0;
+   color : #fff;
+   position: fixed;
+   width : inherit;
+}
+
+.list-unstyled{
+   cursor : pointer;
+   margin-top: 1rem;
+   transition: .7s all ease-in-out;
+}
+
+.list-unstyled:hover{
+   padding: 0.5rem;
+   background-color: rgb(35, 35, 185);
+   color : #fff;
+}

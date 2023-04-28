@@ -1,0 +1,5 @@
+.footer-container  div i:hover{
+    background-color: rgb(226, 213, 237);
+    border-radius: 50%;
+    cursor: pointer;
+}

@@ -1,0 +1,195 @@
+@import url('https://fonts.googleapis.com/css2?family=Lobster&family=Open+Sans:ital,wght@1,800&display=swap');
+@import url('https://fonts.googleapis.com/css2?family=Open+Sans:wght@800&display=swap');
+.gradient{
+    background-image: linear-gradient(43deg, #4158D0 0%, #C850C0 46%, #FFCC70 100%);
+}
+.bodyContainer{
+  
+   
+   
+    font-family: 'Open Sans', sans-serif;
+   display: grid;
+   grid-template-columns: 50% 50%;
+   height: 100vh;
+
+}
+
+
+.bodyContainer > div{
+    display : flex;
+    flex-direction: column;
+    align-items: center;
+    justify-content:center;
+}
+
+.loginText:hover{
+    cursor: pointer;
+}
+
+.login-form{
+    width : fit-content;
+   
+
+}
+
+
+.lobster{   
+    font-family: 'Lobster', cursive;
+    font-size: 3.7rem;
+    text-shadow: 2px 2px #000000;
+    /* color : #68d388; */
+    color : rgb(7, 38, 121);
+ 
+}
+
+
+.submit-btn{
+    margin: 1.2rem auto;
+}
+
+
+.bi-google{
+    display: inline;
+    margin  : auto;
+    margin-left:  5rem;
+   
+    transition: .3s all ease-in-out ;
+    width: 10px;
+    height: 10px;
+    border-radius: 50%;
+
+    padding : 0.7rem;
+   
+}
+
+.bi-google:hover{
+    background-color: aliceblue;
+    cursor: pointer;
+
+}
+
+.input{
+    display: inline-block;
+    padding: 0.4rem;
+    margin: 1rem;
+}
+
+.logoText{
+    color : #68d388;
+    font-family: 'Open Sans', sans-serif;
+    font-size: 1.6rem;
+    
+}
+.home:hover{
+    cursor :pointer;
+}
+
+.large-text{
+    font-size: 1rem;
+}
+
+
+.toggler{
+    cursor: pointer;
+}
+
+
+
+
+.signin-link{
+    padding : 0.4rem 1rem;
+    background-color: rgba(225,225,225, 0);
+    border-radius: 0.6rem;
+    border : 2px solid black;
+}
+
+/* .signin-link:hover , .submit-btn:hover{
+    background-color: rgba(104, 211, 136 , 0.8);
+    
+} */
+
+
+.login-form{
+    height: fit-content;
+    width: 100%;
+    
+}
+
+.login-container{
+    min-height: 100vh;
+   
+}
+
+
+.inputs{
+    /* width : 100%; */
+    position : relative;
+    margin-bottom: 1rem;
+
+}
+
+
+.inputs input{
+
+    display: inline-block;
+    border : none;
+    outline : none;
+    border-bottom: 1px solid rgb(3, 8, 14);
+    background-color: transparent;
+    width : 90%;
+    margin : 0;
+    padding : 1rem;
+}
+
+.padding{
+    padding: 1rem;
+}
+.inputs label{
+    position: absolute;
+    left : 1rem;
+    padding: 10px;
+    pointer-events: none;
+    transition: all .4s ease-in-out;
+    font-size: 1.2rem;
+    color: rgb(10, 38, 25);
+}
+
+.inputs input:hover ,.inputs input:focus , .inputs input:valid {
+    border : none;
+    border-bottom: 2px solid rgb(7, 19, 151);
+    background-color: transparent;
+    /* width : 90%; */
+}
+
+.inputs input:focus ~ label , .inputs input:valid ~ label {
+    font-size: 0.8rem;
+    top : -30%;
+    left : 0.5rem;
+    color :rgb(7, 19, 151);
+    font-weight: bold;
+}
+
+
+ 
+
+
+.form-contain{
+    min-width: 100px;
+    max-width: 500px;
+}
+
+
+.tried , .tried:valid{
+    margin-bottom: 2px solid red;
+}
+
+
+.sign-up{
+    transition: 0.4s all ease-in-out;
+}
+
+.sign-up:hover{
+    
+    box-shadow: rgba(0, 0, 0, 0.25) 0px 54px 55px;
+    border : 3px solid rgb(11, 64, 117);
+}
